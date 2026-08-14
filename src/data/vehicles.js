@@ -1,0 +1,320 @@
+// ─────────────────────────────────────────────────────────────
+// VEHICLE INVENTORY
+// This is the single source of truth for all cars shown on the site.
+// To add a new arrival: copy an object below, give it a new unique `id`,
+// fill in the fields, and add image URLs. No other file needs to change —
+// Home, Products, and vehicle detail views all read from this array.
+// This shape is intentionally flat so it can later be swapped for an
+// API / CMS / database response with minimal changes to the UI layer.
+// ─────────────────────────────────────────────────────────────
+
+export const vehicles = [
+  {
+    id: 'v-001',
+    brand: 'Mahindra',
+    model: 'XUV 500',
+    variant: 'ZXi+ AMT',
+    year: 2022,
+    price: 725000,
+    kmDriven: 18400,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'Hatchback',
+    location: 'Kolkata',
+    isFeatured: true,
+    isNewArrival: true,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Pearl Arctic White',
+    images: [
+      'https://i.pinimg.com/736x/56/ea/1b/56ea1b1635915af30909bb7b4f17394d.jpg',
+      
+    ],
+    features: ['Touchscreen Infotainment', 'Rear Parking Camera', 'Alloy Wheels', 'Airbags (Dual)', 'ABS with EBD'],
+    description: 'A well-maintained single-owner Swift with a full service history and a clean interior. Ideal first car or city runabout.',
+  },
+  {
+    id: 'v-002',
+    brand: 'Hyundai',
+    model: 'Creta',
+    variant: 'SX(O) Turbo',
+    year: 2023,
+    price: 1685000,
+    kmDriven: 12250,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'SUV',
+    location: 'Kolkata',
+    isFeatured: true,
+    isNewArrival: true,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Abyss Black',
+    images: [
+      'https://i.pinimg.com/736x/49/e5/17/49e517c793957bf6e767cfca038f624e.jpg',
+      
+    ],
+    features: ['Panoramic Sunroof', 'Ventilated Seats', 'BOSE Sound System', 'ADAS Level 2', '360° Camera'],
+    description: 'Top-spec Creta turbo with the full luxury package. Garage-kept and accident-free with all documents in order.',
+  },
+  {
+    id: 'v-003',
+    brand: 'Tata',
+    model: 'Nexon',
+    variant: 'XZ+ (O)',
+    year: 2021,
+    price: 895000,
+    kmDriven: 32100,
+    fuelType: 'Diesel',
+    transmission: 'Manual',
+    bodyType: 'SUV',
+    location: 'Kolkata',
+    isFeatured: true,
+    isNewArrival: false,
+    status: 'available',
+    owners: '2nd Owner',
+    color: 'Flame Red',
+    images: [
+      'https://i.pinimg.com/736x/24/ab/0b/24ab0b0abe7538bd30d4e2701b714c52.jpg',
+      
+    ],
+    features: ['5-Star NCAP Safety', 'Cruise Control', 'Rain-Sensing Wipers', 'Rear AC Vents'],
+    description: 'A rugged and efficient diesel SUV with a 5-star safety rating, recently serviced with new tyres.',
+  },
+  {
+    id: 'v-004',
+    brand: 'Toyota',
+    model: 'Innova Crysta',
+    variant: 'GX 7-Str',
+    year: 2020,
+    price: 1795000,
+    kmDriven: 41200,
+    fuelType: 'Diesel',
+    transmission: 'Manual',
+    bodyType: 'MUV',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: false,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Silver Metallic',
+    images: [
+      'https://i.pinimg.com/1200x/09/2f/70/092f7043a9f7a631415cb67b578d50c3.jpg',
+      
+    ],
+    features: ['7-Seater', 'Captain Seats', 'Roof-Mounted AC', 'Toyota Reliability'],
+    description: 'The dependable family workhorse. Single owner, dealer-serviced throughout, ready for long highway trips.',
+  },
+  {
+    id: 'v-005',
+    brand: 'Honda',
+    model: 'City',
+    variant: 'ZX CVT',
+    year: 2022,
+    price: 1345000,
+    kmDriven: 15680,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'Sedan',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: true,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Lunar Silver',
+    images: [
+      'https://i.pinimg.com/736x/5a/1e/c4/5a1ec4c574f1c9740bd98c3d23d79d01.jpg',
+      
+    ],
+    features: ['Sunroof', 'Honda SENSING Suite', 'Wireless Charging', 'LaneWatch Camera'],
+    description: 'A premium sedan with a smooth CVT gearbox and a spotless cabin. Comes with extended warranty.',
+  },
+  {
+    id: 'v-006',
+    brand: 'Mahindra',
+    model: 'XUV700',
+    variant: 'AX7 L Petrol AT',
+    year: 2023,
+    price: 2495000,
+    kmDriven: 9800,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'SUV',
+    location: 'Kolkata',
+    isFeatured: true,
+    isNewArrival: true,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Everest White',
+    images: [
+      'https://i.pinimg.com/1200x/48/47/3d/48473d16635f7788a310859ababe4daf.jpg',
+      
+    ],
+    features: ['ADAS', 'Panoramic Sunroof', '7 Airbags', 'Dual 10.25" Screens', '3rd Row Captain Seats'],
+    description: 'Nearly new flagship XUV700 loaded with driver-assist tech. Priced below on-road value for a quick sale.',
+  },
+  {
+    id: 'v-007',
+    brand: 'Kia',
+    model: 'Seltos',
+    variant: 'HTX Diesel',
+    year: 2021,
+    price: 1395000,
+    kmDriven: 28950,
+    fuelType: 'Diesel',
+    transmission: 'Manual',
+    bodyType: 'SUV',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: false,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Gravity Grey',
+    images: [
+      'https://i.pinimg.com/236x/d1/18/ad/d118ad010dc5c36de4ccfead45f9da01.jpg',
+      
+    ],
+    features: ['Bose Premium Audio', 'Ventilated Front Seats', 'UVO Connect', 'Sunroof'],
+    description: 'A punchy diesel Seltos with strong highway manners and a feature-loaded cabin.',
+  },
+  {
+    id: 'v-008',
+    brand: 'Volkswagen',
+    model: 'Virtus',
+    variant: 'GT Plus DSG',
+    year: 2023,
+    price: 1595000,
+    kmDriven: 11200,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'Sedan',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: true,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Rising Blue',
+    images: [
+      'https://i.pinimg.com/1200x/d9/f8/cf/d9f8cf9506f7cb414bdb4002a129e98a.jpg',
+      
+    ],
+    features: ['TSI Turbo Engine', 'DSG Automatic', 'Digital Cockpit', 'German Build Quality'],
+    description: 'A driver-focused sedan with a turbo-petrol DSG combo. Immaculate condition, single owner.',
+  },
+  {
+    id: 'v-009',
+    brand: 'Tata',
+    model: 'Tiago EV',
+    variant: 'XZ+ Long Range',
+    year: 2023,
+    price: 995000,
+    kmDriven: 6400,
+    fuelType: 'Electric',
+    transmission: 'Automatic',
+    bodyType: 'Hatchback',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: true,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Tropical Mist',
+    images: [
+      'https://i.pinimg.com/736x/36/5b/6a/365b6a395003617e53c38b35298df098.jpg',
+      
+    ],
+    features: ['315km Range', 'Fast Charging', 'Zero Emissions', 'Low Running Cost'],
+    description: 'A low-mileage electric hatchback, perfect for city commutes with near-zero running costs.',
+  },
+  {
+    id: 'v-010',
+    brand: 'Toyota',
+    model: 'Fortuner',
+    variant: 'Legender 4x2 AT',
+    year: 2022,
+    price: 4295000,
+    kmDriven: 19750,
+    fuelType: 'Diesel',
+    transmission: 'Automatic',
+    bodyType: 'SUV',
+    location: 'Kolkata',
+    isFeatured: true,
+    isNewArrival: false,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Attitude Black',
+    images: [
+      'https://i.pinimg.com/736x/6c/18/bb/6c18bbffeee8638988cd41c88ed0db7c.jpg',
+      
+    ],
+    features: ['Legender Body Kit', 'JBL Premium Audio', 'Ventilated Seats', 'Commanding Road Presence'],
+    description: 'The flagship Legender trim — an imposing luxury SUV, dealer-maintained with zero mechanical issues.',
+  },
+  {
+    id: 'v-011',
+    brand: 'Maruti Suzuki',
+    model: 'Baleno',
+    variant: 'Alpha CVT',
+    year: 2022,
+    price: 845000,
+    kmDriven: 21300,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'Hatchback',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: false,
+    status: 'available',
+    owners: '1st Owner',
+    color: 'Splendid Silver',
+    images: [
+      'https://i.pinimg.com/736x/3c/5b/e8/3c5be850c12955ccb56d17bb6d279af0.jpg',
+      
+    ],
+    features: ['HeadUp Display', 'Automatic Climate Control', '360° Camera', 'Premium Cabin'],
+    description: 'A premium hatchback with a torque-converter automatic — refined, efficient, and city-friendly.',
+  },
+  {
+    id: 'v-012',
+    brand: 'Honda',
+    model: 'Elevate',
+    variant: 'ZX CVT',
+    year: 2024,
+    price: 1795000,
+    kmDriven: 4200,
+    fuelType: 'Petrol',
+    transmission: 'Automatic',
+    bodyType: 'SUV',
+    location: 'Kolkata',
+    isFeatured: false,
+    isNewArrival: true,
+    status: 'sold',
+    owners: '1st Owner',
+    color: 'Meteoroid Grey',
+    images: [
+      'https://i.pinimg.com/736x/41/f9/19/41f91994717a4573c3b9adfa6d5df91d.jpg',
+      
+    ],
+    features: ['Honda CONNECT', 'Sunroof', 'Wireless Android Auto/CarPlay', 'Honda SENSING'],
+    description: 'Practically brand new Elevate — this unit has just sold, shown here as an example of recently delivered stock.',
+  },
+]
+
+export const bodyTypes = ['Hatchback', 'Sedan', 'SUV', 'MUV', 'Coupe']
+export const fuelTypes = ['Petrol', 'Diesel', 'Electric', 'CNG']
+export const transmissions = ['Manual', 'Automatic']
+
+export const budgetRanges = [
+  { label: 'Under ₹5 Lakh', min: 0, max: 500000 },
+  { label: '₹5–10 Lakh', min: 500000, max: 1000000 },
+  { label: '₹10–15 Lakh', min: 1000000, max: 1500000 },
+  { label: '₹15 Lakh+', min: 1500000, max: Infinity },
+]
+
+export function formatPrice(value) {
+  const lakh = value / 100000
+  return `₹${lakh % 1 === 0 ? lakh.toFixed(0) : lakh.toFixed(2)} Lakh`
+}
+
+export function formatKm(value) {
+  return `${value.toLocaleString('en-IN')} km`
+}
