@@ -502,32 +502,35 @@ export default function Home() {
 
               {/* Stats */}
 
-              <div className="grid grid-cols-3 max-w-lg border-t border-[#1A1A1A]/10 pt-7">
+              {/* Stats */}
 
-                {[
-                  ['500+', 'Cars Sold'],
-                  ['4.8/5', 'Customer Rating'],
-                  ['12+', 'Years Trusted'],
-                ].map(([number, label]) => (
+<div className="grid grid-cols-3 max-w-lg border-t border-[#1A1A1A]/10 pt-7">
 
-                  <div
-                    key={label}
-                    className="pr-4"
-                  >
+  {[
+    ['500+', 'Cars Sold'],
+    ['4.8/5', 'Customer Rating'],
+    ['12+', 'Years Trusted'],
+  ].map(([number, label], index) => (
 
-                    <p className="font-display text-2xl md:text-3xl font-medium mb-1 text-[#1A1A1A]">
-                      {number}
-                    </p>
+    <div
+      key={label}
+      className="pr-4 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+      style={{ animationDelay: `${4700 + index * 150}ms` }}
+    >
 
-                    <p className="text-[10px] md:text-xs uppercase tracking-wider text-[#333333]">
-                      {label}
-                    </p>
+      <p className="font-display text-2xl md:text-3xl font-medium mb-1 text-[#1A1A1A] transition-transform duration-300 hover:scale-105">
+        {number}
+      </p>
 
-                  </div>
+      <p className="text-[10px] md:text-xs uppercase tracking-wider text-[#333333]">
+        {label}
+      </p>
 
-                ))}
+    </div>
 
-              </div>
+  ))}
+
+</div>
 
             </div>
 
@@ -580,7 +583,10 @@ export default function Home() {
           SMART SEARCH / BROWSE
       ===================================================== */}
 
-      <section className="relative z-20 container-px -mt-8 lg:-mt-14">
+      <section
+        className="relative z-20 container-px -mt-8 lg:-mt-14 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '240ms' }}
+      >
 
         <div className="rounded-3xl border border-[#1A1A1A]/10 bg-[#F4F2EC]/95 backdrop-blur-2xl p-5 md:p-7 shadow-[0_20px_60px_rgba(26,26,26,0.10)]">
 
@@ -1035,7 +1041,8 @@ export default function Home() {
 
       <section
         id="car-results"
-        className="section container-px"
+        className="section container-px opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '320ms' }}
       >
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-12">
@@ -1298,7 +1305,10 @@ export default function Home() {
           WHY CHOOSE US
       ===================================================== */}
 
-      <section className="section container-px">
+      <section
+        className="section container-px opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '400ms' }}
+      >
 
         <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-start">
 
@@ -1446,7 +1456,10 @@ export default function Home() {
           FINANCIAL SERVICES
       ===================================================== */}
 
-      <section className="section container-px">
+      <section
+        className="section container-px opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '480ms' }}
+      >
 
         <SectionHeading
           eyebrow="Complete Support"
@@ -1502,7 +1515,7 @@ export default function Home() {
               gap-2
               mb-3
               opacity-0
-              animate-fadeUp
+              animate-[fadeUp_0.6s_ease-out_forwards]
             "
           >
 
@@ -1519,7 +1532,7 @@ export default function Home() {
                     fill-[#8B7D6B]
                     text-[#8B7D6B]
                     opacity-0
-                    animate-fadeUp
+                    animate-[fadeUp_0.6s_ease-out_forwards]
                     transition-transform
                     duration-300
                     group-hover:scale-110
@@ -1548,7 +1561,7 @@ export default function Home() {
           <div
             className="
               opacity-0
-              animate-fadeUp
+              animate-[fadeUp_0.6s_ease-out_forwards]
             "
             style={{ animationDelay: '220ms' }}
           >
@@ -1565,7 +1578,10 @@ export default function Home() {
           TRUST BAR
       ===================================================== */}
 
-      <section className="container-px pb-20">
+      <section
+        className="container-px pb-20 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '560ms' }}
+      >
 
         <div className="
           rounded-3xl
@@ -1633,7 +1649,10 @@ export default function Home() {
           FINAL CTA
       ===================================================== */}
 
-      <section className="container-px pb-28">
+      <section
+        className="container-px pb-28 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '640ms' }}
+      >
 
         <div className="
           relative

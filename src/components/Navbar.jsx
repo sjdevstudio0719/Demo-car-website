@@ -96,7 +96,10 @@ export default function Navbar() {
           <Link
             to="/"
             className="group flex items-center"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
           >
             <img
               src="/images/logo.png"
@@ -124,6 +127,11 @@ export default function Navbar() {
               <NavLink
                 key={link.to}
                 to={link.to}
+                onClick={() => {
+                  if (link.to === '/') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }
+                }}
                 className={({ isActive }) =>
                   `
                     group
@@ -174,7 +182,7 @@ export default function Navbar() {
                           w-1
                           rounded-full
                           bg-[#8B7D6B]
-                          animate-fadeUp
+                          animate-[fadeUp_0.6s_ease-out_forwards]
                         "
                         style={{ animationDuration: '300ms' }}
                       />
@@ -417,7 +425,12 @@ export default function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false)
+                if (link.to === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }
+              }}
               style={{
                 transitionDelay: open
                   ? `${i * 60 + 100}ms`

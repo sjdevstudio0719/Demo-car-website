@@ -460,8 +460,8 @@ export default function Footer() {
         >
 
           <p>
-            © {year} Demo Car Website By Mastermind.
-            All rights reserved.
+            © {year} copyright next ride. Team Work - Master Mind (www.msmind.in)
+            
           </p>
 
           <p>
