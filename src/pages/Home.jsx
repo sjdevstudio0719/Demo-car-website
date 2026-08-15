@@ -513,7 +513,7 @@ export default function Home() {
     <div
       key={label}
       className="pr-4 opacity-0 animate-[fadeUp_0.2s_ease-out_forwards]"
-      style={{ animationDelay: `${100 + index * 50}ms` }}
+      style={{ animationDelay: `${2500 + index * 200}ms` }}
     >
       <p className="font-display text-2xl md:text-3xl font-medium mb-1 text-[#1A1A1A] transition-transform duration-100 hover:scale-105">
         {number}
