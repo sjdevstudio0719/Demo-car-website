@@ -500,37 +500,31 @@ export default function Home() {
               </div>
 
 
-              {/* Stats */}
+              
 
               {/* Stats */}
 
 <div className="grid grid-cols-3 max-w-lg border-t border-[#1A1A1A]/10 pt-7">
-
   {[
     ['500+', 'Cars Sold'],
     ['4.8/5', 'Customer Rating'],
     ['12+', 'Years Trusted'],
   ].map(([number, label], index) => (
-
     <div
       key={label}
-      className="pr-4 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
-      style={{ animationDelay: `${4700 + index * 150}ms` }}
+      className="pr-4 opacity-0 animate-[fadeUp_0.2s_ease-out_forwards]"
+      style={{ animationDelay: `${100 + index * 50}ms` }}
     >
-
-      <p className="font-display text-2xl md:text-3xl font-medium mb-1 text-[#1A1A1A] transition-transform duration-300 hover:scale-105">
+      <p className="font-display text-2xl md:text-3xl font-medium mb-1 text-[#1A1A1A] transition-transform duration-100 hover:scale-105">
         {number}
       </p>
-
       <p className="text-[10px] md:text-xs uppercase tracking-wider text-[#333333]">
         {label}
       </p>
-
     </div>
-
   ))}
-
 </div>
+
 
             </div>
 
