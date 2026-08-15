@@ -32,7 +32,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <WhatsappButton />
     </div>
   )
 }
