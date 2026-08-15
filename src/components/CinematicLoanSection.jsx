@@ -2,10 +2,8 @@ import { useEffect, useRef } from 'react'
 import { ArrowRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 import AutoLoanCalculator from './AutoLoanCalculator.jsx'
 import { Link } from 'react-router-dom'
-
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -22,33 +20,29 @@ export default function CinematicLoanSection() {
     if (!section || !background || !content) return
 
     const ctx = gsap.context(() => {
-
       /* ==========================================
-         CINEMATIC PARALLAX
+         CINEMATIC BACKGROUND PARALLAX
       ========================================== */
 
       gsap.fromTo(
         background,
         {
-          yPercent: -8,
-          scale: 1.08,
+          yPercent: -15,
+          scale: 1.10,
         },
         {
-          yPercent: 8,
-          scale: 1.15,
+          yPercent: 18,
+          scale: 1.16,
           ease: 'none',
 
           scrollTrigger: {
             trigger: section,
-
             start: 'top bottom',
             end: 'bottom top',
-
-            scrub: 1,
+            scrub: 2,
           },
         }
       )
-
 
       /* ==========================================
          CONTENT REVEAL
@@ -72,57 +66,54 @@ export default function CinematicLoanSection() {
 
           scrollTrigger: {
             trigger: section,
-
-            start: 'top 70%',
-
+            start: 'top 80%',
             once: true,
           },
         }
       )
-
     }, section)
 
     return () => ctx.revert()
   }, [])
 
-
   return (
     <section
-      ref={sectionRef}
-      className="
-        relative
-        overflow-hidden
-        min-h-[850px]
-        lg:min-h-[900px]
-        flex
-        items-center
-      "
-    >
+  ref={sectionRef}
+  className="
+    relative
+    overflow-hidden
+    min-h-[900px]
+    sm:min-h-[950px]
+    lg:min-h-[850px]
+    flex
+    items-center
+  "
+>
 
       {/* =================================================
           PARALLAX BACKGROUND IMAGE
       ================================================= */}
 
-        <div
-            ref={backgroundRef}
-            className="
-            absolute
-            -inset-y-[10%]
-            inset-x-0
-            z-0
-            bg-cover
-            bg-center
-            bg-no-repeat
-            will-change-transform
-            "
-            style={{
-            backgroundImage: "url('/images/loan-car-bg.jpg')",
-            }}
-        />
+      <div
+  ref={backgroundRef}
+  className="
+    absolute
+    inset-0
+    z-0
+    bg-cover
+    bg-center
+    bg-no-repeat
+    will-change-transform
+    scale-[1.08]
+  "
+  style={{
+    backgroundImage: "url('/images/car.png.jpg')",
+  }}
+/>
 
 
       {/* =================================================
-          DARK CINEMATIC OVERLAY
+          MAIN DARK OVERLAY
       ================================================= */}
 
       <div
@@ -130,18 +121,22 @@ export default function CinematicLoanSection() {
           absolute
           inset-0
           z-[1]
-          bg-black/60
+          bg-black/55
+          pointer-events-none
         "
       />
 
 
-      {/* LEFT DARK GRADIENT */}
+      {/* =================================================
+          LEFT CINEMATIC GRADIENT
+      ================================================= */}
 
       <div
         className="
           absolute
           inset-0
           z-[2]
+          pointer-events-none
           bg-gradient-to-r
           from-black/90
           via-black/65
@@ -150,7 +145,28 @@ export default function CinematicLoanSection() {
       />
 
 
-      {/* BOTTOM GRADIENT */}
+      {/* =================================================
+          TOP GRADIENT
+      ================================================= */}
+
+      <div
+        className="
+          absolute
+          inset-x-0
+          top-0
+          h-40
+          z-[2]
+          pointer-events-none
+          bg-gradient-to-b
+          from-navy-bg/80
+          to-transparent
+        "
+      />
+
+
+      {/* =================================================
+          BOTTOM GRADIENT
+      ================================================= */}
 
       <div
         className="
@@ -159,6 +175,7 @@ export default function CinematicLoanSection() {
           bottom-0
           h-48
           z-[2]
+          pointer-events-none
           bg-gradient-to-t
           from-navy-bg
           to-transparent
@@ -178,6 +195,7 @@ export default function CinematicLoanSection() {
           container-px
           w-full
           py-24
+          lg:py-28
         "
       >
 
@@ -192,7 +210,7 @@ export default function CinematicLoanSection() {
         >
 
           {/* =============================================
-              CALCULATOR
+              AUTO LOAN CALCULATOR
           ============================================= */}
 
           <div className="w-full max-w-xl">
@@ -203,12 +221,12 @@ export default function CinematicLoanSection() {
 
 
           {/* =============================================
-              TEXT
+              DREAM CAR CONTENT
           ============================================= */}
 
           <div className="max-w-2xl">
 
-            {/* Eyebrow */}
+            {/* EYEBROW */}
 
             <span
               className="
@@ -223,14 +241,20 @@ export default function CinematicLoanSection() {
               "
             >
 
-              <span className="w-6 h-px bg-accent-light" />
+              <span
+                className="
+                  w-6
+                  h-px
+                  bg-accent-light
+                "
+              />
 
               Make It Yours
 
             </span>
 
 
-            {/* Heading */}
+            {/* HEADING */}
 
             <h2
               className="
@@ -254,7 +278,7 @@ export default function CinematicLoanSection() {
             </h2>
 
 
-            {/* Description */}
+            {/* DESCRIPTION */}
 
             <p
               className="
@@ -277,37 +301,41 @@ export default function CinematicLoanSection() {
             {/* CTA */}
 
             <Link
-  to="/products"
-  className="
-    group
-    mt-8
-    inline-flex
-    items-center
-    gap-3
-    rounded-full
-    bg-white
-    text-navy-bg
-    px-7
-    py-3.5
-    text-sm
-    font-semibold
-    hover:scale-[1.03]
-    transition-transform
-  "
->
-  Explore Cars
+              to="/products"
+              className="
+                group
+                mt-8
+                inline-flex
+                items-center
+                gap-3
+                rounded-full
+                bg-white
+                text-navy-bg
+                px-7
+                py-3.5
+                text-sm
+                font-semibold
+                hover:scale-[1.03]
+                transition-transform
+                duration-300
+              "
+            >
 
-  <ArrowRight
-    size={17}
-    className="
-      group-hover:translate-x-1
-      transition-transform
-    "
-  />
-</Link>
+              Explore Cars
+
+              <ArrowRight
+                size={17}
+                className="
+                  group-hover:translate-x-1
+                  transition-transform
+                  duration-300
+                "
+              />
+
+            </Link>
 
 
-            {/* Small trust text */}
+            {/* TRUST TEXT */}
 
             <div
               className="
@@ -324,15 +352,35 @@ export default function CinematicLoanSection() {
               "
             >
 
-              <span>Flexible Financing</span>
+              <span>
+                Flexible Financing
+              </span>
 
-              <span className="w-1 h-1 rounded-full bg-white/30" />
+              <span
+                className="
+                  w-1
+                  h-1
+                  rounded-full
+                  bg-white/30
+                "
+              />
 
-              <span>Quick Approval</span>
+              <span>
+                Quick Approval
+              </span>
 
-              <span className="w-1 h-1 rounded-full bg-white/30" />
+              <span
+                className="
+                  w-1
+                  h-1
+                  rounded-full
+                  bg-white/30
+                "
+              />
 
-              <span>Trusted Support</span>
+              <span>
+                Trusted Support
+              </span>
 
             </div>
 

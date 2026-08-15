@@ -87,7 +87,7 @@ export default function Footer() {
 
       <div className="border-t border-white/[0.06]">
         <div className="container-px py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-secondary">
-          <p>© {year} Demo Car Website. All rights reserved.</p>
+          <p>© {year} Demo Car Website By Mastermind. All rights reserved.</p>
           <p>Placeholder content for demonstration purposes.</p>
         </div>
       </div>
