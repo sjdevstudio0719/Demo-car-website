@@ -2,51 +2,62 @@ import { useEffect, useState } from 'react'
 import { ArrowDown, ArrowUpRight, Car } from 'lucide-react'
 
 export default function LandingReveal() {
+  // Starts true so the overlay is present on the very first paint —
+  // starting false and flipping it inside useEffect causes a brief
+  // flash of the page underneath before the effect runs.
   const [visible, setVisible] = useState(true)
   const [closing, setClosing] = useState(false)
 
   useEffect(() => {
+    // Lock scrolling
     document.body.style.overflow = 'hidden'
 
-    const timer = setTimeout(() => {
+    // Keep it visible for 12 seconds
+    const closeTimer = window.setTimeout(() => {
       setClosing(true)
+    }, 1500)
 
-      setTimeout(() => {
-        setVisible(false)
-        document.body.style.overflow = ''
-      }, 1000)
-    }, 2800)
+    // Remove it after the 1 second fade
+    const removeTimer = window.setTimeout(() => {
+      setVisible(false)
+      document.body.style.overflow = ''
+    }, 4500)
 
     return () => {
-      clearTimeout(timer)
+      window.clearTimeout(closeTimer)
+      window.clearTimeout(removeTimer)
       document.body.style.overflow = ''
     }
   }, [])
 
-  if (!visible) return null
+  if (!visible) {
+    return null
+  }
 
   return (
     <div
       className={`
         fixed
         inset-0
-        z-[9999]
+        z-[99999]
         flex
         items-center
         justify-center
         overflow-hidden
-        bg-[#0D0C0A]
+        bg-[#1A1A1A]
         transition-opacity
         duration-1000
-        ${closing
-          ? 'pointer-events-none opacity-0'
-          : 'opacity-100'
+        ease-in-out
+        ${
+          closing
+            ? 'pointer-events-none opacity-0'
+            : 'opacity-100'
         }
       `}
     >
 
       {/* =====================================================
-          DECORATIVE CROSS LINES
+          CENTER CROSS
       ===================================================== */}
 
       <div
@@ -57,7 +68,7 @@ export default function LandingReveal() {
           h-full
           w-px
           -translate-x-1/2
-          bg-[#B08D57]/[0.10]
+          bg-[#8B7D6B]/[0.12]
         "
       />
 
@@ -68,13 +79,12 @@ export default function LandingReveal() {
           top-1/2
           h-px
           w-full
-          bg-[#B08D57]/[0.10]
+          bg-[#8B7D6B]/[0.12]
         "
       />
 
-
       {/* =====================================================
-          SUBTLE GLOW
+          GLOW
       ===================================================== */}
 
       <div
@@ -88,11 +98,10 @@ export default function LandingReveal() {
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-[#B08D57]/[0.035]
+          bg-[#8B7D6B]/[0.06]
           blur-[120px]
         "
       />
-
 
       {/* =====================================================
           TOP LEFT BRAND
@@ -110,7 +119,6 @@ export default function LandingReveal() {
           sm:top-10
         "
       >
-
         <div
           className="
             grid
@@ -119,8 +127,8 @@ export default function LandingReveal() {
             place-items-center
             rounded-full
             border
-            border-[#B08D57]/40
-            text-[#B08D57]
+            border-[#8B7D6B]/50
+            text-[#8B7D6B]
           "
         >
           <Car
@@ -134,17 +142,16 @@ export default function LandingReveal() {
             font-display
             text-sm
             tracking-[-0.02em]
-            text-[#B08D57]
+            text-[#F4F2EC]
           "
         >
           NEXT
-          <span className="ml-1 italic text-[#C8A875]">
+
+          <span className="ml-1 italic text-[#8B7D6B]">
             Ride
           </span>
         </span>
-
       </div>
-
 
       {/* =====================================================
           TOP RIGHT
@@ -158,14 +165,13 @@ export default function LandingReveal() {
           text-[9px]
           uppercase
           tracking-[0.3em]
-          text-[#B08D57]/50
+          text-[#F4F2EC]/50
           sm:right-10
           sm:top-10
         "
       >
         Est. 2026
       </div>
-
 
       {/* =====================================================
           MAIN CONTENT
@@ -185,7 +191,7 @@ export default function LandingReveal() {
         "
       >
 
-        {/* Label */}
+        {/* LABEL */}
 
         <div
           className="
@@ -196,8 +202,7 @@ export default function LandingReveal() {
             animate-[fadeUp_700ms_ease-out_both]
           "
         >
-
-          <span className="h-px w-8 bg-[#B08D57]" />
+          <span className="h-px w-8 bg-[#8B7D6B]" />
 
           <span
             className="
@@ -205,20 +210,16 @@ export default function LandingReveal() {
               font-semibold
               uppercase
               tracking-[0.3em]
-              text-[#B08D57]
+              text-[#8B7D6B]
             "
           >
             Premium Pre-Owned
           </span>
 
-          <span className="h-px w-8 bg-[#B08D57]" />
-
+          <span className="h-px w-8 bg-[#8B7D6B]" />
         </div>
 
-
-        {/* =================================================
-            TITLE
-        ================================================= */}
+        {/* NEXT */}
 
         <h1
           className="
@@ -227,7 +228,7 @@ export default function LandingReveal() {
             font-medium
             leading-[0.75]
             tracking-[-0.075em]
-            text-[#B08D57]
+            text-[#F4F2EC]
             sm:text-[13vw]
             lg:text-[10rem]
             animate-[titleReveal_1000ms_cubic-bezier(.16,1,.3,1)_both]
@@ -235,6 +236,8 @@ export default function LandingReveal() {
         >
           NEXT
         </h1>
+
+        {/* RIDE */}
 
         <h2
           className="
@@ -245,7 +248,7 @@ export default function LandingReveal() {
             italic
             leading-[0.8]
             tracking-[-0.075em]
-            text-[#C8A875]
+            text-[#8B7D6B]
             sm:text-[13vw]
             lg:text-[10rem]
             animate-[titleReveal_1000ms_150ms_cubic-bezier(.16,1,.3,1)_both]
@@ -254,10 +257,7 @@ export default function LandingReveal() {
           Ride
         </h2>
 
-
-        {/* =================================================
-            CAR ICON
-        ================================================= */}
+        {/* CAR */}
 
         <div
           className="
@@ -268,7 +268,6 @@ export default function LandingReveal() {
             animate-[carReveal_1200ms_350ms_cubic-bezier(.16,1,.3,1)_both]
           "
         >
-
           <div
             className="
               flex
@@ -278,9 +277,9 @@ export default function LandingReveal() {
               justify-center
               rounded-full
               border
-              border-[#B08D57]/40
-              bg-[#B08D57]/[0.04]
-              text-[#C8A875]
+              border-[#8B7D6B]/50
+              bg-[#8B7D6B]/[0.06]
+              text-[#F4F2EC]
               sm:h-24
               sm:w-24
             "
@@ -291,13 +290,9 @@ export default function LandingReveal() {
               className="sm:h-12 sm:w-12"
             />
           </div>
-
         </div>
 
-
-        {/* =================================================
-            TAGLINE
-        ================================================= */}
+        {/* TAGLINE */}
 
         <p
           className="
@@ -307,20 +302,20 @@ export default function LandingReveal() {
             uppercase
             leading-5
             tracking-[0.25em]
-            text-[#B08D57]/60
+            text-[#F4F2EC]/60
             sm:text-xs
             animate-[fadeUp_700ms_600ms_ease-out_both]
           "
         >
           Curated vehicles.
 
-          <span className="mx-2 text-[#B08D57]">
+          <span className="mx-2 text-[#8B7D6B]">
             •
           </span>
 
           Transparent buying.
 
-          <span className="mx-2 text-[#B08D57]">
+          <span className="mx-2 text-[#8B7D6B]">
             •
           </span>
 
@@ -329,9 +324,8 @@ export default function LandingReveal() {
 
       </div>
 
-
       {/* =====================================================
-          BOTTOM SCROLL INDICATOR
+          BOTTOM DISCOVER
       ===================================================== */}
 
       <div
@@ -348,14 +342,13 @@ export default function LandingReveal() {
           sm:bottom-10
         "
       >
-
         <span
           className="
             text-[9px]
             font-medium
             uppercase
             tracking-[0.25em]
-            text-[#B08D57]/50
+            text-[#F4F2EC]/50
           "
         >
           Discover your next ride
@@ -370,8 +363,8 @@ export default function LandingReveal() {
             justify-center
             rounded-full
             border
-            border-[#B08D57]/25
-            text-[#B08D57]
+            border-[#8B7D6B]/40
+            text-[#8B7D6B]
           "
         >
           <ArrowDown
@@ -380,9 +373,7 @@ export default function LandingReveal() {
             className="animate-bounce"
           />
         </div>
-
       </div>
-
 
       {/* =====================================================
           BOTTOM RIGHT
@@ -399,7 +390,7 @@ export default function LandingReveal() {
           text-[9px]
           uppercase
           tracking-[0.2em]
-          text-[#B08D57]/40
+          text-[#F4F2EC]/40
           sm:flex
           sm:bottom-10
           sm:right-10

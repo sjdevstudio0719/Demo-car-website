@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Next Ride Brand Colors
+        // NEXT Ride Brand Colors
         brand: {
           dark: '#1A1A1A',
           text: '#333333',
@@ -13,8 +13,7 @@ export default {
           cream: '#F4F2EC',
         },
 
-        // Keep these aliases so existing components
-        // don't immediately break while we redesign them.
+        // Existing aliases
         navy: {
           bg: '#F4F2EC',
           DEFAULT: '#F4F2EC',
@@ -32,9 +31,13 @@ export default {
         },
       },
 
+      /* ================================
+         FONTS
+      ================================= */
+
       fontFamily: {
-        display: ['"Fraunces"', 'serif'],
-        sans: ['"Inter"', 'sans-serif'],
+        sans: ['"Outfit"', 'sans-serif'],
+        display: ['"Outfit"', 'sans-serif'],
       },
 
       boxShadow: {

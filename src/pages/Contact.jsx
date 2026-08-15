@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   Phone,
-  Mail,
   MapPin,
   Clock,
   MessageCircle,
@@ -13,7 +12,6 @@ import {
 const initialForm = {
   name: '',
   phone: '',
-  email: '',
   vehicle: '',
   message: '',
 }
@@ -23,6 +21,7 @@ const address =
 
 const mapsUrl =
   'https://www.google.com/maps/search/?api=1&query=501%2F41A%2C%20Ground%20Floor%2C%20Near%20Hotel%20Meera%20International%2C%20Sen%20Raleigh%20Road%2C%20Asansol%20713304'
+
 
 function validate(form) {
   const errors = {}
@@ -35,10 +34,6 @@ function validate(form) {
     errors.phone = 'Enter a valid phone number.'
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-    errors.email = 'Enter a valid email address.'
-  }
-
   if (!form.message.trim()) {
     errors.message = 'Tell us a little about what you need.'
   }
@@ -46,10 +41,12 @@ function validate(form) {
   return errors
 }
 
+
 export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
+
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -67,6 +64,7 @@ export default function Contact() {
     }
   }
 
+
   const onSubmit = (e) => {
     e.preventDefault()
 
@@ -79,6 +77,7 @@ export default function Contact() {
       setForm(initialForm)
     }
   }
+
 
   return (
     <div className="pt-32 pb-24 bg-[#F4F2EC] text-[#1A1A1A]">
@@ -103,6 +102,7 @@ export default function Contact() {
           Get In Touch
         </span>
 
+
         <h1
           className="
             heading-lg
@@ -113,6 +113,7 @@ export default function Contact() {
         >
           Let's Find Your Next Car Together
         </h1>
+
 
         <p
           className="
@@ -134,74 +135,136 @@ export default function Contact() {
 
       <section className="container-px grid lg:grid-cols-5 gap-10 mb-16">
 
+
         {/* =================================================
             LEFT SIDE
         ================================================= */}
 
         <div className="lg:col-span-2 space-y-4">
 
-          {/* CONTACT DETAILS */}
+
+          {/* =================================================
+              CONTACT DETAILS
+          ================================================= */}
 
           {[
-            [Phone, 'Phone', '+91 98300 00000'],
-            [Mail, 'Email', 'hello@democarwebsite.in'],
+            [
+              Phone,
+              'Phone',
+              '+917406625447',
+              'tel:+917406625447',
+            ],
+
+            // EMAIL — COMMENTED OUT FOR NOW
+            // [
+            //   Mail,
+            //   'Email',
+            //   'hello@democarwebsite.in',
+            //   'mailto:hello@democarwebsite.in',
+            // ],
+
             [
               MapPin,
               'Address',
               address,
+              mapsUrl,
             ],
-            [Clock, 'Business Hours', 'Mon – Sat, 10:00 AM – 7:30 PM'],
-          ].map(([Icon, label, value]) => (
 
-            <div
-              key={label}
-              className="
-                p-5
-                flex
-                items-start
-                gap-4
-                rounded-2xl
-                border
-                border-[#1A1A1A]/10
-                bg-[#F4F2EC]
-                shadow-[0_4px_20px_rgba(26,26,26,0.04)]
-                hover:border-[#8B7D6B]/40
-                transition-colors
-              "
-            >
+            [
+              Clock,
+              'Business Hours',
+              'Mon – Sat, 10:00 AM – 7:30 PM',
+              null,
+            ],
+          ].map(([Icon, label, value, link]) => {
 
-              <span
+            const card = (
+              <div
                 className="
-                  grid
-                  place-items-center
-                  w-11
-                  h-11
-                  rounded-xl
-                  bg-[#8B7D6B]/10
+                  p-5
+                  flex
+                  items-start
+                  gap-4
+                  rounded-2xl
                   border
-                  border-[#8B7D6B]/25
-                  text-[#8B7D6B]
-                  shrink-0
+                  border-[#1A1A1A]/10
+                  bg-[#F4F2EC]
+                  shadow-[0_4px_20px_rgba(26,26,26,0.04)]
+                  hover:border-[#8B7D6B]/40
+                  hover:shadow-[0_6px_25px_rgba(26,26,26,0.07)]
+                  transition-all
+                  duration-300
                 "
               >
-                <Icon size={19} />
-              </span>
 
-              <div className="min-w-0">
+                <span
+                  className="
+                    grid
+                    place-items-center
+                    w-11
+                    h-11
+                    rounded-xl
+                    bg-[#8B7D6B]/10
+                    border
+                    border-[#8B7D6B]/25
+                    text-[#8B7D6B]
+                    shrink-0
+                  "
+                >
+                  <Icon size={19} />
+                </span>
 
-                <p className="text-xs text-[#333333] mb-1">
-                  {label}
-                </p>
 
-                <p className="text-sm font-medium text-[#1A1A1A] leading-relaxed">
-                  {value}
-                </p>
+                <div className="min-w-0">
+
+                  <p className="text-xs text-[#333333] mb-1">
+                    {label}
+                  </p>
+
+
+                  <p
+                    className="
+                      text-sm
+                      font-medium
+                      text-[#1A1A1A]
+                      leading-relaxed
+                      break-words
+                    "
+                  >
+                    {value}
+                  </p>
+
+                </div>
 
               </div>
+            )
 
-            </div>
 
-          ))}
+            if (link) {
+              return (
+                <a
+                  key={label}
+                  href={link}
+                  target={label === 'Address' ? '_blank' : undefined}
+                  rel={
+                    label === 'Address'
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  className="block"
+                >
+                  {card}
+                </a>
+              )
+            }
+
+
+            return (
+              <div key={label}>
+                {card}
+              </div>
+            )
+          })}
 
 
           {/* =================================================
@@ -210,10 +273,11 @@ export default function Contact() {
 
           <div className="grid grid-cols-3 gap-3 pt-2">
 
+
             {/* CALL */}
 
             <a
-              href="tel:+919830000000"
+              href="tel:+917406625447"
               className="
                 flex
                 flex-col
@@ -245,7 +309,7 @@ export default function Contact() {
             {/* WHATSAPP */}
 
             <a
-              href="https://wa.me/919830000000"
+              href="https://wa.me/919752975239"
               target="_blank"
               rel="noreferrer"
               className="
@@ -327,6 +391,7 @@ export default function Contact() {
             "
           >
 
+
             {/* MAP */}
 
             <div className="w-full h-[300px]">
@@ -365,11 +430,13 @@ export default function Contact() {
                   <MapPin size={18} />
                 </span>
 
+
                 <div>
 
                   <p className="text-sm font-semibold text-[#1A1A1A] mb-1">
                     Visit Our Shop
                   </p>
+
 
                   <p className="text-xs leading-relaxed text-[#333333]">
                     {address}
@@ -437,6 +504,7 @@ export default function Contact() {
             "
           >
 
+
             {/* SUCCESS MESSAGE */}
 
             {status === 'success' && (
@@ -482,6 +550,7 @@ export default function Contact() {
                 placeholder="Your name"
               />
 
+
               <Field
                 label="Phone Number"
                 name="phone"
@@ -494,8 +563,9 @@ export default function Contact() {
             </div>
 
 
-            {/* EMAIL */}
+            {/* EMAIL — COMMENTED OUT FOR NOW */}
 
+            {/*
             <Field
               label="Email"
               name="email"
@@ -505,6 +575,7 @@ export default function Contact() {
               error={errors.email}
               placeholder="you@example.com"
             />
+            */}
 
 
             {/* VEHICLE */}
@@ -536,6 +607,7 @@ export default function Contact() {
                 Message
               </label>
 
+
               <textarea
                 id="message"
                 name="message"
@@ -563,6 +635,7 @@ export default function Contact() {
                   }
                 `}
               />
+
 
               {errors.message && (
 

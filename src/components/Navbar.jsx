@@ -142,7 +142,7 @@ export default function Navbar() {
           <div className="hidden lg:block">
 
             <Link
-              to="/products"
+              to="/inventory"
               className="
                 group
                 inline-flex

@@ -165,7 +165,7 @@ export default function Footer() {
 
             {[
               ['Home', '/'],
-              ['Products', '/products'],
+              ['Inventory', '/inventory'],
               ['Services', '/services'],
               ['Gallery', '/gallery'],
               ['Contact', '/contact'],
@@ -278,16 +278,16 @@ export default function Footer() {
               />
 
               <a
-                href="tel:+919830000000"
+                href="tel:+917406-6254-47"
                 className="hover:text-[#8B7D6B] transition-colors"
               >
-                +91 98300 00000
+                 +917406625447
               </a>
 
             </li>
 
 
-            {/* EMAIL */}
+            {/* EMAIL
 
             <li
               className="
@@ -314,7 +314,7 @@ export default function Footer() {
                 hello@democarwebsite.in
               </a>
 
-            </li>
+            </li> */}
 
 
             {/* ADDRESS */}
@@ -339,9 +339,9 @@ export default function Footer() {
               />
 
               <span>
-                Park Street, Kolkata,
+               501/41A, GROUND FLOOR, NEAR HOTEL MEERA INTERNATIONAL, SEN RALEIGH ROAD, ASANSOL
                 <br />
-                West Bengal 700016
+                West Bengal 713304
               </span>
 
             </li>
@@ -384,7 +384,7 @@ export default function Footer() {
 
             <iframe
               title="NEXT Ride Location"
-              src="https://www.google.com/maps?q=Park+Street,+Kolkata,+West+Bengal+700016&output=embed"
+              src="https://www.google.com/maps?q=501%2F41A%2C%20Ground%20Floor%2C%20Near%20Hotel%20Meera%20International%2C%20Sen%20Raleigh%20Road%2C%20Asansol%20713304&output=embed"
               width="100%"
               height="100%"
               style={{
