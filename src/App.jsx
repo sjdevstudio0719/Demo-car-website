@@ -7,7 +7,7 @@ import Inventory from './pages/Inventory.jsx'
 import Services from './pages/Services.jsx'
 import Gallery from './pages/Gallery.jsx'
 import Contact from './pages/Contact.jsx'
-import WhatsAppButton from './components/WhatsAppButton.jsx'
+import WhatsappButton from './components/WhatsappButton.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
