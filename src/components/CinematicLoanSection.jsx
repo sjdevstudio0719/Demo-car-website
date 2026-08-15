@@ -57,11 +57,8 @@ export default function CinematicLoanSection() {
         {
           opacity: 1,
           y: 0,
-
           duration: 0.8,
-
           stagger: 0.15,
-
           ease: 'power3.out',
 
           scrollTrigger: {
@@ -78,42 +75,42 @@ export default function CinematicLoanSection() {
 
   return (
     <section
-  ref={sectionRef}
-  className="
-    relative
-    overflow-hidden
-    min-h-[900px]
-    sm:min-h-[950px]
-    lg:min-h-[850px]
-    flex
-    items-center
-  "
->
+      ref={sectionRef}
+      className="
+        relative
+        overflow-hidden
+        min-h-[900px]
+        sm:min-h-[950px]
+        lg:min-h-[850px]
+        flex
+        items-center
+      "
+    >
 
       {/* =================================================
           PARALLAX BACKGROUND IMAGE
       ================================================= */}
 
       <div
-  ref={backgroundRef}
-  className="
-    absolute
-    inset-0
-    z-0
-    bg-cover
-    bg-center
-    bg-no-repeat
-    will-change-transform
-    scale-[1.08]
-  "
-  style={{
-    backgroundImage: "url('/images/car.png.jpg')",
-  }}
-/>
+        ref={backgroundRef}
+        className="
+          absolute
+          inset-0
+          z-0
+          bg-cover
+          bg-center
+          bg-no-repeat
+          will-change-transform
+          scale-[1.08]
+        "
+        style={{
+          backgroundImage: "url('/images/car.png.jpg')",
+        }}
+      />
 
 
       {/* =================================================
-          MAIN DARK OVERLAY
+          MAIN CHARCOAL OVERLAY
       ================================================= */}
 
       <div
@@ -121,7 +118,7 @@ export default function CinematicLoanSection() {
           absolute
           inset-0
           z-[1]
-          bg-black/55
+          bg-[#1A1A1A]/65
           pointer-events-none
         "
       />
@@ -138,9 +135,9 @@ export default function CinematicLoanSection() {
           z-[2]
           pointer-events-none
           bg-gradient-to-r
-          from-black/90
-          via-black/65
-          to-black/20
+          from-[#1A1A1A]/95
+          via-[#1A1A1A]/75
+          to-[#333333]/20
         "
       />
 
@@ -158,7 +155,7 @@ export default function CinematicLoanSection() {
           z-[2]
           pointer-events-none
           bg-gradient-to-b
-          from-navy-bg/80
+          from-[#1A1A1A]/90
           to-transparent
         "
       />
@@ -177,7 +174,7 @@ export default function CinematicLoanSection() {
           z-[2]
           pointer-events-none
           bg-gradient-to-t
-          from-navy-bg
+          from-[#1A1A1A]
           to-transparent
         "
       />
@@ -226,7 +223,9 @@ export default function CinematicLoanSection() {
 
           <div className="max-w-2xl">
 
-            {/* EYEBROW */}
+            {/* =========================================
+                EYEBROW
+            ========================================= */}
 
             <span
               className="
@@ -236,7 +235,7 @@ export default function CinematicLoanSection() {
                 text-[10px]
                 uppercase
                 tracking-[0.28em]
-                text-accent-light
+                text-[#8B7D6B]
                 mb-5
               "
             >
@@ -245,7 +244,7 @@ export default function CinematicLoanSection() {
                 className="
                   w-6
                   h-px
-                  bg-accent-light
+                  bg-[#8B7D6B]
                 "
               />
 
@@ -254,7 +253,9 @@ export default function CinematicLoanSection() {
             </span>
 
 
-            {/* HEADING */}
+            {/* =========================================
+                HEADING
+            ========================================= */}
 
             <h2
               className="
@@ -263,7 +264,7 @@ export default function CinematicLoanSection() {
                 leading-[0.88]
                 tracking-[-0.055em]
                 font-medium
-                text-white
+                text-[#F4F2EC]
               "
             >
 
@@ -271,14 +272,16 @@ export default function CinematicLoanSection() {
 
               <br />
 
-              <span className="text-accent-light">
+              <span className="text-[#8B7D6B]">
                 Dream Car.
               </span>
 
             </h2>
 
 
-            {/* DESCRIPTION */}
+            {/* =========================================
+                DESCRIPTION
+            ========================================= */}
 
             <p
               className="
@@ -287,7 +290,7 @@ export default function CinematicLoanSection() {
                 text-base
                 md:text-lg
                 leading-8
-                text-white/70
+                text-[#F4F2EC]/70
               "
             >
 
@@ -298,7 +301,9 @@ export default function CinematicLoanSection() {
             </p>
 
 
-            {/* CTA */}
+            {/* =========================================
+                CTA
+            ========================================= */}
 
             <Link
               to="/products"
@@ -309,14 +314,18 @@ export default function CinematicLoanSection() {
                 items-center
                 gap-3
                 rounded-full
-                bg-white
-                text-navy-bg
+                bg-[#F4F2EC]
+                text-[#1A1A1A]
                 px-7
                 py-3.5
                 text-sm
                 font-semibold
+
+                hover:bg-[#8B7D6B]
+                hover:text-[#F4F2EC]
                 hover:scale-[1.03]
-                transition-transform
+
+                transition-all
                 duration-300
               "
             >
@@ -335,7 +344,9 @@ export default function CinematicLoanSection() {
             </Link>
 
 
-            {/* TRUST TEXT */}
+            {/* =========================================
+                TRUST TEXT
+            ========================================= */}
 
             <div
               className="
@@ -348,7 +359,7 @@ export default function CinematicLoanSection() {
                 text-[10px]
                 uppercase
                 tracking-[0.16em]
-                text-white/45
+                text-[#F4F2EC]/50
               "
             >
 
@@ -361,7 +372,7 @@ export default function CinematicLoanSection() {
                   w-1
                   h-1
                   rounded-full
-                  bg-white/30
+                  bg-[#8B7D6B]
                 "
               />
 
@@ -374,7 +385,7 @@ export default function CinematicLoanSection() {
                   w-1
                   h-1
                   rounded-full
-                  bg-white/30
+                  bg-[#8B7D6B]
                 "
               />
 

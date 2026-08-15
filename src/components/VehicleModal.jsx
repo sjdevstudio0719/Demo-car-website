@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { X, Gauge, Fuel, Settings2, MapPin, Calendar, User, Palette, Check, MessageCircle } from 'lucide-react'
+import {
+  X,
+  Gauge,
+  Fuel,
+  Settings2,
+  MapPin,
+  Calendar,
+  User,
+  Palette,
+  Check,
+  MessageCircle,
+  Phone,
+} from 'lucide-react'
+
 import { formatPrice, formatKm } from '../data/vehicles.js'
 
 export default function VehicleModal({ vehicle, onClose }) {
@@ -9,103 +22,458 @@ export default function VehicleModal({ vehicle, onClose }) {
   useEffect(() => {
     setActiveImage(0)
     document.body.style.overflow = vehicle ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [vehicle])
 
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && onClose()
+
     window.addEventListener('keydown', onKey)
+
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
   if (!vehicle) return null
 
+  /* ==========================================
+     WHATSAPP MESSAGE
+  ========================================== */
+
+  const whatsappMessage = encodeURIComponent(
+    `Hi NEXT Ride, I'm interested in the ${vehicle.brand} ${vehicle.model} ${vehicle.variant} (${vehicle.year}) listed at ${formatPrice(vehicle.price)}. Is it still available?`
+  )
+
+  const whatsappUrl = `https://wa.me/919830000000?text=${whatsappMessage}`
+
+  /* ==========================================
+     VEHICLE SPECS
+  ========================================== */
+
   const specs = [
-    { icon: Calendar, label: 'Year', value: vehicle.year },
-    { icon: Gauge, label: 'Driven', value: formatKm(vehicle.kmDriven) },
-    { icon: Fuel, label: 'Fuel', value: vehicle.fuelType },
-    { icon: Settings2, label: 'Transmission', value: vehicle.transmission },
-    { icon: User, label: 'Ownership', value: vehicle.owners },
-    { icon: Palette, label: 'Colour', value: vehicle.color },
-    { icon: MapPin, label: 'Location', value: vehicle.location },
+    {
+      icon: Calendar,
+      label: 'Year',
+      value: vehicle.year,
+    },
+    {
+      icon: Gauge,
+      label: 'Driven',
+      value: formatKm(vehicle.kmDriven),
+    },
+    {
+      icon: Fuel,
+      label: 'Fuel',
+      value: vehicle.fuelType,
+    },
+    {
+      icon: Settings2,
+      label: 'Transmission',
+      value: vehicle.transmission,
+    },
+    {
+      icon: User,
+      label: 'Ownership',
+      value: vehicle.owners,
+    },
+    {
+      icon: Palette,
+      label: 'Colour',
+      value: vehicle.color,
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: vehicle.location,
+    },
   ]
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 bg-navy shadow-card animate-fadeUp">
+      {/* ==========================================
+          BACKDROP
+      ========================================== */}
+
+      <div
+        className="
+          absolute
+          inset-0
+          bg-[#1A1A1A]/85
+          backdrop-blur-sm
+        "
+        onClick={onClose}
+      />
+
+      {/* ==========================================
+          MODAL
+      ========================================== */}
+
+      <div
+        className="
+          relative
+          w-full
+          max-w-4xl
+          max-h-[90vh]
+          overflow-y-auto
+          rounded-2xl
+          border
+          border-[#333333]/20
+          bg-[#F4F2EC]
+          shadow-2xl
+          animate-fadeUp
+        "
+      >
+
+        {/* ========================================
+            CLOSE BUTTON
+        ======================================== */}
+
         <button
           onClick={onClose}
-          className="sticky top-4 float-right mr-4 z-10 grid place-items-center w-9 h-9 rounded-full bg-navy-bg/80 border border-white/10 text-ink-primary hover:border-accent-blue/60 hover:text-accent-light transition-colors"
+          className="
+            sticky
+            top-4
+            float-right
+            mr-4
+            z-10
+            grid
+            place-items-center
+            w-9
+            h-9
+            rounded-full
+            bg-[#F4F2EC]/90
+            border
+            border-[#333333]/20
+            text-[#333333]
+            hover:bg-[#8B7D6B]
+            hover:text-[#F4F2EC]
+            hover:border-[#8B7D6B]
+            transition-colors
+          "
           aria-label="Close details"
         >
           <X size={18} />
         </button>
 
         <div className="p-6 sm:p-8 clear-both">
+
           <div className="grid md:grid-cols-2 gap-8">
+
+            {/* ====================================
+                IMAGE SECTION
+            ==================================== */}
+
             <div>
-              <div className="aspect-[4/3] rounded-xl overflow-hidden mb-3">
-                <img src={vehicle.images[activeImage]} alt={vehicle.model} className="w-full h-full object-cover" />
+
+              <div
+                className="
+                  aspect-[4/3]
+                  rounded-xl
+                  overflow-hidden
+                  mb-3
+                  border
+                  border-[#333333]/10
+                "
+              >
+                <img
+                  src={vehicle.images[activeImage]}
+                  alt={vehicle.model}
+                  className="w-full h-full object-cover"
+                />
               </div>
+
+              {/* Thumbnails */}
+
               {vehicle.images.length > 1 && (
                 <div className="flex gap-2">
+
                   {vehicle.images.map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveImage(i)}
-                      className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
-                        i === activeImage ? 'border-accent-blue' : 'border-transparent opacity-60'
-                      }`}
+                      className={`
+                        w-16
+                        h-16
+                        rounded-lg
+                        overflow-hidden
+                        border-2
+                        transition-all
+                        ${
+                          i === activeImage
+                            ? 'border-[#8B7D6B] opacity-100'
+                            : 'border-transparent opacity-60 hover:opacity-90'
+                        }
+                      `}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      <img
+                        src={img}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
                     </button>
                   ))}
+
                 </div>
               )}
+
             </div>
 
-            <div>
-              <p className="text-xs text-accent-light font-semibold tracking-widest uppercase mb-2">{vehicle.brand}</p>
-              <h2 className="heading-md mb-1">{vehicle.model}</h2>
-              <p className="body-text text-sm mb-4">{vehicle.variant}</p>
-              <p className="font-display text-3xl text-accent-light mb-5">{formatPrice(vehicle.price)}</p>
-              <p className="body-text text-sm mb-6">{vehicle.description}</p>
+            {/* ====================================
+                VEHICLE INFORMATION
+            ==================================== */}
 
-              <div className="grid grid-cols-2 gap-4 mb-6">
+            <div>
+
+              {/* Brand */}
+
+              <p
+                className="
+                  text-xs
+                  text-[#8B7D6B]
+                  font-semibold
+                  tracking-widest
+                  uppercase
+                  mb-2
+                "
+              >
+                {vehicle.brand}
+              </p>
+
+              {/* Model */}
+
+              <h2
+                className="
+                  font-display
+                  text-3xl
+                  sm:text-4xl
+                  tracking-tight
+                  text-[#1A1A1A]
+                  mb-1
+                "
+              >
+                {vehicle.model}
+              </h2>
+
+              {/* Variant */}
+
+              <p className="text-[#333333]/70 text-sm mb-4">
+                {vehicle.variant}
+              </p>
+
+              {/* Price */}
+
+              <p
+                className="
+                  font-display
+                  text-3xl
+                  text-[#8B7D6B]
+                  mb-5
+                "
+              >
+                {formatPrice(vehicle.price)}
+              </p>
+
+              {/* Description */}
+
+              <p
+                className="
+                  text-[#333333]/80
+                  text-sm
+                  leading-6
+                  mb-6
+                "
+              >
+                {vehicle.description}
+              </p>
+
+              {/* ==================================
+                  SPECS
+              ================================== */}
+
+              <div className="grid grid-cols-2 gap-4 mb-7">
+
                 {specs.map((s) => (
-                  <div key={s.label} className="flex items-start gap-2">
-                    <s.icon size={15} className="text-accent-light mt-0.5 shrink-0" />
+                  <div
+                    key={s.label}
+                    className="flex items-start gap-2"
+                  >
+
+                    <s.icon
+                      size={15}
+                      className="
+                        text-[#8B7D6B]
+                        mt-0.5
+                        shrink-0
+                      "
+                    />
+
                     <div>
-                      <p className="text-[11px] text-ink-secondary">{s.label}</p>
-                      <p className="text-sm text-ink-primary font-medium">{s.value}</p>
+
+                      <p className="text-[11px] text-[#333333]/60">
+                        {s.label}
+                      </p>
+
+                      <p className="text-sm text-[#1A1A1A] font-medium">
+                        {s.value}
+                      </p>
+
                     </div>
+
                   </div>
                 ))}
+
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link to="/contact" onClick={onClose} className="btn-primary flex-1">
-                  <MessageCircle size={16} /> Enquire Now
+              {/* ==================================
+                  ACTION BUTTONS
+              ================================== */}
+
+              <div className="grid sm:grid-cols-3 gap-3">
+
+                {/* Enquire */}
+
+                <Link
+                  to="/contact"
+                  onClick={onClose}
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-full
+                    bg-[#1A1A1A]
+                    text-[#F4F2EC]
+                    px-5
+                    py-3
+                    text-sm
+                    font-semibold
+                    hover:bg-[#333333]
+                    transition-colors
+                  "
+                >
+                  <MessageCircle size={16} />
+                  Enquire Now
                 </Link>
-                <a href="tel:+919830000000" className="btn-secondary flex-1">Call Dealer</a>
+
+                {/* WhatsApp */}
+
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-full
+                    bg-[#8B7D6B]
+                    text-[#F4F2EC]
+                    px-5
+                    py-3
+                    text-sm
+                    font-semibold
+                    border
+                    border-[#8B7D6B]
+                    hover:bg-[#333333]
+                    hover:border-[#333333]
+                    transition-colors
+                  "
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp
+                </a>
+
+                {/* Call */}
+
+                <a
+                  href="tel:+919830000000"
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-[#8B7D6B]/50
+                    text-[#1A1A1A]
+                    px-5
+                    py-3
+                    text-sm
+                    font-semibold
+                    hover:bg-[#8B7D6B]
+                    hover:text-[#F4F2EC]
+                    hover:border-[#8B7D6B]
+                    transition-colors
+                  "
+                >
+                  <Phone size={16} />
+                  Call Dealer
+                </a>
+
               </div>
+
             </div>
           </div>
 
+          {/* ========================================
+              KEY FEATURES
+          ======================================== */}
+
           {vehicle.features?.length > 0 && (
-            <div className="mt-8 pt-8 border-t border-white/[0.06]">
-              <h3 className="font-display text-lg text-ink-primary mb-4">Key Features</h3>
+            <div
+              className="
+                mt-8
+                pt-8
+                border-t
+                border-[#333333]/10
+              "
+            >
+
+              <h3
+                className="
+                  font-display
+                  text-xl
+                  text-[#1A1A1A]
+                  mb-4
+                "
+              >
+                Key Features
+              </h3>
+
               <div className="grid sm:grid-cols-2 gap-3">
+
                 {vehicle.features.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-ink-secondary">
-                    <Check size={14} className="text-accent-light shrink-0" /> {f}
+                  <div
+                    key={f}
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      text-sm
+                      text-[#333333]/80
+                    "
+                  >
+                    <Check
+                      size={14}
+                      className="
+                        text-[#8B7D6B]
+                        shrink-0
+                      "
+                    />
+
+                    {f}
                   </div>
                 ))}
+
               </div>
+
             </div>
           )}
+
         </div>
       </div>
     </div>

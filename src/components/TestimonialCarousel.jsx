@@ -1,69 +1,297 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+  Star,
+  Quote,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
 import { testimonials } from '../data/content.js'
 
 export default function TestimonialCarousel() {
   const [index, setIndex] = useState(0)
-  const perView = 1
 
-  const next = useCallback(() => setIndex((i) => (i + 1) % testimonials.length), [])
-  const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length)
+  const next = useCallback(() => {
+    if (!testimonials?.length) return
+
+    setIndex(
+      (i) => (i + 1) % testimonials.length
+    )
+  }, [])
+
+  const prev = () => {
+    if (!testimonials?.length) return
+
+    setIndex(
+      (i) =>
+        (i - 1 + testimonials.length) %
+        testimonials.length
+    )
+  }
 
   useEffect(() => {
-    const t = setInterval(next, 6000)
-    return () => clearInterval(t)
+    if (!testimonials?.length) return
+
+    const timer = setInterval(next, 6000)
+
+    return () => clearInterval(timer)
   }, [next])
+
+  if (!testimonials?.length) {
+    return null
+  }
 
   const t = testimonials[index]
 
   return (
-    <div className="relative max-w-2xl mx-auto">
-      <div className="card-surface p-8 md:p-10 text-center min-h-[260px] flex flex-col items-center justify-center">
-        <Quote className="text-accent-blue/40 mb-4" size={32} />
-        <div className="flex items-center gap-1 mb-4">
+    <div className="relative mx-auto max-w-3xl">
+
+      {/* =====================================================
+          TESTIMONIAL CARD
+      ===================================================== */}
+
+      <div
+        className="
+          relative
+          overflow-hidden
+          border
+          border-[#1A1A1A]/10
+          bg-[#F4F2EC]
+          px-6
+          py-10
+          text-center
+          md:px-12
+          md:py-14
+        "
+      >
+
+        {/* Decorative accent */}
+
+        <div
+          className="
+            absolute
+            left-1/2
+            top-0
+            h-px
+            w-20
+            -translate-x-1/2
+            bg-[#8B7D6B]
+          "
+        />
+
+
+        {/* Quote Icon */}
+
+        <Quote
+          size={34}
+          strokeWidth={1.2}
+          className="
+            mx-auto
+            mb-6
+            text-[#8B7D6B]
+          "
+        />
+
+
+        {/* Stars */}
+
+        <div className="mb-6 flex items-center justify-center gap-1">
+
           {Array.from({ length: 5 }).map((_, i) => (
+
             <Star
               key={i}
-              size={16}
-              className={i < t.rating ? 'text-accent-light fill-accent-light' : 'text-white/15'}
+              size={15}
+              strokeWidth={1.5}
+              className={
+                i < t.rating
+                  ? `
+                    fill-[#8B7D6B]
+                    text-[#8B7D6B]
+                  `
+                  : `
+                    text-[#1A1A1A]/15
+                  `
+              }
             />
+
           ))}
+
         </div>
-        <p className="body-text text-base md:text-lg mb-6 max-w-lg">"{t.review}"</p>
+
+
+        {/* Review */}
+
+        <p
+          className="
+            mx-auto
+            max-w-2xl
+            font-display
+            text-xl
+            leading-relaxed
+            tracking-[-0.02em]
+            text-[#1A1A1A]
+            md:text-2xl
+          "
+        >
+          "{t.review}"
+        </p>
+
+
+        {/* Divider */}
+
+        <div
+          className="
+            mx-auto
+            my-7
+            h-px
+            w-10
+            bg-[#8B7D6B]/50
+          "
+        />
+
+
+        {/* Customer */}
+
         <div>
-          <p className="font-display text-ink-primary">{t.name}</p>
-          <p className="text-xs text-ink-secondary">{t.vehicle}</p>
+
+          <p
+            className="
+              font-display
+              text-lg
+              text-[#1A1A1A]
+            "
+          >
+            {t.name}
+          </p>
+
+          <p
+            className="
+              mt-1
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.2em]
+              text-[#333333]/70
+            "
+          >
+            {t.vehicle}
+          </p>
+
         </div>
+
       </div>
 
-      <div className="flex items-center justify-center gap-4 mt-6">
+
+      {/* =====================================================
+          CONTROLS
+      ===================================================== */}
+
+      <div
+        className="
+          mt-7
+          flex
+          items-center
+          justify-center
+          gap-5
+        "
+      >
+
+        {/* Previous */}
+
         <button
           onClick={prev}
-          className="grid place-items-center w-10 h-10 rounded-full border border-white/10 text-ink-secondary hover:text-accent-light hover:border-accent-blue/50 transition-colors"
+          className="
+            grid
+            h-10
+            w-10
+            place-items-center
+            border
+            border-[#1A1A1A]/15
+            bg-[#F4F2EC]
+            text-[#333333]
+            transition-all
+            duration-300
+            hover:border-[#8B7D6B]
+            hover:bg-[#8B7D6B]
+            hover:text-[#F4F2EC]
+          "
           aria-label="Previous testimonial"
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft
+            size={18}
+            strokeWidth={1.5}
+          />
         </button>
+
+
+        {/* Progress indicators */}
+
         <div className="flex items-center gap-2">
+
           {testimonials.map((_, i) => (
+
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === index ? 'w-6 bg-accent-blue' : 'w-1.5 bg-white/15'
-              }`}
+              className="
+                flex
+                h-6
+                items-center
+                justify-center
+              "
               aria-label={`Go to testimonial ${i + 1}`}
-            />
+            >
+
+              <span
+                className={`
+                  block
+                  h-px
+                  transition-all
+                  duration-500
+                  ${
+                    i === index
+                      ? 'w-8 bg-[#8B7D6B]'
+                      : 'w-3 bg-[#1A1A1A]/20 hover:w-5 hover:bg-[#1A1A1A]/40'
+                  }
+                `}
+              />
+
+            </button>
+
           ))}
+
         </div>
+
+
+        {/* Next */}
+
         <button
           onClick={next}
-          className="grid place-items-center w-10 h-10 rounded-full border border-white/10 text-ink-secondary hover:text-accent-light hover:border-accent-blue/50 transition-colors"
+          className="
+            grid
+            h-10
+            w-10
+            place-items-center
+            border
+            border-[#1A1A1A]/15
+            bg-[#F4F2EC]
+            text-[#333333]
+            transition-all
+            duration-300
+            hover:border-[#8B7D6B]
+            hover:bg-[#8B7D6B]
+            hover:text-[#F4F2EC]
+          "
           aria-label="Next testimonial"
         >
-          <ChevronRight size={18} />
+          <ChevronRight
+            size={18}
+            strokeWidth={1.5}
+          />
         </button>
+
       </div>
+
     </div>
   )
 }

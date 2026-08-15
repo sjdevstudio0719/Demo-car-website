@@ -10,24 +10,53 @@ import {
 function FilterGroup({ title, options, selected, onToggle }) {
   return (
     <div className="mb-5">
+
       {/* GROUP TITLE */}
-      <p className="text-[10px] sm:text-xs font-semibold tracking-[0.12em] text-ink-secondary uppercase mb-3">
+      <p
+        className="
+          text-[10px]
+          sm:text-xs
+          font-semibold
+          tracking-[0.12em]
+          text-[#333333]
+          uppercase
+          mb-3
+        "
+      >
         {title}
       </p>
 
+
       {/* OPTIONS */}
       <div className="flex flex-wrap gap-2">
-        {options.map((opt) => {
-          const label = typeof opt === 'string' ? opt : opt.label
-          const value = typeof opt === 'string' ? opt : opt.label
 
-          const active = selected === value
+        {options.map((opt) => {
+
+          const label =
+            typeof opt === 'string'
+              ? opt
+              : opt.label
+
+          const value =
+            typeof opt === 'string'
+              ? opt
+              : opt.label
+
+          const active =
+            selected === value
 
           return (
+
             <button
               key={label}
               type="button"
-              onClick={() => onToggle(active ? null : value)}
+              onClick={() =>
+                onToggle(
+                  active
+                    ? null
+                    : value
+                )
+              }
               className={`
                 px-3 py-2
                 sm:px-3.5 sm:py-2
@@ -40,19 +69,35 @@ function FilterGroup({ title, options, selected, onToggle }) {
 
                 ${
                   active
-                    ? 'bg-accent-blue border-accent-blue text-white shadow-[0_0_15px_rgba(47,128,237,0.18)]'
-                    : 'border-white/10 text-ink-secondary bg-white/[0.02] hover:border-accent-blue/40 hover:text-ink-primary'
+                    ? `
+                      bg-[#1A1A1A]
+                      border-[#1A1A1A]
+                      text-[#F4F2EC]
+                      shadow-[0_4px_15px_rgba(26,26,26,0.12)]
+                    `
+                    : `
+                      border-[#1A1A1A]/10
+                      text-[#333333]
+                      bg-[#F4F2EC]
+                      hover:border-[#8B7D6B]/50
+                      hover:text-[#8B7D6B]
+                      hover:bg-[#8B7D6B]/5
+                    `
                 }
               `}
             >
               {label}
             </button>
+
           )
         })}
+
       </div>
+
     </div>
   )
 }
+
 
 export default function FilterPanel({
   filters,
@@ -61,14 +106,19 @@ export default function FilterPanel({
   open,
   onClose,
 }) {
+
   const update = (key, value) => {
+
     setFilters((f) => ({
       ...f,
       [key]: value,
     }))
+
   }
 
+
   const clearAll = () => {
+
     setFilters({
       brand: null,
       bodyType: null,
@@ -77,7 +127,9 @@ export default function FilterPanel({
       budget: null,
       search: filters.search,
     })
+
   }
+
 
   const hasActive =
     filters.brand ||
@@ -86,25 +138,31 @@ export default function FilterPanel({
     filters.transmission ||
     filters.budget
 
+
   return (
+
     <>
+
       {/* =====================================================
           MOBILE BACKDROP
       ===================================================== */}
 
       {open && (
+
         <div
           onClick={onClose}
           className="
             fixed
             inset-0
             z-40
-            bg-black/70
+            bg-[#1A1A1A]/50
             backdrop-blur-sm
             lg:hidden
           "
         />
+
       )}
+
 
       {/* =====================================================
           FILTER PANEL
@@ -121,7 +179,7 @@ export default function FilterPanel({
           w-[88%]
           max-w-[380px]
 
-          bg-navy-bg
+          bg-[#F4F2EC]
 
           overflow-y-auto
           overscroll-contain
@@ -147,6 +205,8 @@ export default function FilterPanel({
           lg:translate-x-0
         `}
       >
+
+
         {/* =====================================================
             MOBILE HEADER
         ===================================================== */}
@@ -161,38 +221,57 @@ export default function FilterPanel({
             py-5
 
             border-b
-            border-white/10
+            border-[#1A1A1A]/10
 
             lg:hidden
           "
         >
+
           <div className="flex items-center gap-2">
+
             <div
               className="
                 w-9
                 h-9
                 rounded-xl
-                bg-accent-blue/10
+                bg-[#8B7D6B]/10
                 border
-                border-accent-blue/20
+                border-[#8B7D6B]/25
                 grid
                 place-items-center
-                text-accent-light
+                text-[#8B7D6B]
               "
             >
               <SlidersHorizontal size={17} />
             </div>
 
+
             <div>
-              <h3 className="font-display text-lg text-ink-primary">
+
+              <h3
+                className="
+                  font-display
+                  text-lg
+                  text-[#1A1A1A]
+                "
+              >
                 Filters
               </h3>
 
-              <p className="text-[10px] text-ink-secondary mt-0.5">
+              <p
+                className="
+                  text-[10px]
+                  text-[#333333]/70
+                  mt-0.5
+                "
+              >
                 Refine your search
               </p>
+
             </div>
+
           </div>
+
 
           <button
             type="button"
@@ -205,19 +284,21 @@ export default function FilterPanel({
               rounded-full
 
               border
-              border-white/10
+              border-[#1A1A1A]/10
 
-              text-ink-secondary
+              text-[#333333]
 
-              hover:text-white
-              hover:bg-white/5
+              hover:text-[#1A1A1A]
+              hover:bg-[#1A1A1A]/5
 
               transition-colors
             "
           >
             <X size={18} />
           </button>
+
         </div>
+
 
         {/* =====================================================
             FILTER CONTENT
@@ -229,9 +310,13 @@ export default function FilterPanel({
             lg:p-0
           "
         >
+
           <div
             className="
-              card-surface
+              rounded-3xl
+              border
+              border-[#1A1A1A]/10
+              bg-[#F4F2EC]
               p-5
 
               lg:p-5
@@ -239,6 +324,8 @@ export default function FilterPanel({
               lg:top-28
             "
           >
+
+
             {/* =================================================
                 DESKTOP HEADER
             ================================================= */}
@@ -252,45 +339,67 @@ export default function FilterPanel({
                 mb-6
               "
             >
-              <h3 className="font-display text-lg flex items-center gap-2">
+
+              <h3
+                className="
+                  font-display
+                  text-lg
+                  text-[#1A1A1A]
+                  flex
+                  items-center
+                  gap-2
+                "
+              >
                 <SlidersHorizontal size={18} />
                 Filters
               </h3>
 
+
               {hasActive && (
+
                 <button
                   type="button"
                   onClick={clearAll}
                   className="
                     text-xs
-                    text-accent-light
+                    text-[#8B7D6B]
+                    hover:text-[#1A1A1A]
                     hover:underline
                   "
                 >
                   Clear all
                 </button>
+
               )}
+
             </div>
+
 
             {/* =================================================
                 MOBILE CLEAR ALL
             ================================================= */}
 
             {hasActive && (
+
               <div className="flex justify-end mb-4 lg:hidden">
+
                 <button
                   type="button"
                   onClick={clearAll}
                   className="
                     text-[11px]
-                    text-accent-light
+                    text-[#8B7D6B]
+                    hover:text-[#1A1A1A]
                     hover:underline
                   "
                 >
                   Clear all filters
                 </button>
+
               </div>
+
             )}
+
 
             {/* =================================================
                 BUDGET
@@ -300,8 +409,11 @@ export default function FilterPanel({
               title="Budget"
               options={budgetRanges}
               selected={filters.budget}
-              onToggle={(value) => update('budget', value)}
+              onToggle={(value) =>
+                update('budget', value)
+              }
             />
+
 
             {/* =================================================
                 BODY TYPE
@@ -311,8 +423,11 @@ export default function FilterPanel({
               title="Body Type"
               options={bodyTypes}
               selected={filters.bodyType}
-              onToggle={(value) => update('bodyType', value)}
+              onToggle={(value) =>
+                update('bodyType', value)
+              }
             />
+
 
             {/* =================================================
                 BRAND
@@ -320,10 +435,15 @@ export default function FilterPanel({
 
             <FilterGroup
               title="Brand"
-              options={brands.map((brand) => brand.name)}
+              options={brands.map(
+                (brand) => brand.name
+              )}
               selected={filters.brand}
-              onToggle={(value) => update('brand', value)}
+              onToggle={(value) =>
+                update('brand', value)
+              }
             />
+
 
             {/* =================================================
                 FUEL TYPE
@@ -333,8 +453,11 @@ export default function FilterPanel({
               title="Fuel Type"
               options={fuelTypes}
               selected={filters.fuelType}
-              onToggle={(value) => update('fuelType', value)}
+              onToggle={(value) =>
+                update('fuelType', value)
+              }
             />
+
 
             {/* =================================================
                 TRANSMISSION
@@ -344,8 +467,14 @@ export default function FilterPanel({
               title="Transmission"
               options={transmissions}
               selected={filters.transmission}
-              onToggle={(value) => update('transmission', value)}
+              onToggle={(value) =>
+                update(
+                  'transmission',
+                  value
+                )
+              }
             />
+
 
             {/* =================================================
                 RESULT COUNT
@@ -356,16 +485,37 @@ export default function FilterPanel({
                 pt-4
                 mt-2
                 border-t
-                border-white/[0.06]
+                border-[#1A1A1A]/10
               "
             >
-              <p className="text-xs text-ink-secondary">
-                <span className="text-ink-primary font-medium">
+
+              <p
+                className="
+                  text-xs
+                  text-[#333333]
+                "
+              >
+
+                <span
+                  className="
+                    text-[#1A1A1A]
+                    font-semibold
+                  "
+                >
                   {resultCount}
                 </span>{' '}
-                vehicle{resultCount !== 1 ? 's' : ''} found
+
+                vehicle
+                {resultCount !== 1
+                  ? 's'
+                  : ''}{' '}
+
+                found
+
               </p>
+
             </div>
+
 
             {/* =================================================
                 MOBILE SHOW RESULTS
@@ -375,18 +525,32 @@ export default function FilterPanel({
               type="button"
               onClick={onClose}
               className="
-                btn-primary
                 w-full
                 mt-5
+                rounded-full
+                bg-[#1A1A1A]
+                text-[#F4F2EC]
+                py-3
+                px-5
+                text-sm
+                font-semibold
+
+                hover:bg-[#8B7D6B]
+
+                transition-colors
 
                 lg:hidden
               "
             >
               Show {resultCount} results
             </button>
+
           </div>
+
         </div>
+
       </aside>
+
     </>
   )
 }

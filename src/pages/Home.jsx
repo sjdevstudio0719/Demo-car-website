@@ -1,228 +1,5 @@
-// import { Link, useNavigate } from 'react-router-dom'
-// import { ArrowRight, ArrowUpRight, ShieldCheck, Wallet, FileCheck2, Star } from 'lucide-react'
-// import HeroCarousel from '../components/HeroCarousel.jsx'
-// import SectionHeading from '../components/SectionHeading.jsx'
-// import BrandCard from '../components/BrandCard.jsx'
-// import ServiceCard from '../components/ServiceCard.jsx'
-// import TestimonialCarousel from '../components/TestimonialCarousel.jsx'
-// import { vehicles, budgetRanges, bodyTypes } from '../data/vehicles.js'
-// import { brands, carTypes } from '../data/brands.js'
-// import { financialServices } from '../data/content.js'
-
-// export default function Home() {
-//   const navigate = useNavigate()
-//   const featured = vehicles.filter((v) => v.isFeatured && v.status !== 'sold').slice(0, 5)
-
-//   const goWithFilter = (key, value) => navigate('/products', { state: { [key]: value } })
-
-//   return (
-//     <div>
-//       {/* HERO */}
-//       <section className="relative pt-36 pb-16 md:pt-44 md:pb-24 overflow-hidden">
-//         <div className="absolute inset-0 bg-radial-fade pointer-events-none" />
-//         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent-blue/10 blur-3xl pointer-events-none" />
-
-//         <div className="container-px relative grid lg:grid-cols-2 gap-14 items-center">
-//           <div className="reveal">
-//             <span className="eyebrow mb-5 inline-block">Trusted Pre-Owned Cars</span>
-//             <h1 className="heading-xl mb-6">
-//               Find Your Next Car <span className="text-accent-light">With Confidence</span>
-//             </h1>
-//             <p className="body-text text-lg max-w-md mb-9">
-//               Quality pre-owned cars, transparent pricing, hassle-free paperwork and trusted
-//               service — every vehicle, every time.
-//             </p>
-//             <div className="flex flex-wrap items-center gap-4">
-//               <Link to="/products" className="btn-primary">
-//                 Browse Cars <ArrowRight size={16} />
-//               </Link>
-//               <Link to="/services" className="btn-secondary">
-//                 Explore Vehicles
-//               </Link>
-//             </div>
-
-//             <div className="flex items-center gap-8 mt-12 pt-8 border-t border-white/[0.06] max-w-md">
-//               {[['500+', 'Cars Sold'], ['4.8/5', 'Customer Rating'], ['12+', 'Years Trusted']].map(([n, l]) => (
-//                 <div key={l}>
-//                   <p className="font-display text-2xl text-ink-primary">{n}</p>
-//                   <p className="text-xs text-ink-secondary">{l}</p>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-
-//           <div className="reveal" style={{ animationDelay: '150ms' }}>
-//             <HeroCarousel vehicles={featured} />
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* BROWSE SECTION */}
-//       <section className="section container-px">
-//         <SectionHeading eyebrow="Start Browsing" title="Find the Right Car for You" />
-
-//         <div className="grid md:grid-cols-3 gap-10">
-//           <div>
-//             <p className="text-sm font-semibold text-ink-primary mb-4">Browse by Budget</p>
-//             <div className="flex flex-col gap-2.5">
-//               {budgetRanges.map((b) => (
-//                 <button
-//                   key={b.label}
-//                   onClick={() => goWithFilter('budget', b.label)}
-//                   className="flex items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-sm text-ink-secondary hover:border-accent-blue/50 hover:text-ink-primary transition-colors"
-//                 >
-//                   {b.label} <ArrowUpRight size={14} />
-//                 </button>
-//               ))}
-//             </div>
-//           </div>
-
-//           <div>
-//             <p className="text-sm font-semibold text-ink-primary mb-4">Browse by Body Type</p>
-//             <div className="flex flex-col gap-2.5">
-//               {bodyTypes.map((b) => (
-//                 <button
-//                   key={b}
-//                   onClick={() => goWithFilter('bodyType', b)}
-//                   className="flex items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-sm text-ink-secondary hover:border-accent-blue/50 hover:text-ink-primary transition-colors"
-//                 >
-//                   {b} <ArrowUpRight size={14} />
-//                 </button>
-//               ))}
-//             </div>
-//           </div>
-
-//           <div>
-//             <p className="text-sm font-semibold text-ink-primary mb-4">Popular Brands</p>
-//             <div className="flex flex-col gap-2.5">
-//               {brands.slice(0, 5).map((b) => (
-//                 <button
-//                   key={b.name}
-//                   onClick={() => goWithFilter('brand', b.name)}
-//                   className="flex items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-sm text-ink-secondary hover:border-accent-blue/50 hover:text-ink-primary transition-colors"
-//                 >
-//                   {b.name} <ArrowUpRight size={14} />
-//                 </button>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* EXPLORE CAR TYPES */}
-//       <section className="section container-px bg-navy/40">
-//         <SectionHeading eyebrow="Categories" title="Explore All Car Types" />
-//         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-//           {carTypes.map((c, i) => (
-//             <button
-//               key={c.key}
-//               onClick={() =>
-//                 navigate('/products', {
-//                   state: {
-//                     bodyType: c.bodyType || null,
-//                     transmission: c.transmission || null,
-//                     fuelType: c.fuelType || null,
-//                   },
-//                 })
-//               }
-//               className="reveal group relative rounded-2xl overflow-hidden aspect-[4/5] text-left"
-//               style={{ animationDelay: `${i * 60}ms` }}
-//             >
-//               <img
-//                 src={c.image}
-//                 alt={c.label}
-//                 loading="lazy"
-//                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-//               />
-//               <div className="absolute inset-0 bg-gradient-to-t from-navy-bg via-navy-bg/30 to-transparent" />
-//               <div className="absolute bottom-0 p-4">
-//                 <p className="font-display text-base text-ink-primary">{c.label}</p>
-//                 <p className="text-xs text-ink-secondary flex items-center gap-1 mt-1">
-//                   {c.tagline} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-//                 </p>
-//               </div>
-//             </button>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* FINANCIAL SERVICES */}
-//       <section className="section container-px">
-//         <SectionHeading eyebrow="Complete Support" title="Value-Added Financial Services" />
-//         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-//           {financialServices.map((s, i) => (
-//             <ServiceCard key={s.title} {...s} index={i} />
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* TESTIMONIALS */}
-//       <section className="section container-px bg-navy/40">
-//         <SectionHeading eyebrow="Testimonials" title="What Our Customers Say" />
-//         <TestimonialCarousel />
-//       </section>
-
-//       {/* BRANDS */}
-//       <section className="section container-px">
-//         <SectionHeading eyebrow="Inventory" title="Explore Our Brands" />
-//         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-//           {brands.map((b) => (
-//             <BrandCard key={b.name} name={b.name} onClick={() => goWithFilter('brand', b.name)} />
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* TRUST STRIP */}
-//       <section className="container-px pb-20">
-//         <div className="grid sm:grid-cols-3 gap-5">
-//           {[
-//             [ShieldCheck, '3-Month Engine Warranty', 'Every car, every time'],
-//             [Wallet, 'Best Price Guarantee', 'Transparent market pricing'],
-//             [FileCheck2, 'Hassle-Free Paperwork', 'Documentation handled for you'],
-//           ].map(([Icon, title, sub]) => (
-//             <div key={title} className="flex items-center gap-4 card-surface p-5">
-//               <span className="grid place-items-center w-11 h-11 rounded-xl bg-accent-blue/10 border border-accent-blue/25 text-accent-light shrink-0">
-//                 <Icon size={20} />
-//               </span>
-//               <div>
-//                 <p className="text-sm font-semibold text-ink-primary">{title}</p>
-//                 <p className="text-xs text-ink-secondary">{sub}</p>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* FINAL CTA */}
-//       <section className="container-px pb-28">
-//         <div className="relative rounded-3xl overflow-hidden card-surface p-10 md:p-16 text-center">
-//           <div className="absolute inset-0 bg-radial-fade pointer-events-none" />
-//           <div className="relative flex flex-col items-center">
-//             <div className="flex items-center gap-1 mb-4">
-//               {Array.from({ length: 5 }).map((_, i) => (
-//                 <Star key={i} size={14} className="text-accent-light fill-accent-light" />
-//               ))}
-//             </div>
-//             <h2 className="heading-lg mb-4">Ready to Find Your Next Car?</h2>
-//             <p className="body-text max-w-lg mb-8">
-//               Explore our collection of quality pre-owned vehicles and drive away with confidence.
-//             </p>
-//             <div className="flex flex-wrap items-center justify-center gap-4">
-//               <Link to="/products" className="btn-primary">Browse Cars</Link>
-//               <Link to="/contact" className="btn-secondary">Contact Us</Link>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   )
-// }
-
-
-// 2nd code 
-
-import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useState, useMemo } from 'react'
 
 import {
   ArrowRight,
@@ -234,6 +11,7 @@ import {
   Truck,
   Star,
   Search,
+  X,
 } from 'lucide-react'
 
 import HeroCarousel from '../components/HeroCarousel.jsx'
@@ -260,13 +38,18 @@ import {
 
 export default function Home() {
 
-  const navigate = useNavigate()
-
   // =====================================================
   // SEARCH STATE
   // =====================================================
 
   const [carSearch, setCarSearch] = useState('')
+
+  const [activeFilter, setActiveFilter] = useState({
+    type: '',
+    value: '',
+  })
+
+  const [openFilter, setOpenFilter] = useState(null)
 
 
   // =====================================================
@@ -283,84 +66,282 @@ export default function Home() {
 
 
   // =====================================================
-  // LIVE SEARCH RESULTS
+  // FILTER VEHICLES
   // =====================================================
 
-  const searchResults = carSearch.trim()
-    ? vehicles
-        .filter((vehicle) => {
+  const filteredVehicles = useMemo(() => {
 
-          const search =
-            carSearch
-              .trim()
-              .toLowerCase()
+    let result = vehicles.filter(
+      (vehicle) =>
+        vehicle.status !== 'sold'
+    )
 
-          const name = String(
-            vehicle.name ||
-            vehicle.title ||
-            ''
-          ).toLowerCase()
 
-          const brand = String(
-            vehicle.brand ||
-            ''
-          ).toLowerCase()
+    // =================================================
+    // SEARCH
+    // =================================================
 
-          const model = String(
-            vehicle.model ||
-            ''
-          ).toLowerCase()
+    if (carSearch.trim()) {
+
+      const search =
+        carSearch
+          .trim()
+          .toLowerCase()
+
+      result = result.filter((vehicle) => {
+
+        const name = String(
+          vehicle.name ||
+          vehicle.title ||
+          ''
+        ).toLowerCase()
+
+        const brand = String(
+          vehicle.brand ||
+          ''
+        ).toLowerCase()
+
+        const model = String(
+          vehicle.model ||
+          ''
+        ).toLowerCase()
+
+        const variant = String(
+          vehicle.variant ||
+          ''
+        ).toLowerCase()
+
+        return (
+          name.includes(search) ||
+          brand.includes(search) ||
+          model.includes(search) ||
+          variant.includes(search)
+        )
+
+      })
+
+    }
+
+
+    // =================================================
+    // BUDGET FILTER
+    // =================================================
+
+    if (
+      activeFilter.type === 'budget' &&
+      activeFilter.value
+    ) {
+
+      const selectedBudget =
+        String(activeFilter.value)
+          .toLowerCase()
+
+
+      result = result.filter((vehicle) => {
+
+        const priceText =
+          String(vehicle.price || '')
+
+        const price =
+          parseVehiclePrice(priceText)
+
+
+        // ---------------------------------------------
+        // Under ₹5 Lakh
+        // ---------------------------------------------
+
+        if (
+          selectedBudget.includes('under')
+        ) {
+
+          const match =
+            selectedBudget.match(
+              /[\d.]+/
+            )
+
+          if (match) {
+
+            const limit =
+              Number(match[0]) * 100000
+
+            return price < limit
+
+          }
+
+        }
+
+
+        // ---------------------------------------------
+        // ₹5–10 Lakh / 5 - 10 Lakh
+        // ---------------------------------------------
+
+        const numbers =
+          selectedBudget.match(
+            /[\d.]+/g
+          )
+
+
+        if (
+          numbers &&
+          numbers.length >= 2
+        ) {
+
+          const min =
+            Number(numbers[0]) * 100000
+
+          const max =
+            Number(numbers[1]) * 100000
 
           return (
-            name.includes(search) ||
-            brand.includes(search) ||
-            model.includes(search)
+            price >= min &&
+            price <= max
           )
-        })
-        .filter(
-          (vehicle) =>
-            vehicle.status !== 'sold'
-        )
-        .slice(0, 6)
-    : []
+
+        }
+
+
+        // ---------------------------------------------
+        // 25 Lakh+
+        // ---------------------------------------------
+
+        if (
+          selectedBudget.includes('+')
+        ) {
+
+          const match =
+            selectedBudget.match(
+              /[\d.]+/
+            )
+
+          if (match) {
+
+            const min =
+              Number(match[0]) * 100000
+
+            return price >= min
+
+          }
+
+        }
+
+
+        return true
+
+      })
+
+    }
+
+
+    // =================================================
+    // BODY TYPE FILTER
+    // =================================================
+
+    if (
+      activeFilter.type === 'bodyType' &&
+      activeFilter.value
+    ) {
+
+      result = result.filter(
+        (vehicle) =>
+          String(
+            vehicle.bodyType || ''
+          ).toLowerCase() ===
+          String(
+            activeFilter.value
+          ).toLowerCase()
+      )
+
+    }
+
+
+    // =================================================
+    // BRAND FILTER
+    // =================================================
+
+    if (
+      activeFilter.type === 'brand' &&
+      activeFilter.value
+    ) {
+
+      result = result.filter(
+        (vehicle) =>
+          String(
+            vehicle.brand || ''
+          ).toLowerCase() ===
+          String(
+            activeFilter.value
+          ).toLowerCase()
+      )
+
+    }
+
+
+    return result
+
+  }, [
+    carSearch,
+    activeFilter,
+  ])
 
 
   // =====================================================
-  // FILTER NAVIGATION
+  // SEARCH SUGGESTIONS
   // =====================================================
 
-  const goWithFilter = (key, value) => {
+  const searchResults =
+    carSearch.trim()
+      ? filteredVehicles.slice(0, 6)
+      : []
 
-    navigate('/products', {
-      state: {
-        [key]: value,
-      },
+
+  // =====================================================
+  // DISPLAYED VEHICLES
+  // =====================================================
+
+  const displayedVehicles =
+    (
+      carSearch.trim() ||
+      activeFilter.type
+    )
+      ? filteredVehicles
+      : featured
+
+
+  // =====================================================
+  // FILTER HANDLER
+  // =====================================================
+
+  const selectFilter = (
+    type,
+    value
+  ) => {
+
+    setCarSearch('')
+
+    setActiveFilter({
+      type,
+      value,
     })
+
+    setOpenFilter(null)
 
   }
 
 
   // =====================================================
-  // SEARCH SUBMIT
+  // CLEAR FILTER
   // =====================================================
 
-  const handleSearch = () => {
+  const clearFilters = () => {
 
-    const search =
-      carSearch.trim()
+    setCarSearch('')
 
-    if (!search) {
-
-      navigate('/products')
-
-      return
-    }
-
-    navigate('/products', {
-      state: {
-        search: search,
-      },
+    setActiveFilter({
+      type: '',
+      value: '',
     })
+
+    setOpenFilter(null)
 
   }
 
@@ -369,7 +350,9 @@ export default function Home() {
   // SEARCH RESULT CLICK
   // =====================================================
 
-  const handleSearchResult = (vehicle) => {
+  const handleSearchResult = (
+    vehicle
+  ) => {
 
     const searchValue =
       vehicle.name ||
@@ -377,12 +360,11 @@ export default function Home() {
       vehicle.model ||
       ''
 
-    setCarSearch('')
+    setCarSearch(searchValue)
 
-    navigate('/products', {
-      state: {
-        search: searchValue,
-      },
+    setActiveFilter({
+      type: '',
+      value: '',
     })
 
   }
@@ -390,7 +372,7 @@ export default function Home() {
 
   return (
 
-    <main className="overflow-hidden bg-navy-bg text-ink-primary">
+    <main className="overflow-hidden bg-[#F4F2EC] text-[#1A1A1A]">
 
 
       {/* =====================================================
@@ -403,9 +385,9 @@ export default function Home() {
 
         <div className="absolute inset-0 bg-radial-fade pointer-events-none" />
 
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-accent-blue/10 blur-[120px] pointer-events-none" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#8B7D6B]/10 blur-[120px] pointer-events-none" />
 
-        <div className="absolute -bottom-40 -left-40 w-[450px] h-[450px] rounded-full bg-accent-blue/5 blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-40 -left-40 w-[450px] h-[450px] rounded-full bg-[#8B7D6B]/5 blur-[120px] pointer-events-none" />
 
 
         {/* Hero content */}
@@ -421,12 +403,12 @@ export default function Home() {
 
             <div className="max-w-xl reveal">
 
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 mb-7 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#1A1A1A]/10 bg-[#1A1A1A]/[0.035] px-4 py-2 mb-7 backdrop-blur-md">
 
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-light shadow-[0_0_10px_rgba(96,165,250,0.8)]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8B7D6B] shadow-[0_0_10px_rgba(139,125,107,0.5)]" />
 
-                <span className="text-[10px] tracking-[0.2em] uppercase text-ink-secondary font-medium">
-                  Premium Pre-Owned Cars
+                <span className="text-[10px] tracking-[0.2em] uppercase text-[#333333] font-medium">
+                  Premium.Curated.Yours
                 </span>
 
               </div>
@@ -438,7 +420,7 @@ export default function Home() {
 
                 <br />
 
-                <span className="text-accent-light">
+                <span className="text-[#8B7D6B]">
                   Something
                 </span>
 
@@ -449,7 +431,7 @@ export default function Home() {
               </h1>
 
 
-              <p className="text-base md:text-lg leading-8 text-ink-secondary max-w-lg mb-9">
+              <p className="text-base md:text-lg leading-8 text-[#333333] max-w-lg mb-9">
 
                 Discover carefully selected pre-owned cars with transparent
                 pricing, verified quality and a buying experience built around you.
@@ -461,7 +443,23 @@ export default function Home() {
 
                 <Link
                   to="/products"
-                  className="group inline-flex items-center gap-3 rounded-full bg-accent-light text-navy-bg px-6 py-3.5 text-sm font-semibold hover:scale-[1.02] transition-all duration-300"
+                  className="
+                    group
+                    inline-flex
+                    items-center
+                    gap-3
+                    rounded-full
+                    bg-[#8B7D6B]
+                    text-[#F4F2EC]
+                    px-6
+                    py-3.5
+                    text-sm
+                    font-semibold
+                    hover:bg-[#1A1A1A]
+                    hover:scale-[1.02]
+                    transition-all
+                    duration-300
+                  "
                 >
 
                   Explore Collection
@@ -476,7 +474,22 @@ export default function Home() {
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.035] px-6 py-3.5 text-sm text-ink-primary hover:bg-white/[0.07] transition-all duration-300"
+                  className="
+                    inline-flex
+                    items-center
+                    gap-3
+                    rounded-full
+                    border
+                    border-[#1A1A1A]/10
+                    bg-[#1A1A1A]/[0.035]
+                    px-6
+                    py-3.5
+                    text-sm
+                    text-[#1A1A1A]
+                    hover:bg-[#1A1A1A]/[0.07]
+                    transition-all
+                    duration-300
+                  "
                 >
 
                   Talk to Us
@@ -488,7 +501,7 @@ export default function Home() {
 
               {/* Stats */}
 
-              <div className="grid grid-cols-3 max-w-lg border-t border-white/10 pt-7">
+              <div className="grid grid-cols-3 max-w-lg border-t border-[#1A1A1A]/10 pt-7">
 
                 {[
                   ['500+', 'Cars Sold'],
@@ -501,11 +514,11 @@ export default function Home() {
                     className="pr-4"
                   >
 
-                    <p className="font-display text-2xl md:text-3xl font-medium mb-1">
+                    <p className="font-display text-2xl md:text-3xl font-medium mb-1 text-[#1A1A1A]">
                       {number}
                     </p>
 
-                    <p className="text-[10px] md:text-xs uppercase tracking-wider text-ink-secondary">
+                    <p className="text-[10px] md:text-xs uppercase tracking-wider text-[#333333]">
                       {label}
                     </p>
 
@@ -529,7 +542,7 @@ export default function Home() {
               }}
             >
 
-              <div className="absolute -inset-8 bg-accent-blue/5 blur-3xl rounded-full pointer-events-none" />
+              <div className="absolute -inset-8 bg-[#8B7D6B]/5 blur-3xl rounded-full pointer-events-none" />
 
               <div className="relative">
 
@@ -548,13 +561,13 @@ export default function Home() {
 
         {/* Scroll indicator */}
 
-        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-ink-secondary">
+        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[#333333]">
 
           <span className="text-[9px] tracking-[0.25em] uppercase">
             Scroll
           </span>
 
-          <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" />
+          <div className="w-px h-8 bg-gradient-to-b from-[#333333]/40 to-transparent" />
 
         </div>
 
@@ -568,328 +581,93 @@ export default function Home() {
 
       <section className="relative z-20 container-px -mt-8 lg:-mt-14">
 
-        <div className="rounded-3xl border border-white/10 bg-[#0d121a]/90 backdrop-blur-2xl p-5 md:p-7 shadow-2xl">
+        <div className="rounded-3xl border border-[#1A1A1A]/10 bg-[#F4F2EC]/95 backdrop-blur-2xl p-5 md:p-7 shadow-[0_20px_60px_rgba(26,26,26,0.10)]">
 
 
           {/* =================================================
               SEARCH BAR
           ================================================= */}
 
-          <div className="mb-6 relative">
+          
 
-            <div className="flex items-center gap-2 mb-2">
 
-              <Search
-                size={16}
-                className="text-accent-light"
-              />
 
-              <span className="text-[10px] uppercase tracking-[0.2em] text-ink-secondary">
-                Find Your Car
+          {/* =================================================
+              ACTIVE FILTER
+          ================================================= */}
+
+          {(activeFilter.type ||
+            carSearch.trim()) && (
+
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+
+              <span className="text-xs text-[#333333]">
+                Showing:
               </span>
 
-            </div>
-
-
-            <div className="flex flex-col sm:flex-row gap-3">
-
-
-              {/* SEARCH INPUT */}
-
-              <div className="relative flex-1">
-
-                <Search
-                  size={18}
-                  className="
-                    absolute
-                    left-4
-                    top-1/2
-                    -translate-y-1/2
-                    text-white/40
-                    pointer-events-none
-                  "
-                />
-
-
-                <input
-                  type="text"
-                  value={carSearch}
-                  onChange={(e) =>
-                    setCarSearch(e.target.value)
-                  }
-                  onKeyDown={(e) => {
-
-                    if (e.key === 'Enter') {
-                      handleSearch()
-                    }
-
-                    if (
-                      e.key === 'Escape'
-                    ) {
-                      setCarSearch('')
-                    }
-
-                  }}
-                  placeholder="Search by brand, model or car name..."
-                  className="
-                    w-full
-                    h-14
-                    rounded-2xl
-                    border
-                    border-white/10
-                    bg-white/[0.04]
-                    pl-12
-                    pr-12
-                    text-sm
-                    text-white
-                    placeholder:text-white/35
-                    outline-none
-                    transition-all
-                    focus:border-accent-blue/60
-                    focus:bg-white/[0.06]
-                    focus:ring-2
-                    focus:ring-accent-blue/10
-                  "
-                />
-
-
-                {/* CLEAR BUTTON */}
-
-                {carSearch && (
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setCarSearch('')
-                    }
-                    className="
-                      absolute
-                      right-4
-                      top-1/2
-                      -translate-y-1/2
-                      text-white/40
-                      hover:text-white
-                      transition-colors
-                    "
-                    aria-label="Clear search"
-                  >
-                    ×
-                  </button>
-
-                )}
-
-
-                {/* =================================================
-                    LIVE SEARCH RESULTS
-                ================================================= */}
-
-                {carSearch.trim() && (
-
-                  <div
-                    className="
-                      absolute
-                      left-0
-                      right-0
-                      top-[calc(100%+10px)]
-                      z-50
-                      overflow-hidden
-                      rounded-2xl
-                      border
-                      border-white/10
-                      bg-[#0d121a]
-                      shadow-2xl
-                      backdrop-blur-xl
-                    "
-                  >
-
-                    {searchResults.length > 0 ? (
-
-                      <div className="max-h-[360px] overflow-y-auto">
-
-                        {searchResults.map(
-                          (vehicle, index) => (
-
-                            <button
-                              key={
-                                vehicle.id ||
-                                index
-                              }
-                              type="button"
-                              onClick={() =>
-                                handleSearchResult(
-                                  vehicle
-                                )
-                              }
-                              className="
-                                w-full
-                                flex
-                                items-center
-                                gap-4
-                                p-3
-                                text-left
-                                border-b
-                                border-white/[0.06]
-                                last:border-b-0
-                                hover:bg-white/[0.05]
-                                transition-colors
-                              "
-                            >
-
-
-                              {/* CAR IMAGE */}
-
-                              <div
-                                className="
-                                  w-20
-                                  h-14
-                                  rounded-xl
-                                  overflow-hidden
-                                  bg-white/[0.04]
-                                  shrink-0
-                                "
-                              >
-
-                                <img
-                                  src={
-                                    vehicle.image ||
-                                    vehicle.images?.[0]
-                                  }
-                                  alt={
-                                    vehicle.name ||
-                                    vehicle.title ||
-                                    'Car'
-                                  }
-                                  className="
-                                    w-full
-                                    h-full
-                                    object-cover
-                                  "
-                                />
-
-                              </div>
-
-
-                              {/* CAR DETAILS */}
-
-                              <div className="min-w-0 flex-1">
-
-                                <p className="text-sm font-medium text-white truncate">
-
-                                  {vehicle.name ||
-                                    vehicle.title ||
-                                    vehicle.model ||
-                                    'Premium Vehicle'}
-
-                                </p>
-
-
-                                <p className="text-xs text-white/45 mt-1 truncate">
-
-                                  {vehicle.brand || ''}
-
-                                  {vehicle.year
-                                    ? ` • ${vehicle.year}`
-                                    : ''}
-
-                                  {vehicle.fuelType
-                                    ? ` • ${vehicle.fuelType}`
-                                    : ''}
-
-                                </p>
-
-
-                                {vehicle.price && (
-
-                                  <p className="text-xs text-accent-light mt-1">
-
-                                    {vehicle.price}
-
-                                  </p>
-
-                                )}
-
-                              </div>
-
-
-                              <ArrowRight
-                                size={16}
-                                className="text-white/30 shrink-0"
-                              />
-
-                            </button>
-
-                          )
-                        )}
-
-                      </div>
-
-                    ) : (
-
-                      /* NO RESULTS */
-
-                      <div className="p-6 text-center">
-
-                        <Search
-                          size={24}
-                          className="mx-auto mb-3 text-white/20"
-                        />
-
-                        <p className="text-sm text-white/60">
-                          No cars found
-                        </p>
-
-                        <p className="text-xs text-white/30 mt-1">
-                          Try another brand or model
-                        </p>
-
-                      </div>
-
-                    )}
-
-                  </div>
-
-                )}
-
-              </div>
-
-
-              {/* SEARCH BUTTON */}
+              {carSearch.trim() && (
+
+                <span className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-[#8B7D6B]/10
+                  border
+                  border-[#8B7D6B]/20
+                  px-3
+                  py-1.5
+                  text-xs
+                  text-[#8B7D6B]
+                ">
+
+                  Search: {carSearch}
+
+                </span>
+
+              )}
+
+              {activeFilter.type && (
+
+                <span className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-[#8B7D6B]/10
+                  border
+                  border-[#8B7D6B]/20
+                  px-3
+                  py-1.5
+                  text-xs
+                  text-[#8B7D6B]
+                ">
+
+                  {activeFilter.value}
+
+                </span>
+
+              )}
 
               <button
                 type="button"
-                onClick={handleSearch}
+                onClick={clearFilters}
                 className="
-                  h-14
-                  px-7
-                  rounded-2xl
-                  bg-accent-blue
-                  text-white
-                  text-sm
-                  font-semibold
-                  flex
-                  items-center
-                  justify-center
-                  gap-2
-                  transition-all
-                  hover:bg-accent-light
-                  hover:text-navy-bg
-                  hover:scale-[1.02]
-                  active:scale-[0.98]
-                  shrink-0
+                  text-xs
+                  text-[#333333]/60
+                  hover:text-[#1A1A1A]
+                  underline
+                  underline-offset-4
                 "
               >
 
-                Search Cars
-
-                <ArrowUpRight
-                  size={17}
-                />
+                Clear
 
               </button>
 
             </div>
 
-          </div>
+          )}
 
 
 
@@ -897,25 +675,25 @@ export default function Home() {
               BROWSE OPTIONS
           ================================================= */}
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-6">
 
 
             {/* Heading */}
 
             <div className="shrink-0">
 
-              <h2 className="font-display text-xl md:text-2xl">
+              <h2 className="font-display text-xl md:text-2xl text-[#1A1A1A]">
                 Start your search
               </h2>
 
-              <p className="text-xs text-ink-secondary mt-1">
+              <p className="text-xs text-[#333333] mt-1">
                 Browse cars by your preference
               </p>
 
             </div>
 
 
-            <div className="hidden lg:block w-px h-12 bg-white/10" />
+            <div className="hidden lg:block w-px h-12 bg-[#1A1A1A]/10" />
 
 
             {/* Browse Cards */}
@@ -923,147 +701,322 @@ export default function Home() {
             <div className="grid sm:grid-cols-3 gap-3 flex-1">
 
 
-              {/* Budget */}
+              {/* =================================================
+                  BUDGET
+              ================================================= */}
 
-              <button
-                onClick={() =>
-                  goWithFilter(
-                    'budget',
-                    budgetRanges[0]?.label
-                  )
-                }
-                className="
-                  group
-                  text-left
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/[0.025]
-                  p-4
-                  hover:border-accent-blue/40
-                  hover:bg-white/[0.045]
-                  transition-all
-                "
-              >
+              <div className="relative">
 
-                <p className="text-[10px] uppercase tracking-wider text-ink-secondary mb-1">
-                  Budget
-                </p>
+                <button
+                  type="button"
+                  onClick={() => {
 
-                <div className="flex items-center justify-between">
+                    setOpenFilter(
+                      openFilter === 'budget'
+                        ? null
+                        : 'budget'
+                    )
 
-                  <span className="text-sm">
-                    Browse by Budget
-                  </span>
+                  }}
+                  className="
+                    group
+                    w-full
+                    text-left
+                    rounded-2xl
+                    border
+                    border-[#1A1A1A]/10
+                    bg-[#1A1A1A]/[0.025]
+                    p-4
+                    hover:border-[#8B7D6B]/40
+                    hover:bg-[#1A1A1A]/[0.045]
+                    transition-all
+                  "
+                >
 
-                  <ArrowUpRight
-                    size={15}
-                    className="
-                      text-ink-secondary
-                      group-hover:text-accent-light
-                      transition-colors
-                    "
-                  />
+                  <p className="text-[10px] uppercase tracking-wider text-[#333333]/70 mb-1">
+                    Budget
+                  </p>
 
-                </div>
+                  <div className="flex items-center justify-between">
 
-              </button>
+                    <span className="text-sm text-[#1A1A1A]">
+                      Browse by Budget
+                    </span>
 
+                    <ArrowUpRight
+                      size={15}
+                      className="
+                        text-[#333333]/60
+                        group-hover:text-[#8B7D6B]
+                        transition-colors
+                      "
+                    />
 
+                  </div>
 
-              {/* Body Type */}
-
-              <button
-                onClick={() =>
-                  goWithFilter(
-                    'bodyType',
-                    bodyTypes[0]
-                  )
-                }
-                className="
-                  group
-                  text-left
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/[0.025]
-                  p-4
-                  hover:border-accent-blue/40
-                  hover:bg-white/[0.045]
-                  transition-all
-                "
-              >
-
-                <p className="text-[10px] uppercase tracking-wider text-ink-secondary mb-1">
-                  Body Type
-                </p>
-
-                <div className="flex items-center justify-between">
-
-                  <span className="text-sm">
-                    Find by Body Type
-                  </span>
-
-                  <ArrowUpRight
-                    size={15}
-                    className="
-                      text-ink-secondary
-                      group-hover:text-accent-light
-                      transition-colors
-                    "
-                  />
-
-                </div>
-
-              </button>
+                </button>
 
 
+                {openFilter === 'budget' && (
 
-              {/* Brand */}
+                  <FilterDropdown>
 
-              <button
-                onClick={() =>
-                  goWithFilter(
-                    'brand',
-                    brands[0]?.name
-                  )
-                }
-                className="
-                  group
-                  text-left
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/[0.025]
-                  p-4
-                  hover:border-accent-blue/40
-                  hover:bg-white/[0.045]
-                  transition-all
-                "
-              >
+                    {budgetRanges.map(
+                      (range, index) => (
 
-                <p className="text-[10px] uppercase tracking-wider text-ink-secondary mb-1">
-                  Brand
-                </p>
+                        <button
+                          key={
+                            range?.label ||
+                            index
+                          }
+                          type="button"
+                          onClick={() =>
+                            selectFilter(
+                              'budget',
+                              range?.label ||
+                              range
+                            )
+                          }
+                          className="
+                            w-full
+                            text-left
+                            px-4
+                            py-3
+                            text-sm
+                            text-[#1A1A1A]
+                            hover:bg-[#8B7D6B]/10
+                            transition-colors
+                          "
+                        >
 
-                <div className="flex items-center justify-between">
+                          {range?.label ||
+                            range}
 
-                  <span className="text-sm">
-                    Explore Brands
-                  </span>
+                        </button>
 
-                  <ArrowUpRight
-                    size={15}
-                    className="
-                      text-ink-secondary
-                      group-hover:text-accent-light
-                      transition-colors
-                    "
-                  />
+                      )
+                    )}
 
-                </div>
+                  </FilterDropdown>
 
-              </button>
+                )}
+
+              </div>
+
+
+
+              {/* =================================================
+                  BODY TYPE
+              ================================================= */}
+
+              <div className="relative">
+
+                <button
+                  type="button"
+                  onClick={() => {
+
+                    setOpenFilter(
+                      openFilter === 'bodyType'
+                        ? null
+                        : 'bodyType'
+                    )
+
+                  }}
+                  className="
+                    group
+                    w-full
+                    text-left
+                    rounded-2xl
+                    border
+                    border-[#1A1A1A]/10
+                    bg-[#1A1A1A]/[0.025]
+                    p-4
+                    hover:border-[#8B7D6B]/40
+                    hover:bg-[#1A1A1A]/[0.045]
+                    transition-all
+                  "
+                >
+
+                  <p className="text-[10px] uppercase tracking-wider text-[#333333]/70 mb-1">
+                    Body Type
+                  </p>
+
+                  <div className="flex items-center justify-between">
+
+                    <span className="text-sm text-[#1A1A1A]">
+                      Find by Body Type
+                    </span>
+
+                    <ArrowUpRight
+                      size={15}
+                      className="
+                        text-[#333333]/60
+                        group-hover:text-[#8B7D6B]
+                        transition-colors
+                      "
+                    />
+
+                  </div>
+
+                </button>
+
+
+                {openFilter === 'bodyType' && (
+
+                  <FilterDropdown>
+
+                    {bodyTypes.map(
+                      (type, index) => (
+
+                        <button
+                          key={
+                            type?.name ||
+                            type ||
+                            index
+                          }
+                          type="button"
+                          onClick={() =>
+                            selectFilter(
+                              'bodyType',
+                              type?.name ||
+                              type
+                            )
+                          }
+                          className="
+                            w-full
+                            text-left
+                            px-4
+                            py-3
+                            text-sm
+                            text-[#1A1A1A]
+                            hover:bg-[#8B7D6B]/10
+                            transition-colors
+                          "
+                        >
+
+                          {type?.name ||
+                            type}
+
+                        </button>
+
+                      )
+                    )}
+
+                  </FilterDropdown>
+
+                )}
+
+              </div>
+
+
+
+              {/* =================================================
+                  BRAND
+              ================================================= */}
+
+              <div className="relative">
+
+                <button
+                  type="button"
+                  onClick={() => {
+
+                    setOpenFilter(
+                      openFilter === 'brand'
+                        ? null
+                        : 'brand'
+                    )
+
+                  }}
+                  className="
+                    group
+                    w-full
+                    text-left
+                    rounded-2xl
+                    border
+                    border-[#1A1A1A]/10
+                    bg-[#1A1A1A]/[0.025]
+                    p-4
+                    hover:border-[#8B7D6B]/40
+                    hover:bg-[#1A1A1A]/[0.045]
+                    transition-all
+                  "
+                >
+
+                  <p className="text-[10px] uppercase tracking-wider text-[#333333]/70 mb-1">
+                    Brand
+                  </p>
+
+                  <div className="flex items-center justify-between">
+
+                    <span className="text-sm text-[#1A1A1A]">
+                      Explore Brands
+                    </span>
+
+                    <ArrowUpRight
+                      size={15}
+                      className="
+                        text-[#333333]/60
+                        group-hover:text-[#8B7D6B]
+                        transition-colors
+                      "
+                    />
+
+                  </div>
+
+                </button>
+
+
+                {openFilter === 'brand' && (
+
+                  <FilterDropdown>
+
+                    {brands.map(
+                      (brand, index) => {
+
+                        const brandName =
+                          brand?.name ||
+                          brand
+
+                        return (
+
+                          <button
+                            key={
+                              brandName ||
+                              index
+                            }
+                            type="button"
+                            onClick={() =>
+                              selectFilter(
+                                'brand',
+                                brandName
+                              )
+                            }
+                            className="
+                              w-full
+                              text-left
+                              px-4
+                              py-3
+                              text-sm
+                              text-[#1A1A1A]
+                              hover:bg-[#8B7D6B]/10
+                              transition-colors
+                            "
+                          >
+
+                            {brandName}
+
+                          </button>
+
+                        )
+
+                      }
+                    )}
+
+                  </FilterDropdown>
+
+                )}
+
+              </div>
 
             </div>
 
@@ -1076,29 +1029,59 @@ export default function Home() {
 
 
       {/* =====================================================
-          FEATURED VEHICLES
+          FEATURED VEHICLES / SEARCH RESULTS
       ===================================================== */}
 
-      <section className="section container-px">
+      <section
+        id="car-results"
+        className="section container-px"
+      >
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-12">
 
           <div>
 
-            <span className="text-[10px] uppercase tracking-[0.25em] text-accent-light">
-              Handpicked Collection
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#8B7D6B]">
+
+              {carSearch.trim() ||
+              activeFilter.type
+                ? 'Search Results'
+                : 'Handpicked Collection'}
+
             </span>
 
-            <h2 className="font-display text-4xl md:text-5xl tracking-tight mt-3">
-              Featured Vehicles
+
+            <h2 className="font-display text-4xl md:text-5xl tracking-tight mt-3 text-[#1A1A1A]">
+
+              {carSearch.trim() ||
+              activeFilter.type
+                ? 'Cars For You'
+                : 'Featured Vehicles'}
+
             </h2>
+
+
+            {(carSearch.trim() ||
+              activeFilter.type) && (
+
+              <p className="text-sm text-[#333333]/70 mt-3">
+
+                {displayedVehicles.length}{' '}
+                {displayedVehicles.length === 1
+                  ? 'vehicle'
+                  : 'vehicles'}{' '}
+                found
+
+              </p>
+
+            )}
 
           </div>
 
 
           <Link
             to="/products"
-            className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary transition-colors"
+            className="group inline-flex items-center gap-2 text-sm text-[#333333] hover:text-[#1A1A1A] transition-colors"
           >
 
             View all vehicles
@@ -1113,129 +1096,198 @@ export default function Home() {
         </div>
 
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {displayedVehicles.length > 0 ? (
 
-          {featured
-            .slice(0, 3)
-            .map((vehicle, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-              <Link
-                key={
-                  vehicle.id ||
-                  index
-                }
-                to="/products"
-                className="
-                  group
-                  relative
-                  overflow-hidden
-                  rounded-3xl
-                  border
-                  border-white/10
-                  bg-white/[0.025]
-                "
-              >
+            {displayedVehicles
+              .slice(0, 6)
+              .map((vehicle, index) => (
 
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <Link
+                  key={
+                    vehicle.id ||
+                    index
+                  }
+                  to="/products"
+                  className="
+                    group
+                    relative
+                    overflow-hidden
+                    rounded-3xl
+                    border
+                    border-[#1A1A1A]/10
+                    bg-[#1A1A1A]/[0.025]
+                  "
+                >
 
-                  <img
-                    src={
-                      vehicle.image ||
-                      vehicle.images?.[0]
-                    }
-                    alt={
-                      vehicle.name ||
-                      'Featured vehicle'
-                    }
-                    loading="lazy"
-                    className="
-                      absolute
-                      inset-0
-                      w-full
-                      h-full
-                      object-cover
-                      group-hover:scale-105
-                      transition-transform
-                      duration-700
-                    "
-                  />
+                  <div className="relative aspect-[16/10] overflow-hidden">
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <img
+                      src={
+                        vehicle.image ||
+                        vehicle.images?.[0]
+                      }
+                      alt={
+                        vehicle.name ||
+                        vehicle.title ||
+                        'Featured vehicle'
+                      }
+                      loading="lazy"
+                      className="
+                        absolute
+                        inset-0
+                        w-full
+                        h-full
+                        object-cover
+                        group-hover:scale-105
+                        transition-transform
+                        duration-700
+                      "
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/70 via-transparent to-transparent" />
 
 
-                  <div className="absolute top-4 left-4 rounded-full bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1.5">
+                    <div className="absolute top-4 left-4 rounded-full bg-[#1A1A1A]/60 backdrop-blur-md border border-[#F4F2EC]/20 px-3 py-1.5">
 
-                    <span className="text-[9px] uppercase tracking-wider text-white">
-                      Featured
-                    </span>
+                      <span className="text-[9px] uppercase tracking-wider text-[#F4F2EC]">
+
+                        {carSearch.trim() ||
+                        activeFilter.type
+                          ? 'Match'
+                          : 'Featured'}
+
+                      </span>
+
+                    </div>
 
                   </div>
 
-                </div>
+
+                  <div className="p-5">
+
+                    <div className="flex items-start justify-between gap-4">
+
+                      <div>
+
+                        <h3 className="font-display text-xl text-[#1A1A1A]">
+
+                          {vehicle.name ||
+                            vehicle.title ||
+                            vehicle.model ||
+                            'Premium Vehicle'}
+
+                        </h3>
 
 
-                <div className="p-5">
+                        <p className="text-xs text-[#333333] mt-1">
 
-                  <div className="flex items-start justify-between gap-4">
+                          {vehicle.brand || ''}
 
-                    <div>
+                          {vehicle.year
+                            ? ` • ${vehicle.year}`
+                            : ''}
 
-                      <h3 className="font-display text-xl">
+                          {vehicle.transmission
+                            ? ` • ${vehicle.transmission}`
+                            : ''}
 
-                        {vehicle.name ||
-                          vehicle.title ||
-                          'Premium Vehicle'}
+                          {vehicle.fuelType
+                            ? ` • ${vehicle.fuelType}`
+                            : ''}
 
-                      </h3>
+                        </p>
+
+                      </div>
 
 
-                      <p className="text-xs text-ink-secondary mt-1">
-
-                        {vehicle.year ||
-                          '2024'}
-
-                        {' • '}
-
-                        {vehicle.transmission ||
-                          'Automatic'}
-
-                        {' • '}
-
-                        {vehicle.fuelType ||
-                          'Petrol'}
-
-                      </p>
+                      <ArrowUpRight
+                        size={18}
+                        className="
+                          text-[#333333]/60
+                          group-hover:text-[#8B7D6B]
+                          transition-colors
+                        "
+                      />
 
                     </div>
 
 
-                    <ArrowUpRight
-                      size={18}
-                      className="
-                        text-ink-secondary
-                        group-hover:text-accent-light
-                        transition-colors
-                      "
-                    />
+                    {vehicle.price && (
+
+                      <p className="mt-5 text-lg font-medium text-[#1A1A1A]">
+
+                        {vehicle.price}
+
+                      </p>
+
+                    )}
 
                   </div>
 
+                </Link>
 
-                  {vehicle.price && (
+              ))}
 
-                    <p className="mt-5 text-lg font-medium">
-                      {vehicle.price}
-                    </p>
+          </div>
 
-                  )}
+        ) : (
 
-                </div>
+          /* =================================================
+             NO VEHICLES
+          ================================================= */
 
-              </Link>
+          <div className="
+            rounded-3xl
+            border
+            border-[#1A1A1A]/10
+            bg-[#1A1A1A]/[0.025]
+            p-12
+            text-center
+          ">
 
-            ))}
+            <Search
+              size={34}
+              className="mx-auto mb-4 text-[#333333]/30"
+            />
 
-        </div>
+            <h3 className="font-display text-2xl text-[#1A1A1A]">
+              No vehicles found
+            </h3>
+
+            <p className="text-sm text-[#333333]/70 mt-2 mb-6">
+              Try another search, brand, budget or body type.
+            </p>
+
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                bg-[#8B7D6B]
+                text-[#F4F2EC]
+                px-5
+                py-3
+                text-sm
+                font-semibold
+                hover:bg-[#1A1A1A]
+                transition-colors
+              "
+            >
+
+              Clear Search
+
+              <X size={15} />
+
+            </button>
+
+          </div>
+
+        )}
 
       </section>
 
@@ -1252,17 +1304,17 @@ export default function Home() {
 
           <div>
 
-            <span className="text-[10px] uppercase tracking-[0.25em] text-accent-light">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#8B7D6B]">
               The Difference
             </span>
 
 
-            <h2 className="font-display text-4xl md:text-5xl tracking-tight mt-4 mb-6">
+            <h2 className="font-display text-4xl md:text-5xl tracking-tight mt-4 mb-6 text-[#1A1A1A]">
               Buying a car should feel this good.
             </h2>
 
 
-            <p className="text-ink-secondary leading-7 max-w-md">
+            <p className="text-[#333333] leading-7 max-w-md">
 
               From the moment you discover your car to the day it reaches
               your driveway, we keep the experience simple, transparent and stress-free.
@@ -1313,11 +1365,11 @@ export default function Home() {
                     group
                     rounded-3xl
                     border
-                    border-white/10
-                    bg-white/[0.025]
+                    border-[#1A1A1A]/10
+                    bg-[#1A1A1A]/[0.025]
                     p-6
-                    hover:bg-white/[0.045]
-                    hover:border-accent-blue/25
+                    hover:bg-[#1A1A1A]/[0.045]
+                    hover:border-[#8B7D6B]/25
                     transition-all
                     duration-300
                   "
@@ -1328,11 +1380,11 @@ export default function Home() {
                     h-11
                     rounded-2xl
                     border
-                    border-accent-blue/20
-                    bg-accent-blue/10
+                    border-[#8B7D6B]/25
+                    bg-[#8B7D6B]/10
                     grid
                     place-items-center
-                    text-accent-light
+                    text-[#8B7D6B]
                     mb-6
                   ">
 
@@ -1341,12 +1393,12 @@ export default function Home() {
                   </div>
 
 
-                  <h3 className="font-display text-lg mb-2">
+                  <h3 className="font-display text-lg mb-2 text-[#1A1A1A]">
                     {title}
                   </h3>
 
 
-                  <p className="text-sm text-ink-secondary leading-6">
+                  <p className="text-sm text-[#333333] leading-6">
                     {text}
                   </p>
 
@@ -1412,8 +1464,8 @@ export default function Home() {
         <div className="
           rounded-[2rem]
           border
-          border-white/10
-          bg-white/[0.025]
+          border-[#1A1A1A]/10
+          bg-[#1A1A1A]/[0.025]
           p-6
           md:p-10
           lg:p-14
@@ -1431,8 +1483,8 @@ export default function Home() {
                   key={index}
                   size={13}
                   className="
-                    fill-accent-light
-                    text-accent-light
+                    fill-[#8B7D6B]
+                    text-[#8B7D6B]
                   "
                 />
 
@@ -1441,7 +1493,7 @@ export default function Home() {
             </div>
 
 
-            <span className="text-xs text-ink-secondary">
+            <span className="text-xs text-[#333333]">
               Trusted by our customers
             </span>
 
@@ -1471,8 +1523,8 @@ export default function Home() {
         <div className="
           rounded-3xl
           border
-          border-white/10
-          bg-white/[0.025]
+          border-[#1A1A1A]/10
+          bg-[#1A1A1A]/[0.025]
           overflow-hidden
         ">
 
@@ -1483,7 +1535,7 @@ export default function Home() {
             divide-y
             sm:divide-y-0
             sm:divide-x
-            divide-white/10
+            divide-[#1A1A1A]/10
           ">
 
             {[
@@ -1509,12 +1561,12 @@ export default function Home() {
                 <Icon
                   size={20}
                   className="
-                    text-accent-light
+                    text-[#8B7D6B]
                     shrink-0
                   "
                 />
 
-                <span className="text-sm text-ink-secondary">
+                <span className="text-sm text-[#333333]">
                   {title}
                 </span>
 
@@ -1541,7 +1593,8 @@ export default function Home() {
           overflow-hidden
           rounded-[2rem]
           border
-          border-white/10
+          border-[#1A1A1A]/10
+          bg-[#F4F2EC]
           min-h-[430px]
           flex
           items-center
@@ -1554,7 +1607,7 @@ export default function Home() {
             absolute
             inset-0
             bg-gradient-to-br
-            from-accent-blue/15
+            from-[#8B7D6B]/15
             via-transparent
             to-transparent
           " />
@@ -1566,7 +1619,7 @@ export default function Home() {
             w-[500px]
             h-[500px]
             rounded-full
-            bg-accent-blue/10
+            bg-[#8B7D6B]/10
             blur-[100px]
           " />
 
@@ -1597,8 +1650,8 @@ export default function Home() {
                   key={index}
                   size={14}
                   className="
-                    fill-accent-light
-                    text-accent-light
+                    fill-[#8B7D6B]
+                    text-[#8B7D6B]
                   "
                 />
 
@@ -1611,7 +1664,7 @@ export default function Home() {
               text-[10px]
               uppercase
               tracking-[0.25em]
-              text-accent-light
+              text-[#8B7D6B]
             ">
               Your Next Journey Starts Here
             </span>
@@ -1625,6 +1678,7 @@ export default function Home() {
               leading-[0.95]
               mt-4
               mb-6
+              text-[#1A1A1A]
             ">
 
               Find a car
@@ -1637,7 +1691,7 @@ export default function Home() {
 
 
             <p className="
-              text-ink-secondary
+              text-[#333333]
               max-w-xl
               leading-7
               mb-8
@@ -1659,12 +1713,14 @@ export default function Home() {
                   items-center
                   gap-3
                   rounded-full
-                  bg-accent-light
-                  text-navy-bg
+                  bg-[#8B7D6B]
+                  text-[#F4F2EC]
                   px-6
                   py-3.5
                   text-sm
                   font-semibold
+                  hover:bg-[#1A1A1A]
+                  transition-all
                 "
               >
 
@@ -1689,12 +1745,13 @@ export default function Home() {
                   gap-3
                   rounded-full
                   border
-                  border-white/10
-                  bg-white/[0.04]
+                  border-[#1A1A1A]/10
+                  bg-[#1A1A1A]/[0.04]
                   px-6
                   py-3.5
                   text-sm
-                  hover:bg-white/[0.08]
+                  text-[#1A1A1A]
+                  hover:bg-[#1A1A1A]/[0.08]
                   transition-all
                 "
               >
@@ -1712,5 +1769,89 @@ export default function Home() {
       </section>
 
     </main>
+
   )
+}
+
+
+/* =========================================================
+   FILTER DROPDOWN
+========================================================= */
+
+function FilterDropdown({
+  children,
+}) {
+
+  return (
+
+    <div className="
+      absolute
+      left-0
+      right-0
+      top-[calc(100%+8px)]
+      z-50
+      overflow-hidden
+      rounded-2xl
+      border
+      border-[#1A1A1A]/10
+      bg-[#F4F2EC]
+      shadow-[0_20px_50px_rgba(26,26,26,0.15)]
+      max-h-[280px]
+      overflow-y-auto
+    ">
+
+      {children}
+
+    </div>
+
+  )
+
+}
+
+
+/* =========================================================
+   PRICE PARSER
+========================================================= */
+
+function parseVehiclePrice(
+  priceText
+) {
+
+  const text =
+    String(priceText)
+      .toLowerCase()
+      .replace(/,/g, '')
+      .replace(/₹/g, '')
+      .trim()
+
+
+  const number =
+    parseFloat(
+      text.match(/[\d.]+/)?.[0] || 0
+    )
+
+
+  if (
+    text.includes('crore') ||
+    text.includes('cr')
+  ) {
+
+    return number * 10000000
+
+  }
+
+
+  if (
+    text.includes('lakh') ||
+    text.includes('lac') ||
+    text.includes('l')
+  ) {
+
+    return number * 100000
+
+  }
+
+
+  return number
+
 }
