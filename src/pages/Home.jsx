@@ -19,6 +19,7 @@ import SectionHeading from '../components/SectionHeading.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import TestimonialCarousel from '../components/TestimonialCarousel.jsx'
 import CinematicLoanSection from '../components/CinematicLoanSection.jsx'
+import { formatPrice } from '../data/vehicles.js' 
 
 import {
   vehicles,
@@ -442,7 +443,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-3 mb-12">
 
                 <Link
-                  to="/products"
+                  to="/inventory"
                   className="
                     group
                     inline-flex
@@ -1080,7 +1081,7 @@ export default function Home() {
 
 
           <Link
-            to="/products"
+            to="/inventory"
             className="group inline-flex items-center gap-2 text-sm text-[#333333] hover:text-[#1A1A1A] transition-colors"
           >
 
@@ -1109,7 +1110,7 @@ export default function Home() {
                     vehicle.id ||
                     index
                   }
-                  to="/products"
+                  to="/inventory"
                   className="
                     group
                     relative
@@ -1218,7 +1219,7 @@ export default function Home() {
 
                       <p className="mt-5 text-lg font-medium text-[#1A1A1A]">
 
-                        {vehicle.price}
+                       {formatPrice(vehicle.price)}
 
                       </p>
 
@@ -1330,7 +1331,7 @@ export default function Home() {
 
               {
                 icon: ShieldCheck,
-                title: '3-Month Warranty',
+                title: '3-Month Engine Warranty',
                 text: 'Extra peace of mind with every eligible vehicle.',
               },
 
@@ -1370,8 +1371,12 @@ export default function Home() {
                     p-6
                     hover:bg-[#1A1A1A]/[0.045]
                     hover:border-[#8B7D6B]/25
+                    hover:-translate-y-1.5
+                    hover:shadow-[0_20px_40px_rgba(26,26,26,0.10)]
                     transition-all
                     duration-300
+                    ease-out
+                    cursor-default
                   "
                 >
 
@@ -1386,6 +1391,12 @@ export default function Home() {
                     place-items-center
                     text-[#8B7D6B]
                     mb-6
+                    transition-all
+                    duration-300
+                    group-hover:bg-[#8B7D6B]
+                    group-hover:text-[#F4F2EC]
+                    group-hover:border-[#8B7D6B]
+                    group-hover:scale-110
                   ">
 
                     <Icon size={19} />
@@ -1393,7 +1404,15 @@ export default function Home() {
                   </div>
 
 
-                  <h3 className="font-display text-lg mb-2 text-[#1A1A1A]">
+                  <h3 className="
+                    font-display
+                    text-lg
+                    mb-2
+                    text-[#1A1A1A]
+                    transition-colors
+                    duration-300
+                    group-hover:text-[#8B7D6B]
+                  ">
                     {title}
                   </h3>
 
@@ -1462,6 +1481,7 @@ export default function Home() {
       <section className="section container-px">
 
         <div className="
+          group
           rounded-[2rem]
           border
           border-[#1A1A1A]/10
@@ -1469,9 +1489,22 @@ export default function Home() {
           p-6
           md:p-10
           lg:p-14
+          transition-all
+          duration-300
+          hover:border-[#8B7D6B]/25
+          hover:shadow-[0_20px_50px_rgba(26,26,26,0.06)]
         ">
 
-          <div className="flex items-center gap-2 mb-3">
+          <div
+            className="
+              flex
+              items-center
+              gap-2
+              mb-3
+              opacity-0
+              animate-fadeUp
+            "
+          >
 
             <div className="flex gap-0.5">
 
@@ -1485,7 +1518,13 @@ export default function Home() {
                   className="
                     fill-[#8B7D6B]
                     text-[#8B7D6B]
+                    opacity-0
+                    animate-fadeUp
+                    transition-transform
+                    duration-300
+                    group-hover:scale-110
                   "
+                  style={{ animationDelay: `${index * 80}ms` }}
                 />
 
               ))}
@@ -1506,7 +1545,15 @@ export default function Home() {
           />
 
 
-          <TestimonialCarousel />
+          <div
+            className="
+              opacity-0
+              animate-fadeUp
+            "
+            style={{ animationDelay: '220ms' }}
+          >
+            <TestimonialCarousel />
+          </div>
 
         </div>
 
@@ -1706,7 +1753,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-3">
 
               <Link
-                to="/products"
+                to="/inventory"
                 className="
                   group
                   inline-flex

@@ -7,6 +7,7 @@ import {
   Navigation,
   CheckCircle2,
   AlertCircle,
+  Loader2,
 } from 'lucide-react'
 
 const initialForm = {
@@ -73,8 +74,14 @@ export default function Contact() {
     setErrors(nextErrors)
 
     if (Object.keys(nextErrors).length === 0) {
-      setStatus('success')
-      setForm(initialForm)
+      setStatus('submitting')
+
+      // Brief simulated delay so the loading state is visible/felt,
+      // rather than the button flipping to success instantly.
+      window.setTimeout(() => {
+        setStatus('success')
+        setForm(initialForm)
+      }, 900)
     }
   }
 
@@ -97,6 +104,8 @@ export default function Contact() {
             tracking-[0.25em]
             font-medium
             text-[#8B7D6B]
+            opacity-0
+            animate-fadeUp
           "
         >
           Get In Touch
@@ -109,7 +118,10 @@ export default function Contact() {
             mb-5
             max-w-xl
             text-[#1A1A1A]
+            opacity-0
+            animate-fadeUp
           "
+          style={{ animationDelay: '80ms' }}
         >
           Let's Find Your Next Car Together
         </h1>
@@ -120,7 +132,10 @@ export default function Contact() {
             body-text
             max-w-xl
             text-[#333333]
+            opacity-0
+            animate-fadeUp
           "
+          style={{ animationDelay: '160ms' }}
         >
           Have a question about a listing, financing, or trade-in? Reach out
           and our team will respond within one business day.
@@ -140,7 +155,15 @@ export default function Contact() {
             LEFT SIDE
         ================================================= */}
 
-        <div className="lg:col-span-2 space-y-4">
+        <div
+          className="
+            lg:col-span-2
+            space-y-4
+            opacity-0
+            animate-fadeUp
+          "
+          style={{ animationDelay: '220ms' }}
+        >
 
 
           {/* =================================================
@@ -181,6 +204,7 @@ export default function Contact() {
             const card = (
               <div
                 className="
+                  group
                   p-5
                   flex
                   items-start
@@ -191,7 +215,9 @@ export default function Contact() {
                   bg-[#F4F2EC]
                   shadow-[0_4px_20px_rgba(26,26,26,0.04)]
                   hover:border-[#8B7D6B]/40
-                  hover:shadow-[0_6px_25px_rgba(26,26,26,0.07)]
+                  hover:shadow-[0_10px_30px_rgba(26,26,26,0.08)]
+                  hover:-translate-y-0.5
+                  active:scale-[0.98]
                   transition-all
                   duration-300
                 "
@@ -209,6 +235,9 @@ export default function Contact() {
                     border-[#8B7D6B]/25
                     text-[#8B7D6B]
                     shrink-0
+                    transition-transform
+                    duration-300
+                    group-hover:scale-110
                   "
                 >
                   <Icon size={19} />
@@ -279,6 +308,7 @@ export default function Contact() {
             <a
               href="tel:+917406625447"
               className="
+                group
                 flex
                 flex-col
                 items-center
@@ -290,13 +320,21 @@ export default function Contact() {
                 py-5
                 hover:border-[#8B7D6B]/40
                 hover:bg-[#8B7D6B]/[0.04]
-                transition-colors
+                hover:-translate-y-0.5
+                active:scale-[0.96]
+                transition-all
+                duration-300
               "
             >
 
               <Phone
                 size={18}
-                className="text-[#8B7D6B]"
+                className="
+                  text-[#8B7D6B]
+                  transition-transform
+                  duration-300
+                  group-hover:scale-125
+                "
               />
 
               <span className="text-xs font-medium text-[#1A1A1A]">
@@ -313,6 +351,7 @@ export default function Contact() {
               target="_blank"
               rel="noreferrer"
               className="
+                group
                 flex
                 flex-col
                 items-center
@@ -324,13 +363,21 @@ export default function Contact() {
                 py-5
                 hover:border-[#8B7D6B]/40
                 hover:bg-[#8B7D6B]/[0.04]
-                transition-colors
+                hover:-translate-y-0.5
+                active:scale-[0.96]
+                transition-all
+                duration-300
               "
             >
 
               <MessageCircle
                 size={18}
-                className="text-[#8B7D6B]"
+                className="
+                  text-[#8B7D6B]
+                  transition-transform
+                  duration-300
+                  group-hover:scale-125
+                "
               />
 
               <span className="text-xs font-medium text-[#1A1A1A]">
@@ -347,6 +394,7 @@ export default function Contact() {
               target="_blank"
               rel="noreferrer"
               className="
+                group
                 flex
                 flex-col
                 items-center
@@ -358,13 +406,21 @@ export default function Contact() {
                 py-5
                 hover:border-[#8B7D6B]/40
                 hover:bg-[#8B7D6B]/[0.04]
-                transition-colors
+                hover:-translate-y-0.5
+                active:scale-[0.96]
+                transition-all
+                duration-300
               "
             >
 
               <Navigation
                 size={18}
-                className="text-[#8B7D6B]"
+                className="
+                  text-[#8B7D6B]
+                  transition-transform
+                  duration-300
+                  group-hover:scale-125
+                "
               />
 
               <span className="text-xs font-medium text-[#1A1A1A]">
@@ -388,6 +444,9 @@ export default function Contact() {
               border-[#1A1A1A]/10
               bg-[#F4F2EC]
               shadow-[0_8px_30px_rgba(26,26,26,0.05)]
+              hover:shadow-[0_14px_40px_rgba(26,26,26,0.09)]
+              transition-shadow
+              duration-300
             "
           >
 
@@ -466,7 +525,10 @@ export default function Contact() {
                   text-sm
                   font-semibold
                   hover:bg-[#8B7D6B]
-                  transition-colors
+                  hover:-translate-y-0.5
+                  active:scale-[0.98]
+                  transition-all
+                  duration-300
                 "
               >
 
@@ -487,7 +549,14 @@ export default function Contact() {
             CONTACT FORM
         ================================================= */}
 
-        <div className="lg:col-span-3">
+        <div
+          className="
+            lg:col-span-3
+            opacity-0
+            animate-fadeUp
+          "
+          style={{ animationDelay: '280ms' }}
+        >
 
           <form
             onSubmit={onSubmit}
@@ -501,6 +570,9 @@ export default function Contact() {
               border-[#1A1A1A]/10
               bg-[#F4F2EC]
               shadow-[0_8px_30px_rgba(26,26,26,0.05)]
+              transition-shadow
+              duration-300
+              hover:shadow-[0_14px_40px_rgba(26,26,26,0.08)]
             "
           >
 
@@ -510,6 +582,8 @@ export default function Contact() {
             {status === 'success' && (
 
               <div
+                role="status"
+                aria-live="polite"
                 className="
                   flex
                   items-center
@@ -522,6 +596,8 @@ export default function Contact() {
                   py-3.5
                   text-sm
                   text-[#8B7D6B]
+                  opacity-0
+                  animate-fadeUp
                 "
               >
 
@@ -548,6 +624,8 @@ export default function Contact() {
                 onChange={onChange}
                 error={errors.name}
                 placeholder="Your name"
+                autoComplete="name"
+                disabled={status === 'submitting'}
               />
 
 
@@ -558,6 +636,8 @@ export default function Contact() {
                 onChange={onChange}
                 error={errors.phone}
                 placeholder="+91 98XXXXXXXX"
+                autoComplete="tel"
+                disabled={status === 'submitting'}
               />
 
             </div>
@@ -587,6 +667,7 @@ export default function Contact() {
               onChange={onChange}
               placeholder="e.g. Hyundai Creta 2023"
               optional
+              disabled={status === 'submitting'}
             />
 
 
@@ -615,6 +696,9 @@ export default function Contact() {
                 value={form.message}
                 onChange={onChange}
                 placeholder="Tell us what you're looking for…"
+                disabled={status === 'submitting'}
+                aria-invalid={Boolean(errors.message)}
+                aria-describedby={errors.message ? 'message-error' : undefined}
                 className={`
                   w-full
                   rounded-xl
@@ -627,7 +711,10 @@ export default function Contact() {
                   placeholder:text-[#333333]/50
                   focus:outline-none
                   transition-colors
+                  duration-200
                   resize-none
+                  disabled:opacity-60
+                  disabled:cursor-not-allowed
                   ${
                     errors.message
                       ? 'border-red-400/60'
@@ -640,6 +727,8 @@ export default function Contact() {
               {errors.message && (
 
                 <p
+                  id="message-error"
+                  role="alert"
                   className="
                     flex
                     items-center
@@ -665,12 +754,14 @@ export default function Contact() {
 
             <button
               type="submit"
+              disabled={status === 'submitting'}
               className="
                 w-full
                 sm:w-auto
                 inline-flex
                 items-center
                 justify-center
+                gap-2
                 rounded-xl
                 bg-[#1A1A1A]
                 text-[#F4F2EC]
@@ -679,10 +770,23 @@ export default function Contact() {
                 text-sm
                 font-semibold
                 hover:bg-[#8B7D6B]
-                transition-colors
+                active:scale-[0.98]
+                disabled:opacity-70
+                disabled:cursor-not-allowed
+                transition-all
+                duration-300
               "
             >
-              Send Enquiry
+
+              {status === 'submitting' && (
+                <Loader2
+                  size={16}
+                  className="animate-spin"
+                />
+              )}
+
+              {status === 'submitting' ? 'Sending…' : 'Send Enquiry'}
+
             </button>
 
           </form>
@@ -709,6 +813,8 @@ function Field({
   placeholder,
   type = 'text',
   optional = false,
+  autoComplete,
+  disabled = false,
 }) {
 
   return (
@@ -745,6 +851,10 @@ function Field({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        autoComplete={autoComplete}
+        disabled={disabled}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${name}-error` : undefined}
         className={`
           w-full
           rounded-xl
@@ -757,6 +867,9 @@ function Field({
           placeholder:text-[#333333]/50
           focus:outline-none
           transition-colors
+          duration-200
+          disabled:opacity-60
+          disabled:cursor-not-allowed
           ${
             error
               ? 'border-red-400/60'
@@ -769,6 +882,8 @@ function Field({
       {error && (
 
         <p
+          id={`${name}-error`}
+          role="alert"
           className="
             flex
             items-center

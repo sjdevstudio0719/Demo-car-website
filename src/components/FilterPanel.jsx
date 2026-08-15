@@ -9,7 +9,7 @@ import {
 
 function FilterGroup({ title, options, selected, onToggle }) {
   return (
-    <div className="mb-5">
+    <div className="mb-6">
 
       {/* GROUP TITLE */}
       <p
@@ -17,10 +17,10 @@ function FilterGroup({ title, options, selected, onToggle }) {
           text-[10px]
           sm:text-xs
           font-semibold
-          tracking-[0.12em]
-          text-[#333333]
+          tracking-[0.16em]
+          text-[#333333]/80
           uppercase
-          mb-3
+          mb-3.5
         "
       >
         {title}
@@ -58,14 +58,21 @@ function FilterGroup({ title, options, selected, onToggle }) {
                 )
               }
               className={`
-                px-3 py-2
-                sm:px-3.5 sm:py-2
+                px-3.5 py-2
+                sm:px-4 sm:py-2.5
                 rounded-full
                 text-[10px] sm:text-xs
                 font-medium
+                tracking-wide
                 whitespace-nowrap
                 border
-                transition-all duration-200
+                transition-all duration-300 ease-out
+                active:scale-[0.97]
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#8B7D6B]/40
+                focus-visible:ring-offset-2
+                focus-visible:ring-offset-[#F4F2EC]
 
                 ${
                   active
@@ -73,7 +80,8 @@ function FilterGroup({ title, options, selected, onToggle }) {
                       bg-[#1A1A1A]
                       border-[#1A1A1A]
                       text-[#F4F2EC]
-                      shadow-[0_4px_15px_rgba(26,26,26,0.12)]
+                      shadow-[0_6px_18px_-4px_rgba(26,26,26,0.35)]
+                      -translate-y-[1px]
                     `
                     : `
                       border-[#1A1A1A]/10
@@ -82,6 +90,8 @@ function FilterGroup({ title, options, selected, onToggle }) {
                       hover:border-[#8B7D6B]/50
                       hover:text-[#8B7D6B]
                       hover:bg-[#8B7D6B]/5
+                      hover:-translate-y-[1px]
+                      hover:shadow-[0_4px_12px_-4px_rgba(26,26,26,0.12)]
                     `
                 }
               `}
@@ -158,6 +168,8 @@ export default function FilterPanel({
             bg-[#1A1A1A]/50
             backdrop-blur-sm
             lg:hidden
+            transition-opacity
+            duration-300
           "
         />
 
@@ -181,6 +193,8 @@ export default function FilterPanel({
 
           bg-[#F4F2EC]
 
+          shadow-[8px_0_40px_-12px_rgba(26,26,26,0.25)]
+
           overflow-y-auto
           overscroll-contain
 
@@ -195,6 +209,7 @@ export default function FilterPanel({
           lg:translate-x-0
           lg:overflow-visible
           lg:bg-transparent
+          lg:shadow-none
 
           ${
             open
@@ -227,7 +242,7 @@ export default function FilterPanel({
           "
         >
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
 
             <div
               className="
@@ -240,6 +255,7 @@ export default function FilterPanel({
                 grid
                 place-items-center
                 text-[#8B7D6B]
+                shadow-[0_2px_8px_-2px_rgba(139,125,107,0.3)]
               "
             >
               <SlidersHorizontal size={17} />
@@ -253,6 +269,7 @@ export default function FilterPanel({
                   font-display
                   text-lg
                   text-[#1A1A1A]
+                  tracking-tight
                 "
               >
                 Filters
@@ -263,6 +280,7 @@ export default function FilterPanel({
                   text-[10px]
                   text-[#333333]/70
                   mt-0.5
+                  tracking-wide
                 "
               >
                 Refine your search
@@ -290,8 +308,10 @@ export default function FilterPanel({
 
               hover:text-[#1A1A1A]
               hover:bg-[#1A1A1A]/5
+              active:scale-95
 
-              transition-colors
+              transition-all
+              duration-200
             "
           >
             <X size={18} />
@@ -319,7 +339,8 @@ export default function FilterPanel({
               bg-[#F4F2EC]
               p-5
 
-              lg:p-5
+              lg:p-6
+              lg:shadow-[0_10px_40px_-16px_rgba(26,26,26,0.15)]
               lg:sticky
               lg:top-28
             "
@@ -336,7 +357,10 @@ export default function FilterPanel({
                 lg:flex
                 items-center
                 justify-between
-                mb-6
+                mb-7
+                pb-5
+                border-b
+                border-[#1A1A1A]/8
               "
             >
 
@@ -345,12 +369,27 @@ export default function FilterPanel({
                   font-display
                   text-lg
                   text-[#1A1A1A]
+                  tracking-tight
                   flex
                   items-center
-                  gap-2
+                  gap-2.5
                 "
               >
-                <SlidersHorizontal size={18} />
+                <span
+                  className="
+                    w-8
+                    h-8
+                    rounded-lg
+                    bg-[#8B7D6B]/10
+                    border
+                    border-[#8B7D6B]/25
+                    grid
+                    place-items-center
+                    text-[#8B7D6B]
+                  "
+                >
+                  <SlidersHorizontal size={15} />
+                </span>
                 Filters
               </h3>
 
@@ -362,9 +401,11 @@ export default function FilterPanel({
                   onClick={clearAll}
                   className="
                     text-xs
+                    font-medium
                     text-[#8B7D6B]
                     hover:text-[#1A1A1A]
-                    hover:underline
+                    transition-colors
+                    duration-200
                   "
                 >
                   Clear all
@@ -388,9 +429,11 @@ export default function FilterPanel({
                   onClick={clearAll}
                   className="
                     text-[11px]
+                    font-medium
                     text-[#8B7D6B]
                     hover:text-[#1A1A1A]
-                    hover:underline
+                    transition-colors
+                    duration-200
                   "
                 >
                   Clear all filters
@@ -482,8 +525,8 @@ export default function FilterPanel({
 
             <div
               className="
-                pt-4
-                mt-2
+                pt-5
+                mt-3
                 border-t
                 border-[#1A1A1A]/10
               "
@@ -493,6 +536,7 @@ export default function FilterPanel({
                 className="
                   text-xs
                   text-[#333333]
+                  tracking-wide
                 "
               >
 
@@ -530,14 +574,19 @@ export default function FilterPanel({
                 rounded-full
                 bg-[#1A1A1A]
                 text-[#F4F2EC]
-                py-3
+                py-3.5
                 px-5
                 text-sm
                 font-semibold
+                tracking-wide
+
+                shadow-[0_8px_24px_-8px_rgba(26,26,26,0.4)]
 
                 hover:bg-[#8B7D6B]
+                active:scale-[0.98]
 
-                transition-colors
+                transition-all
+                duration-250
 
                 lg:hidden
               "

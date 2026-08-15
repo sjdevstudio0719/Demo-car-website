@@ -31,17 +31,22 @@ export default function ServiceCard({
   return (
     <div
       className="
-        reveal
+        group
+        opacity-0
+        animate-fadeUp
         card-surface
+        rounded-3xl
         p-7
         border
         border-[#1A1A1A]/10
         bg-[#FAF2EC]
         hover:border-[#8B7D6B]/40
         hover:bg-[#8B7D6B]/[0.035]
-        hover:-translate-y-1
+        hover:-translate-y-1.5
+        hover:shadow-[0_20px_40px_rgba(26,26,26,0.10)]
         transition-all
         duration-300
+        ease-out
       "
       style={{
         animationDelay: `${index * 90}ms`,
@@ -62,6 +67,12 @@ export default function ServiceCard({
           border-[#8B7D6B]/25
           text-[#8B7D6B]
           mb-5
+          transition-all
+          duration-300
+          group-hover:bg-[#8B7D6B]
+          group-hover:text-[#F4F2EC]
+          group-hover:border-[#8B7D6B]
+          group-hover:scale-110
         "
       >
         <Icon
@@ -79,6 +90,9 @@ export default function ServiceCard({
           text-lg
           text-[#1A1A1A]
           mb-2
+          transition-colors
+          duration-300
+          group-hover:text-[#8B7D6B]
         "
       >
         {title}

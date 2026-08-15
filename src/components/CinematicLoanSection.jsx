@@ -306,7 +306,7 @@ export default function CinematicLoanSection() {
             ========================================= */}
 
             <Link
-              to="/products"
+              to="/inventory"
               className="
                 group
                 mt-8

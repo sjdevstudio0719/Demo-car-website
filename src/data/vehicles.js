@@ -39,7 +39,7 @@ export const vehicles = [
     model: 'Creta',
     variant: 'SX(O) Turbo',
     year: 2023,
-    price: 1685000,
+    price: 162554,
     kmDriven: 12250,
     fuelType: 'Petrol',
     transmission: 'Automatic',
@@ -312,9 +312,9 @@ export const budgetRanges = [
 
 export function formatPrice(value) {
   const lakh = value / 100000
-  return `₹${lakh % 1 === 0 ? lakh.toFixed(0) : lakh.toFixed(2)} Lakh`
+  return `₹${lakh.toFixed(2)} Lakh`
 }
 
 export function formatKm(value) {
   return `${value.toLocaleString('en-IN')} km`
-}
+} 

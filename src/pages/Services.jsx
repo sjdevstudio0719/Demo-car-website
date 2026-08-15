@@ -44,6 +44,8 @@ export default function Services() {
             tracking-[0.25em]
             font-medium
             text-[#8B7D6B]
+            opacity-0
+            animate-fadeUp
           "
         >
           Our Services
@@ -55,7 +57,10 @@ export default function Services() {
             mb-5
             max-w-2xl
             text-[#1A1A1A]
+            opacity-0
+            animate-fadeUp
           "
+          style={{ animationDelay: '80ms' }}
         >
           Why Choose Us
         </h1>
@@ -66,7 +71,10 @@ export default function Services() {
             max-w-2xl
             text-lg
             text-[#333333]
+            opacity-0
+            animate-fadeUp
           "
+          style={{ animationDelay: '160ms' }}
         >
           We built Demo Car Website around one idea: buying a used car should feel as
           straightforward as buying a new one. That means honest inspections, fair pricing and
@@ -123,7 +131,9 @@ export default function Services() {
             <div
               key={p.title}
               className="
-                reveal
+                group
+                opacity-0
+                animate-fadeUp
                 rounded-3xl
                 border
                 border-[#1A1A1A]/10
@@ -131,10 +141,12 @@ export default function Services() {
                 p-7
 
                 hover:border-[#8B7D6B]/40
-                hover:-translate-y-1
+                hover:-translate-y-1.5
+                hover:shadow-[0_20px_40px_rgba(26,26,26,0.10)]
 
                 transition-all
                 duration-300
+                ease-out
               "
               style={{
                 animationDelay: `${i * 90}ms`,
@@ -155,6 +167,12 @@ export default function Services() {
                   border-[#8B7D6B]/25
                   text-[#8B7D6B]
                   mb-5
+                  transition-all
+                  duration-300
+                  group-hover:bg-[#8B7D6B]
+                  group-hover:text-[#F4F2EC]
+                  group-hover:border-[#8B7D6B]
+                  group-hover:scale-110
                 "
               >
                 <p.icon size={22} />
@@ -169,6 +187,9 @@ export default function Services() {
                   text-lg
                   text-[#1A1A1A]
                   mb-2
+                  transition-colors
+                  duration-300
+                  group-hover:text-[#8B7D6B]
                 "
               >
                 {p.title}
@@ -245,6 +266,9 @@ export default function Services() {
             md:p-16
 
             text-center
+
+            opacity-0
+            animate-fadeUp
           "
         >
 
@@ -326,7 +350,7 @@ export default function Services() {
               {/* BROWSE CARS */}
 
               <Link
-                to="/products"
+                to="/inventory"
                 className="
                   group
                   inline-flex
@@ -341,6 +365,8 @@ export default function Services() {
                   font-semibold
 
                   hover:bg-[#8B7D6B]
+                  hover:-translate-y-0.5
+                  hover:shadow-[0_12px_24px_rgba(139,125,107,0.35)]
 
                   transition-all
                   duration-300
@@ -379,6 +405,7 @@ export default function Services() {
 
                   hover:border-[#8B7D6B]/50
                   hover:text-[#8B7D6B]
+                  hover:-translate-y-0.5
 
                   transition-all
                   duration-300

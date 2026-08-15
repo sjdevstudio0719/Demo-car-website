@@ -1,33 +1,28 @@
 export const testimonials = [
   {
-    name: 'Arjun Mehta',
-    vehicle: 'Hyundai Creta, 2023',
+    name: 'Dr ginny',
     rating: 5,
-    review: 'The entire process was transparent from the first call to the final handover. No hidden charges, and the paperwork was done for me within three days.',
+    review: 'Excellent service and trustworthy dealership. They explained every detail clearly, offered fair pricing, and made the buying process hassle-free. Very satisfied with the overall experience.',
   },
   {
-    name: 'Priyanka Sen',
-    vehicle: 'Maruti Suzuki Swift, 2022',
+    name: 'Raunak Saluja',
     rating: 5,
-    review: 'I was nervous about buying second-hand, but the inspection report and the engine warranty gave me real confidence. Would recommend to anyone in Kolkata.',
+    review: 'Had a great experience. The car was in excellent condition, and the dealer explained everything clearly. Very friendly and honest—no unnecessary pressure at all. The pricing was fair and transparent. Definitely a reliable place if you’re looking for a second-hand car. Highly recommended',
   },
   {
-    name: 'Rohit Banerjee',
-    vehicle: 'Mahindra XUV700, 2023',
+    name: 'Md Shahzad',
     rating: 5,
-    review: 'Found a nearly-new XUV700 for well under showroom price. The team even arranged financing with a better rate than my bank offered.',
+    review: 'Bought my new baleno,very satisfied with the service.thank you karan sir and thank you nextride.',
   },
   {
-    name: 'Sneha Kapoor',
-    vehicle: 'Honda City, 2022',
+    name: 'Gonu Saluja',
     rating: 4,
-    review: 'Smooth test drive, honest answers about the car\'s history, and delivery right to my doorstep. Minor delay on RC transfer but support kept me updated throughout.',
+    review: 'I love how easy they make the car buying process. Very Cooperative Staff. Amazing Sales and Transparent Paperwork. I got my RC transferred within 48 hours.',
   },
   {
-    name: 'Vikram Chatterjee',
-    vehicle: 'Toyota Fortuner, 2022',
+    name: 'Saadgi Sachdeva',
     rating: 5,
-    review: 'Best pre-owned buying experience I\'ve had. The car looked exactly as described and the price was fair from the start — no haggling games.',
+    review: 'Good experience overall. The staff was polite and helpful, and they explained everything clearly. Smooth buying process.',
   },
 ]
 

@@ -14,14 +14,18 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
   return (
     <div
       className="
-        reveal
         group
+        opacity-0
+        animate-fadeUp
         card-surface
+        rounded-3xl
         overflow-hidden
         hover:border-[#8B7D6B]/50
-        hover:-translate-y-1
+        hover:-translate-y-1.5
+        hover:shadow-[0_20px_40px_rgba(26,26,26,0.10)]
         transition-all
         duration-300
+        ease-out
       "
       style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
     >
@@ -63,6 +67,9 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
               font-semibold
               tracking-wide
               text-[#F4F2EC]
+              transition-transform
+              duration-300
+              group-hover:scale-105
             "
           >
             New Arrival
@@ -107,6 +114,9 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
             text-xs
             font-semibold
             text-[#F4F2EC]
+            transition-transform
+            duration-300
+            group-hover:scale-105
           "
         >
           {formatPrice(vehicle.price)}
@@ -125,7 +135,17 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
         </p>
 
         {/* Vehicle Name */}
-        <h3 className="font-display text-lg text-[#1A1A1A] mb-3">
+        <h3
+          className="
+            font-display
+            text-lg
+            text-[#1A1A1A]
+            mb-3
+            transition-colors
+            duration-300
+            group-hover:text-[#8B7D6B]
+          "
+        >
           {vehicle.model}{' '}
           <span className="text-[#333333]/70 text-sm font-sans">
             {vehicle.variant}
@@ -183,6 +203,7 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
             <button
               onClick={() => onView?.(vehicle)}
               className="
+                group/btn
                 inline-flex
                 items-center
                 justify-center
@@ -198,12 +219,21 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
                 hover:bg-[#8B7D6B]
                 hover:text-[#F4F2EC]
                 hover:border-[#8B7D6B]
+                active:scale-95
                 transition-all
                 duration-300
               "
             >
               View Details
-              <ArrowUpRight size={15} />
+              <ArrowUpRight
+                size={15}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover/btn:translate-x-0.5
+                  group-hover/btn:-translate-y-0.5
+                "
+              />
             </button>
 
             {/* WhatsApp */}
@@ -227,6 +257,7 @@ export default function VehicleCard({ vehicle, index = 0, onView }) {
                 text-[#F4F2EC]
                 hover:bg-[#333333]
                 hover:border-[#333333]
+                active:scale-95
                 transition-all
                 duration-300
               "

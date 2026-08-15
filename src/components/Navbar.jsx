@@ -12,11 +12,20 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24)
+
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight
+
+      const progress =
+        docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0
+
+      setScrollProgress(Math.min(100, Math.max(0, progress)))
     }
 
     onScroll()
@@ -51,6 +60,7 @@ export default function Navbar() {
                 border-[#1A1A1A]/10
                 bg-[#F4F2EC]/90
                 py-3
+                shadow-[0_8px_30px_rgba(26,26,26,0.06)]
                 backdrop-blur-xl
               `
               : `
@@ -60,6 +70,23 @@ export default function Navbar() {
           }
         `}
       >
+
+        {/* SCROLL PROGRESS LINE */}
+
+        <div
+          className="
+            absolute
+            bottom-0
+            left-0
+            h-px
+            bg-[#8B7D6B]
+            transition-all
+            duration-150
+            ease-out
+          "
+          style={{ width: `${scrollProgress}%` }}
+        />
+
         <nav className="container-px flex items-center justify-between">
 
           {/* =================================================
@@ -80,6 +107,8 @@ export default function Navbar() {
                 object-contain
                 transition-all
                 duration-300
+                group-hover:scale-105
+                group-hover:brightness-110
               "
             />
           </Link>
@@ -97,28 +126,34 @@ export default function Navbar() {
                 to={link.to}
                 className={({ isActive }) =>
                   `
+                    group
                     relative
+                    flex
+                    flex-col
+                    items-center
                     py-2
                     text-[11px]
                     font-medium
                     uppercase
                     tracking-[0.14em]
-                    transition-colors
+                    transition-all
                     duration-300
 
                     ${
                       isActive
                         ? 'text-[#8B7D6B]'
-                        : 'text-[#333333] hover:text-[#1A1A1A]'
+                        : 'text-[#333333] hover:-translate-y-0.5 hover:text-[#1A1A1A]'
                     }
 
                     after:absolute
                     after:bottom-0
-                    after:left-0
+                    after:left-1/2
                     after:h-px
+                    after:-translate-x-1/2
                     after:bg-[#8B7D6B]
                     after:transition-all
                     after:duration-300
+                    after:ease-out
 
                     ${
                       isActive
@@ -128,7 +163,25 @@ export default function Navbar() {
                   `
                 }
               >
-                {link.label}
+                {({ isActive }) => (
+                  <>
+                    {isActive && (
+                      <span
+                        className="
+                          absolute
+                          -top-2.5
+                          h-1
+                          w-1
+                          rounded-full
+                          bg-[#8B7D6B]
+                          animate-fadeUp
+                        "
+                        style={{ animationDuration: '300ms' }}
+                      />
+                    )}
+                    {link.label}
+                  </>
+                )}
               </NavLink>
             ))}
 
@@ -145,9 +198,11 @@ export default function Navbar() {
               to="/inventory"
               className="
                 group
+                relative
                 inline-flex
                 items-center
                 gap-3
+                overflow-hidden
                 border
                 border-[#1A1A1A]
                 bg-[#1A1A1A]
@@ -162,14 +217,40 @@ export default function Navbar() {
                 duration-300
                 hover:border-[#8B7D6B]
                 hover:bg-[#8B7D6B]
+                hover:shadow-[0_10px_25px_rgba(139,125,107,0.35)]
               "
             >
-              Browse Cars
+
+              {/* Shimmer sweep */}
+
+              <span
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-y-0
+                  -left-1/2
+                  w-1/2
+                  -skew-x-12
+                  bg-gradient-to-r
+                  from-transparent
+                  via-[#F4F2EC]/25
+                  to-transparent
+                  transition-transform
+                  duration-700
+                  ease-out
+                  group-hover:translate-x-[400%]
+                "
+              />
+
+              <span className="relative">
+                Browse Cars
+              </span>
 
               <ArrowUpRight
                 size={14}
                 strokeWidth={1.5}
                 className="
+                  relative
                   transition-transform
                   duration-300
                   group-hover:-translate-y-0.5
@@ -201,17 +282,30 @@ export default function Navbar() {
               hover:border-[#8B7D6B]
               hover:bg-[#8B7D6B]
               hover:text-[#F4F2EC]
+              active:scale-90
               lg:hidden
             "
             onClick={() => setOpen((value) => !value)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
-            {open ? (
-              <X size={19} strokeWidth={1.5} />
-            ) : (
-              <Menu size={19} strokeWidth={1.5} />
-            )}
+            <span
+              className="
+                grid
+                place-items-center
+                transition-transform
+                duration-300
+              "
+              style={{
+                transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+              }}
+            >
+              {open ? (
+                <X size={19} strokeWidth={1.5} />
+              ) : (
+                <Menu size={19} strokeWidth={1.5} />
+              )}
+            </span>
           </button>
 
         </nav>
@@ -227,6 +321,7 @@ export default function Navbar() {
           fixed
           inset-0
           z-40
+          overflow-hidden
           bg-[#F4F2EC]
           transition-all
           duration-500
@@ -240,7 +335,37 @@ export default function Navbar() {
         `}
       >
 
-        <div className="container-px flex flex-col pt-28">
+        {/* AMBIENT GLOW */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            -right-32
+            -top-32
+            h-80
+            w-80
+            rounded-full
+            bg-[#8B7D6B]/10
+            blur-[100px]
+          "
+        />
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            -bottom-32
+            -left-32
+            h-80
+            w-80
+            rounded-full
+            bg-[#8B7D6B]/5
+            blur-[100px]
+          "
+        />
+
+        <div className="container-px relative flex flex-col pt-28">
 
           {/* Small label */}
 
@@ -261,7 +386,15 @@ export default function Navbar() {
             `}
           >
 
-            <span className="h-px w-8 bg-[#8B7D6B]" />
+            <span
+              className="
+                h-px
+                bg-[#8B7D6B]
+                transition-all
+                duration-700
+              "
+              style={{ width: open ? '2rem' : '0rem' }}
+            />
 
             <span
               className="
@@ -292,9 +425,11 @@ export default function Navbar() {
               }}
               className={({ isActive }) =>
                 `
+                  group
                   flex
                   items-center
                   justify-between
+                  gap-4
                   border-b
                   border-[#1A1A1A]/10
                   py-5
@@ -318,11 +453,29 @@ export default function Navbar() {
                 `
               }
             >
-              {link.label}
+              <span className="flex items-baseline gap-4">
+                <span
+                  className="
+                    text-[11px]
+                    font-sans
+                    tracking-[0.1em]
+                    text-[#8B7D6B]/60
+                  "
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {link.label}
+              </span>
 
               <ArrowUpRight
                 size={17}
                 strokeWidth={1.5}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-1
+                  group-hover:-translate-y-1
+                "
               />
             </NavLink>
           ))}
@@ -331,13 +484,16 @@ export default function Navbar() {
           {/* Mobile CTA */}
 
           <Link
-            to="/products"
+            to="/inventory"
             onClick={() => setOpen(false)}
             className={`
+              group
+              relative
               mt-8
               flex
               items-center
               justify-between
+              overflow-hidden
               border
               border-[#1A1A1A]
               bg-[#1A1A1A]
@@ -361,11 +517,36 @@ export default function Navbar() {
               transitionDelay: open ? '400ms' : '0ms',
             }}
           >
-            Browse Cars
+
+            {/* Shimmer sweep */}
+
+            <span
+              className="
+                pointer-events-none
+                absolute
+                inset-y-0
+                -left-1/2
+                w-1/2
+                -skew-x-12
+                bg-gradient-to-r
+                from-transparent
+                via-[#F4F2EC]/20
+                to-transparent
+                transition-transform
+                duration-700
+                ease-out
+                group-hover:translate-x-[400%]
+              "
+            />
+
+            <span className="relative">
+              Browse Cars
+            </span>
 
             <ArrowUpRight
               size={15}
               strokeWidth={1.5}
+              className="relative"
             />
           </Link>
 

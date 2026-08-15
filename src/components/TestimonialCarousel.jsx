@@ -51,8 +51,10 @@ export default function TestimonialCarousel() {
 
       <div
         className="
+          group
           relative
           overflow-hidden
+          rounded-3xl
           border
           border-[#1A1A1A]/10
           bg-[#F4F2EC]
@@ -61,6 +63,10 @@ export default function TestimonialCarousel() {
           text-center
           md:px-12
           md:py-14
+          transition-all
+          duration-300
+          hover:border-[#8B7D6B]/30
+          hover:shadow-[0_20px_50px_rgba(26,26,26,0.08)]
         "
       >
 
@@ -88,94 +94,111 @@ export default function TestimonialCarousel() {
             mx-auto
             mb-6
             text-[#8B7D6B]
+            transition-transform
+            duration-300
+            group-hover:scale-110
+            group-hover:-rotate-3
           "
         />
 
 
-        {/* Stars */}
-
-        <div className="mb-6 flex items-center justify-center gap-1">
-
-          {Array.from({ length: 5 }).map((_, i) => (
-
-            <Star
-              key={i}
-              size={15}
-              strokeWidth={1.5}
-              className={
-                i < t.rating
-                  ? `
-                    fill-[#8B7D6B]
-                    text-[#8B7D6B]
-                  `
-                  : `
-                    text-[#1A1A1A]/15
-                  `
-              }
-            />
-
-          ))}
-
-        </div>
-
-
-        {/* Review */}
-
-        <p
-          className="
-            mx-auto
-            max-w-2xl
-            font-display
-            text-xl
-            leading-relaxed
-            tracking-[-0.02em]
-            text-[#1A1A1A]
-            md:text-2xl
-          "
-        >
-          "{t.review}"
-        </p>
-
-
-        {/* Divider */}
+        {/* Content — keyed so it cross-fades whenever the testimonial changes */}
 
         <div
+          key={index}
           className="
-            mx-auto
-            my-7
-            h-px
-            w-10
-            bg-[#8B7D6B]/50
+            opacity-0
+            animate-fadeUp
           "
-        />
+          style={{ animationDuration: '500ms' }}
+        >
+
+          {/* Stars */}
+
+          <div className="mb-6 flex items-center justify-center gap-1">
+
+            {Array.from({ length: 5 }).map((_, i) => (
+
+              <Star
+                key={i}
+                size={15}
+                strokeWidth={1.5}
+                className={
+                  i < t.rating
+                    ? `
+                      fill-[#8B7D6B]
+                      text-[#8B7D6B]
+                    `
+                    : `
+                      text-[#1A1A1A]/15
+                    `
+                }
+              />
+
+            ))}
+
+          </div>
 
 
-        {/* Customer */}
-
-        <div>
+          {/* Review */}
 
           <p
             className="
+              mx-auto
+              max-w-2xl
               font-display
-              text-lg
+              text-xl
+              leading-relaxed
+              tracking-[-0.02em]
               text-[#1A1A1A]
+              md:text-2xl
             "
           >
-            {t.name}
+            "{t.review}"
           </p>
 
-          <p
+
+          {/* Divider */}
+
+          <div
             className="
-              mt-1
-              text-[10px]
-              font-medium
-              uppercase
-              tracking-[0.2em]
-              text-[#333333]/70
+              mx-auto
+              my-7
+              h-px
+              w-10
+              bg-[#8B7D6B]/50
             "
-          >
-            {t.vehicle}
-          </p>
+          />
+
+
+          {/* Customer */}
+
+          <div>
+
+            <p
+              className="
+                font-display
+                text-lg
+                text-[#1A1A1A]
+              "
+            >
+              {t.name}
+            </p>
+
+            <p
+              className="
+                mt-1
+                text-[10px]
+                font-medium
+                uppercase
+                tracking-[0.2em]
+                text-[#333333]/70
+              "
+            >
+              {t.vehicle}
+            </p>
+
+          </div>
 
         </div>
 
@@ -205,6 +228,7 @@ export default function TestimonialCarousel() {
             h-10
             w-10
             place-items-center
+            rounded-full
             border
             border-[#1A1A1A]/15
             bg-[#F4F2EC]
@@ -214,6 +238,8 @@ export default function TestimonialCarousel() {
             hover:border-[#8B7D6B]
             hover:bg-[#8B7D6B]
             hover:text-[#F4F2EC]
+            hover:-translate-x-0.5
+            active:scale-90
           "
           aria-label="Previous testimonial"
         >
@@ -238,6 +264,9 @@ export default function TestimonialCarousel() {
                 h-6
                 items-center
                 justify-center
+                active:scale-90
+                transition-transform
+                duration-200
               "
               aria-label={`Go to testimonial ${i + 1}`}
             >
@@ -272,6 +301,7 @@ export default function TestimonialCarousel() {
             h-10
             w-10
             place-items-center
+            rounded-full
             border
             border-[#1A1A1A]/15
             bg-[#F4F2EC]
@@ -281,6 +311,8 @@ export default function TestimonialCarousel() {
             hover:border-[#8B7D6B]
             hover:bg-[#8B7D6B]
             hover:text-[#F4F2EC]
+            hover:translate-x-0.5
+            active:scale-90
           "
           aria-label="Next testimonial"
         >

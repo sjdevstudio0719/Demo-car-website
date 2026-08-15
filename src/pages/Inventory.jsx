@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Search, SlidersHorizontal, CarFront } from 'lucide-react'
+import { Search, SlidersHorizontal, CarFront, X } from 'lucide-react'
 import VehicleCard from '../components/VehicleCard.jsx'
 import FilterPanel from '../components/FilterPanel.jsx'
 import VehicleModal from '../components/VehicleModal.jsx'
@@ -94,6 +94,14 @@ export default function Products() {
     return list
   }, [filters, sort])
 
+  const hasActiveFilters =
+    filters.brand ||
+    filters.bodyType ||
+    filters.fuelType ||
+    filters.transmission ||
+    filters.budget ||
+    filters.search
+
   return (
     <div
       className="
@@ -120,6 +128,8 @@ export default function Products() {
             tracking-[0.25em]
             font-medium
             text-[#8B7D6B]
+            opacity-0
+            animate-fadeUp
           "
         >
           Inventory
@@ -130,7 +140,10 @@ export default function Products() {
             heading-lg
             mb-3
             text-[#1A1A1A]
+            opacity-0
+            animate-fadeUp
           "
+          style={{ animationDelay: '80ms' }}
         >
           Browse Our Collection
         </h1>
@@ -140,7 +153,10 @@ export default function Products() {
             body-text
             max-w-xl
             text-[#333333]
+            opacity-0
+            animate-fadeUp
           "
+          style={{ animationDelay: '160ms' }}
         >
           Every vehicle listed here is currently available and inspected.
           Filter by budget, body type, brand and more to find the right fit.
@@ -168,17 +184,24 @@ export default function Products() {
 
         {/* PRODUCTS */}
 
-        <div className="flex-1">
+        <div
+          className="
+            flex-1
+            opacity-0
+            animate-fadeUp
+          "
+          style={{ animationDelay: '220ms' }}
+        >
 
           {/* =================================================
               SEARCH + SORT
           ================================================= */}
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">
 
             {/* SEARCH */}
 
-            <div className="relative flex-1">
+            <div className="relative flex-1 group">
 
               <Search
                 size={16}
@@ -188,6 +211,9 @@ export default function Products() {
                   top-1/2
                   -translate-y-1/2
                   text-[#333333]/60
+                  transition-transform
+                  duration-300
+                  group-focus-within:scale-110
                 "
               />
 
@@ -208,7 +234,7 @@ export default function Products() {
                   border-[#1A1A1A]/10
                   bg-[#F4F2EC]
                   pl-11
-                  pr-4
+                  pr-11
                   py-3
                   text-sm
                   text-[#1A1A1A]
@@ -217,9 +243,44 @@ export default function Products() {
                   focus:border-[#8B7D6B]/60
                   focus:ring-2
                   focus:ring-[#8B7D6B]/10
-                  transition-colors
+                  transition-all
+                  duration-300
                 "
               />
+
+              {filters.search && (
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFilters((f) => ({
+                      ...f,
+                      search: '',
+                    }))
+                  }
+                  aria-label="Clear search"
+                  className="
+                    absolute
+                    right-3
+                    top-1/2
+                    -translate-y-1/2
+                    grid
+                    place-items-center
+                    w-6
+                    h-6
+                    rounded-full
+                    text-[#333333]/50
+                    hover:text-[#8B7D6B]
+                    hover:bg-[#8B7D6B]/10
+                    active:scale-90
+                    transition-all
+                    duration-200
+                  "
+                >
+                  <X size={14} />
+                </button>
+
+              )}
 
             </div>
 
@@ -245,7 +306,9 @@ export default function Products() {
                 text-[#1A1A1A]
                 hover:border-[#8B7D6B]/50
                 hover:text-[#8B7D6B]
-                transition-colors
+                active:scale-95
+                transition-all
+                duration-300
               "
             >
               <SlidersHorizontal size={15} />
@@ -269,7 +332,9 @@ export default function Products() {
                 text-[#1A1A1A]
                 focus:outline-none
                 focus:border-[#8B7D6B]/60
+                hover:border-[#8B7D6B]/40
                 transition-colors
+                duration-300
               "
             >
 
@@ -290,6 +355,14 @@ export default function Products() {
           </div>
 
 
+          {/* RESULT COUNT */}
+
+          <p className="text-xs text-[#333333]/70 mb-6">
+            {filtered.length} {filtered.length === 1 ? 'vehicle' : 'vehicles'} found
+            {hasActiveFilters ? ' matching your filters' : ''}
+          </p>
+
+
           {/* =================================================
               NO RESULTS
           ================================================= */}
@@ -297,6 +370,7 @@ export default function Products() {
           {filtered.length === 0 ? (
 
             <div
+              key="no-results"
               className="
                 flex
                 flex-col
@@ -309,6 +383,8 @@ export default function Products() {
                 border
                 border-[#1A1A1A]/10
                 bg-[#F4F2EC]
+                opacity-0
+                animate-fadeUp
               "
             >
 
@@ -324,6 +400,7 @@ export default function Products() {
                   border-[#8B7D6B]/25
                   text-[#8B7D6B]
                   mb-5
+                  animate-pulse
                 "
               >
                 <CarFront size={24} />
@@ -379,7 +456,9 @@ export default function Products() {
                   text-sm
                   font-semibold
                   hover:bg-[#8B7D6B]
-                  transition-colors
+                  active:scale-95
+                  transition-all
+                  duration-300
                 "
               >
                 Clear Filters
@@ -393,7 +472,17 @@ export default function Products() {
                VEHICLE GRID
             ================================================= */
 
-            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div
+              key={`grid-${filters.brand}-${filters.bodyType}-${filters.fuelType}-${filters.transmission}-${filters.budget}-${filters.search}-${sort}`}
+              className="
+                grid
+                sm:grid-cols-2
+                xl:grid-cols-3
+                gap-6
+                opacity-0
+                animate-fadeUp
+              "
+            >
 
               {filtered.map((v, i) => (
 

@@ -103,7 +103,10 @@ export default function VehicleModal({ vehicle, onClose }) {
           inset-0
           bg-[#1A1A1A]/85
           backdrop-blur-sm
+          opacity-0
+          animate-fadeUp
         "
+        style={{ animationDuration: '400ms' }}
         onClick={onClose}
       />
 
@@ -118,11 +121,12 @@ export default function VehicleModal({ vehicle, onClose }) {
           max-w-4xl
           max-h-[90vh]
           overflow-y-auto
-          rounded-2xl
+          rounded-3xl
           border
           border-[#333333]/20
           bg-[#F4F2EC]
           shadow-2xl
+          opacity-0
           animate-fadeUp
         "
       >
@@ -151,7 +155,10 @@ export default function VehicleModal({ vehicle, onClose }) {
             hover:bg-[#8B7D6B]
             hover:text-[#F4F2EC]
             hover:border-[#8B7D6B]
-            transition-colors
+            hover:rotate-90
+            active:scale-90
+            transition-all
+            duration-300
           "
           aria-label="Close details"
         >
@@ -171,7 +178,7 @@ export default function VehicleModal({ vehicle, onClose }) {
               <div
                 className="
                   aspect-[4/3]
-                  rounded-xl
+                  rounded-2xl
                   overflow-hidden
                   mb-3
                   border
@@ -179,9 +186,17 @@ export default function VehicleModal({ vehicle, onClose }) {
                 "
               >
                 <img
+                  key={activeImage}
                   src={vehicle.images[activeImage]}
                   alt={vehicle.model}
-                  className="w-full h-full object-cover"
+                  className="
+                    w-full
+                    h-full
+                    object-cover
+                    opacity-0
+                    animate-fadeUp
+                  "
+                  style={{ animationDuration: '300ms' }}
                 />
               </div>
 
@@ -201,6 +216,9 @@ export default function VehicleModal({ vehicle, onClose }) {
                         overflow-hidden
                         border-2
                         transition-all
+                        duration-300
+                        hover:-translate-y-0.5
+                        active:scale-95
                         ${
                           i === activeImage
                             ? 'border-[#8B7D6B] opacity-100'
@@ -351,7 +369,9 @@ export default function VehicleModal({ vehicle, onClose }) {
                     text-sm
                     font-semibold
                     hover:bg-[#333333]
-                    transition-colors
+                    active:scale-95
+                    transition-all
+                    duration-300
                   "
                 >
                   <MessageCircle size={16} />
@@ -380,7 +400,9 @@ export default function VehicleModal({ vehicle, onClose }) {
                     border-[#8B7D6B]
                     hover:bg-[#333333]
                     hover:border-[#333333]
-                    transition-colors
+                    active:scale-95
+                    transition-all
+                    duration-300
                   "
                 >
                   <MessageCircle size={16} />
@@ -407,7 +429,9 @@ export default function VehicleModal({ vehicle, onClose }) {
                     hover:bg-[#8B7D6B]
                     hover:text-[#F4F2EC]
                     hover:border-[#8B7D6B]
-                    transition-colors
+                    active:scale-95
+                    transition-all
+                    duration-300
                   "
                 >
                   <Phone size={16} />
@@ -455,6 +479,9 @@ export default function VehicleModal({ vehicle, onClose }) {
                       gap-2
                       text-sm
                       text-[#333333]/80
+                      transition-transform
+                      duration-300
+                      hover:translate-x-1
                     "
                   >
                     <Check
