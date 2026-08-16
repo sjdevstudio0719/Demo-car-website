@@ -861,7 +861,7 @@ export default function Home() {
             {
               icon: Wallet,
               eyebrow: 'Drive your dream Car',
-              title: 'Caclculate EMIs',
+              title: 'Calculate EMIs',
               text: 'Cars starting at ₹4,999/month EMI.',
               type: 'anchor',
               href: '#finance',
