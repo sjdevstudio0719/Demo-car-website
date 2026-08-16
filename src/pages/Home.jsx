@@ -12,6 +12,9 @@ import {
   Star,
   Search,
   X,
+  Gauge,
+  CalendarCheck,
+  PhoneCall,
 } from 'lucide-react'
 
 import HeroCarousel from '../components/HeroCarousel.jsx'
@@ -23,18 +26,38 @@ import { formatPrice } from '../data/vehicles.js'
 
 import {
   vehicles,
-  budgetRanges,
-  bodyTypes,
 } from '../data/vehicles.js'
-
-import {
-  brands,
-  carTypes,
-} from '../data/brands.js'
 
 import {
   financialServices,
 } from '../data/content.js'
+
+// =====================================================
+// WHATSAPP CONFIG
+// =====================================================
+
+const WHATSAPP_NUMBER = '919752975239'
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+
+
+// =====================================================
+// COLOR HELPER — hex -> rgba, used to drive per-card
+// accent strokes via CSS custom properties so Tailwind's
+// static class scanning still works (classes stay literal,
+// only the CSS variable values change per card).
+// =====================================================
+
+function hexToRgba(hex, alpha) {
+
+  const clean = hex.replace('#', '')
+
+  const r = parseInt(clean.slice(0, 2), 16)
+  const g = parseInt(clean.slice(2, 4), 16)
+  const b = parseInt(clean.slice(4, 6), 16)
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`
+
+}
 
 
 export default function Home() {
@@ -49,9 +72,6 @@ export default function Home() {
     type: '',
     value: '',
   })
-
-  const [openFilter, setOpenFilter] = useState(null)
-
 
   // =====================================================
   // FEATURED VEHICLES
@@ -309,27 +329,6 @@ export default function Home() {
 
 
   // =====================================================
-  // FILTER HANDLER
-  // =====================================================
-
-  const selectFilter = (
-    type,
-    value
-  ) => {
-
-    setCarSearch('')
-
-    setActiveFilter({
-      type,
-      value,
-    })
-
-    setOpenFilter(null)
-
-  }
-
-
-  // =====================================================
   // CLEAR FILTER
   // =====================================================
 
@@ -341,8 +340,6 @@ export default function Home() {
       type: '',
       value: '',
     })
-
-    setOpenFilter(null)
 
   }
 
@@ -500,8 +497,6 @@ export default function Home() {
               </div>
 
 
-              
-
               {/* Stats */}
 
 <div className="grid grid-cols-3 max-w-lg border-t border-[#1A1A1A]/10 pt-7">
@@ -573,459 +568,546 @@ export default function Home() {
 
 
 
+
+
+
       {/* =====================================================
-          SMART SEARCH / BROWSE
+          BUY / SELL A CAR — WHATSAPP
       ===================================================== */}
 
       <section
-        className="relative z-20 container-px -mt-8 lg:-mt-14 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
-        style={{ animationDelay: '240ms' }}
+        className="relative z-20 container-px mb-8 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '200ms' }}
       >
 
-        <div className="rounded-3xl border border-[#1A1A1A]/10 bg-[#F4F2EC]/95 backdrop-blur-2xl p-5 md:p-7 shadow-[0_20px_60px_rgba(26,26,26,0.10)]">
-
-
-          {/* =================================================
-              SEARCH BAR
-          ================================================= */}
-
-          
-
-
+        <div className="grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
 
           {/* =================================================
-              ACTIVE FILTER
+              BUY A CAR
           ================================================= */}
 
-          {(activeFilter.type ||
-            carSearch.trim()) && (
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              group
+              relative
+              flex
+              items-center
+              justify-between
+              gap-3
+              overflow-hidden
+              rounded-2xl
+              border
+              border-[#1A1A1A]/10
+              bg-[#8B7D6B]
+              px-5
+              py-3.5
+              opacity-0
+              animate-[fadeUp_0.6s_ease-out_forwards]
+              hover:bg-[#1A1A1A]
+              hover:-translate-y-0.5
+              hover:shadow-[0_16px_35px_rgba(26,26,26,0.20)]
+              transition-all
+              duration-500
+              ease-out
+            "
+            style={{ animationDelay: '260ms' }}
+          >
 
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            {/* animated border glow */}
+            <div className="
+              absolute
+              inset-0
+              rounded-2xl
+              opacity-0
+              group-hover:opacity-100
+              transition-opacity
+              duration-500
+              pointer-events-none
+              shadow-[inset_0_0_0_1px_rgba(244,242,236,0.25)]
+            " />
 
-              <span className="text-xs text-[#333333]">
-                Showing:
-              </span>
+            {/* ambient glow */}
+            <div className="
+              absolute
+              -right-8
+              -top-8
+              w-28
+              h-28
+              rounded-full
+              bg-[#F4F2EC]/10
+              blur-2xl
+              opacity-0
+              group-hover:opacity-100
+              transition-opacity
+              duration-500
+            " />
 
-              {carSearch.trim() && (
+            {/* shine sweep */}
+            <div className="
+              absolute
+              inset-0
+              -translate-x-full
+              group-hover:translate-x-full
+              bg-gradient-to-r
+              from-transparent
+              via-[#F4F2EC]/10
+              to-transparent
+              transition-transform
+              duration-[1000ms]
+              ease-out
+              pointer-events-none
+            " />
 
-                <span className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  bg-[#8B7D6B]/10
-                  border
-                  border-[#8B7D6B]/20
-                  px-3
-                  py-1.5
-                  text-xs
-                  text-[#8B7D6B]
-                ">
+            <div className="relative z-10">
 
-                  Search: {carSearch}
+              <p className="text-[9px] uppercase tracking-[0.18em] text-[#F4F2EC]/70 mb-0.5 transition-colors duration-300">
+                Looking to purchase
+              </p>
 
-                </span>
-
-              )}
-
-              {activeFilter.type && (
-
-                <span className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  bg-[#8B7D6B]/10
-                  border
-                  border-[#8B7D6B]/20
-                  px-3
-                  py-1.5
-                  text-xs
-                  text-[#8B7D6B]
-                ">
-
-                  {activeFilter.value}
-
-                </span>
-
-              )}
-
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="
-                  text-xs
-                  text-[#333333]/60
-                  hover:text-[#1A1A1A]
-                  underline
-                  underline-offset-4
-                "
-              >
-
-                Clear
-
-              </button>
-
-            </div>
-
-          )}
-
-
-
-          {/* =================================================
-              BROWSE OPTIONS
-          ================================================= */}
-
-          <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-
-
-            {/* Heading */}
-
-            <div className="shrink-0">
-
-              <h2 className="font-display text-xl md:text-2xl text-[#1A1A1A]">
-                Start your search
-              </h2>
-
-              <p className="text-xs text-[#333333] mt-1">
-                Browse cars by your preference
+              <p className="font-display text-base md:text-lg text-[#F4F2EC] transition-transform duration-300 group-hover:translate-x-0.5">
+                Buy a Car
               </p>
 
             </div>
 
-
-            <div className="hidden lg:block w-px h-12 bg-[#1A1A1A]/10" />
-
-
-            {/* Browse Cards */}
-
-            <div className="grid sm:grid-cols-3 gap-3 flex-1">
-
-
-              {/* =================================================
-                  BUDGET
-              ================================================= */}
-
-              <div className="relative">
-
-                <button
-                  type="button"
-                  onClick={() => {
-
-                    setOpenFilter(
-                      openFilter === 'budget'
-                        ? null
-                        : 'budget'
-                    )
-
-                  }}
-                  className="
-                    group
-                    w-full
-                    text-left
-                    rounded-2xl
-                    border
-                    border-[#1A1A1A]/10
-                    bg-[#1A1A1A]/[0.025]
-                    p-4
-                    hover:border-[#8B7D6B]/40
-                    hover:bg-[#1A1A1A]/[0.045]
-                    transition-all
-                  "
-                >
-
-                  <p className="text-[10px] uppercase tracking-wider text-[#333333]/70 mb-1">
-                    Budget
-                  </p>
-
-                  <div className="flex items-center justify-between">
-
-                    <span className="text-sm text-[#1A1A1A]">
-                      Browse by Budget
-                    </span>
-
-                    <ArrowUpRight
-                      size={15}
-                      className="
-                        text-[#333333]/60
-                        group-hover:text-[#8B7D6B]
-                        transition-colors
-                      "
-                    />
-
-                  </div>
-
-                </button>
-
-
-                {openFilter === 'budget' && (
-
-                  <FilterDropdown>
-
-                    {budgetRanges.map(
-                      (range, index) => (
-
-                        <button
-                          key={
-                            range?.label ||
-                            index
-                          }
-                          type="button"
-                          onClick={() =>
-                            selectFilter(
-                              'budget',
-                              range?.label ||
-                              range
-                            )
-                          }
-                          className="
-                            w-full
-                            text-left
-                            px-4
-                            py-3
-                            text-sm
-                            text-[#1A1A1A]
-                            hover:bg-[#8B7D6B]/10
-                            transition-colors
-                          "
-                        >
-
-                          {range?.label ||
-                            range}
-
-                        </button>
-
-                      )
-                    )}
-
-                  </FilterDropdown>
-
-                )}
-
-              </div>
-
-
-
-              {/* =================================================
-                  BODY TYPE
-              ================================================= */}
-
-              <div className="relative">
-
-                <button
-                  type="button"
-                  onClick={() => {
-
-                    setOpenFilter(
-                      openFilter === 'bodyType'
-                        ? null
-                        : 'bodyType'
-                    )
-
-                  }}
-                  className="
-                    group
-                    w-full
-                    text-left
-                    rounded-2xl
-                    border
-                    border-[#1A1A1A]/10
-                    bg-[#1A1A1A]/[0.025]
-                    p-4
-                    hover:border-[#8B7D6B]/40
-                    hover:bg-[#1A1A1A]/[0.045]
-                    transition-all
-                  "
-                >
-
-                  <p className="text-[10px] uppercase tracking-wider text-[#333333]/70 mb-1">
-                    Body Type
-                  </p>
-
-                  <div className="flex items-center justify-between">
-
-                    <span className="text-sm text-[#1A1A1A]">
-                      Find by Body Type
-                    </span>
-
-                    <ArrowUpRight
-                      size={15}
-                      className="
-                        text-[#333333]/60
-                        group-hover:text-[#8B7D6B]
-                        transition-colors
-                      "
-                    />
-
-                  </div>
-
-                </button>
-
-
-                {openFilter === 'bodyType' && (
-
-                  <FilterDropdown>
-
-                    {bodyTypes.map(
-                      (type, index) => (
-
-                        <button
-                          key={
-                            type?.name ||
-                            type ||
-                            index
-                          }
-                          type="button"
-                          onClick={() =>
-                            selectFilter(
-                              'bodyType',
-                              type?.name ||
-                              type
-                            )
-                          }
-                          className="
-                            w-full
-                            text-left
-                            px-4
-                            py-3
-                            text-sm
-                            text-[#1A1A1A]
-                            hover:bg-[#8B7D6B]/10
-                            transition-colors
-                          "
-                        >
-
-                          {type?.name ||
-                            type}
-
-                        </button>
-
-                      )
-                    )}
-
-                  </FilterDropdown>
-
-                )}
-
-              </div>
-
-
-
-              {/* =================================================
-                  BRAND
-              ================================================= */}
-
-              <div className="relative">
-
-                <button
-                  type="button"
-                  onClick={() => {
-
-                    setOpenFilter(
-                      openFilter === 'brand'
-                        ? null
-                        : 'brand'
-                    )
-
-                  }}
-                  className="
-                    group
-                    w-full
-                    text-left
-                    rounded-2xl
-                    border
-                    border-[#1A1A1A]/10
-                    bg-[#1A1A1A]/[0.025]
-                    p-4
-                    hover:border-[#8B7D6B]/40
-                    hover:bg-[#1A1A1A]/[0.045]
-                    transition-all
-                  "
-                >
-
-                  <p className="text-[10px] uppercase tracking-wider text-[#333333]/70 mb-1">
-                    Brand
-                  </p>
-
-                  <div className="flex items-center justify-between">
-
-                    <span className="text-sm text-[#1A1A1A]">
-                      Explore Brands
-                    </span>
-
-                    <ArrowUpRight
-                      size={15}
-                      className="
-                        text-[#333333]/60
-                        group-hover:text-[#8B7D6B]
-                        transition-colors
-                      "
-                    />
-
-                  </div>
-
-                </button>
-
-
-                {openFilter === 'brand' && (
-
-                  <FilterDropdown>
-
-                    {brands.map(
-                      (brand, index) => {
-
-                        const brandName =
-                          brand?.name ||
-                          brand
-
-                        return (
-
-                          <button
-                            key={
-                              brandName ||
-                              index
-                            }
-                            type="button"
-                            onClick={() =>
-                              selectFilter(
-                                'brand',
-                                brandName
-                              )
-                            }
-                            className="
-                              w-full
-                              text-left
-                              px-4
-                              py-3
-                              text-sm
-                              text-[#1A1A1A]
-                              hover:bg-[#8B7D6B]/10
-                              transition-colors
-                            "
-                          >
-
-                            {brandName}
-
-                          </button>
-
-                        )
-
-                      }
-                    )}
-
-                  </FilterDropdown>
-
-                )}
-
-              </div>
+            <div className="
+              relative
+              z-10
+              w-8
+              h-8
+              rounded-full
+              border
+              border-[#F4F2EC]/30
+              bg-[#F4F2EC]/10
+              grid
+              place-items-center
+              shrink-0
+              transition-all
+              duration-300
+              group-hover:bg-[#F4F2EC]
+              group-hover:scale-110
+              group-hover:rotate-45
+            ">
+
+              <ArrowUpRight
+                size={14}
+                className="text-[#F4F2EC] transition-colors duration-300 group-hover:text-[#1A1A1A]"
+              />
 
             </div>
 
-          </div>
+          </a>
+
+
+          {/* =================================================
+              SELL A CAR
+          ================================================= */}
+
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              group
+              relative
+              flex
+              items-center
+              justify-between
+              gap-3
+              overflow-hidden
+              rounded-2xl
+              border
+              border-[#1A1A1A]/10
+              bg-[#1A1A1A]/[0.025]
+              px-5
+              py-3.5
+              opacity-0
+              animate-[fadeUp_0.6s_ease-out_forwards]
+              hover:bg-[#1A1A1A]/[0.045]
+              hover:border-[#8B7D6B]/40
+              hover:-translate-y-0.5
+              hover:shadow-[0_16px_35px_rgba(26,26,26,0.10)]
+              transition-all
+              duration-500
+              ease-out
+            "
+            style={{ animationDelay: '340ms' }}
+          >
+
+            {/* animated border glow */}
+            <div className="
+              absolute
+              inset-0
+              rounded-2xl
+              opacity-0
+              group-hover:opacity-100
+              transition-opacity
+              duration-500
+              pointer-events-none
+              shadow-[inset_0_0_0_1px_rgba(139,125,107,0.35)]
+            " />
+
+            {/* ambient glow */}
+            <div className="
+              absolute
+              -right-8
+              -top-8
+              w-28
+              h-28
+              rounded-full
+              bg-[#8B7D6B]/15
+              blur-2xl
+              opacity-0
+              group-hover:opacity-100
+              transition-opacity
+              duration-500
+            " />
+
+            {/* shine sweep */}
+            <div className="
+              absolute
+              inset-0
+              -translate-x-full
+              group-hover:translate-x-full
+              bg-gradient-to-r
+              from-transparent
+              via-[#8B7D6B]/10
+              to-transparent
+              transition-transform
+              duration-[1000ms]
+              ease-out
+              pointer-events-none
+            " />
+
+            <div className="relative z-10">
+
+              <p className="text-[9px] uppercase tracking-[0.18em] text-[#333333]/70 mb-0.5 transition-colors duration-300">
+                Have a car to offer
+              </p>
+
+              <p className="font-display text-base md:text-lg text-[#1A1A1A] transition-all duration-300 group-hover:text-[#8B7D6B] group-hover:translate-x-0.5">
+                Sell a Car
+              </p>
+
+            </div>
+
+            <div className="
+              relative
+              z-10
+              w-8
+              h-8
+              rounded-full
+              border
+              border-[#8B7D6B]/25
+              bg-[#8B7D6B]/10
+              grid
+              place-items-center
+              shrink-0
+              transition-all
+              duration-300
+              group-hover:bg-[#8B7D6B]
+              group-hover:scale-110
+              group-hover:rotate-45
+            ">
+
+              <ArrowUpRight
+                size={14}
+                className="text-[#8B7D6B] transition-colors duration-300 group-hover:text-[#F4F2EC]"
+              />
+
+            </div>
+
+          </a>
 
         </div>
 
       </section>
+
+
+
+      {/* =====================================================
+          QUICK ACTIONS — BOOK / TEST DRIVE / FINANCE / BOOK NOW
+      ===================================================== */}
+
+      <section
+        className="relative z-20 container-px mt-4 opacity-0 animate-[fadeUp_0.6s_ease-out_forwards]"
+        style={{ animationDelay: '380ms' }}
+      >
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-8xl mx-auto justify-center">
+
+          {[
+            {
+              icon: CalendarCheck,
+              eyebrow: 'Schedule a visit',
+              title: 'Book an Appointment',
+              text: 'Reserve a time slot that works for you.',
+              type: 'link',
+              to: '/contact',
+              color: '#8B7D6B', // taupe — matches primary brand accent
+            },
+            {
+              icon: Gauge,
+              eyebrow: 'Experience it first',
+              title: 'Test Drive',
+              text: 'Book a slot and get behind the wheel.',
+              type: 'external',
+              href: WHATSAPP_URL,
+              color: '#6B8B7D', // muted sage green
+            },
+            {
+              icon: Wallet,
+              eyebrow: 'Drive your dream Car',
+              title: 'Caclculate EMIs',
+              text: 'Cars starting at ₹4,999/month EMI.',
+              type: 'anchor',
+              href: '#finance',
+              color: '#7D6B8B', // muted plum
+            },
+            {
+              icon: PhoneCall,
+              eyebrow: 'Ready when you are',
+              title: 'Book Now',
+              text: 'Message us on WhatsApp to lock it in.',
+              type: 'external',
+              href: WHATSAPP_URL,
+              color: '#8B6B5A', // muted terracotta
+            },
+          ].map(
+            (
+              {
+                icon: Icon,
+                eyebrow,
+                title,
+                text,
+                type,
+                to,
+                href,
+                color,
+              },
+              index
+            ) => {
+
+              const accentStyle = {
+                '--accent': color,
+                '--accent-bg': hexToRgba(color, 0.1),
+                '--accent-border': hexToRgba(color, 0.25),
+                '--accent-glow': hexToRgba(color, 0.18),
+                '--accent-shine': hexToRgba(color, 0.12),
+                animationDelay: `${440 + index * 90}ms`,
+              }
+
+              const cardInner = (
+                <>
+
+                  {/* ambient glow */}
+                  <div className="
+                    absolute
+                    -right-8
+                    -top-8
+                    w-32
+                    h-32
+                    rounded-full
+                    bg-[var(--accent-glow)]
+                    blur-2xl
+                    opacity-0
+                    group-hover:opacity-100
+                    transition-opacity
+                    duration-500
+                  " />
+
+                  {/* shine sweep */}
+                  <div className="
+                    absolute
+                    inset-0
+                    -translate-x-full
+                    group-hover:translate-x-full
+                    bg-gradient-to-r
+                    from-transparent
+                    via-[var(--accent-shine)]
+                    to-transparent
+                    transition-transform
+                    duration-[1000ms]
+                    ease-out
+                    pointer-events-none
+                  " />
+
+                  <div className="
+                    relative
+                    z-10
+                    w-11
+                    h-11
+                    mx-auto
+                    rounded-2xl
+                    border
+                    border-[var(--accent-border)]
+                    bg-[var(--accent-bg)]
+                    grid
+                    place-items-center
+                    text-[var(--accent)]
+                    mb-8
+                    transition-all
+                    duration-300
+                    group-hover:bg-[var(--accent)]
+                    group-hover:text-[#F4F2EC]
+                    group-hover:border-[var(--accent)]
+                    group-hover:scale-110
+                    group-hover:-rotate-6
+                  ">
+
+                    <Icon size={19} />
+
+                  </div>
+
+
+                  <p className="relative z-10 text-[10px] uppercase tracking-[0.18em] text-[#333333]/70 mb-2 text-center">
+                    {eyebrow}
+                  </p>
+
+
+                  <div className="relative z-10 flex items-center justify-center gap-2 mb-2">
+
+                    <h3 className="font-display text-xl text-[#1A1A1A] transition-colors duration-300 group-hover:text-[var(--accent)] text-center">
+                      {title}
+                    </h3>
+
+                  </div>
+
+
+                  <p className="relative z-10 text-sm text-[#333333] leading-6 mb-6 text-center">
+                    {text}
+                  </p>
+
+
+                  {/* centered pill button */}
+                  <div className="relative z-10 mt-8 flex justify-center">
+
+                    <span className="
+                      inline-flex
+                      items-center
+                      gap-2
+                      rounded-full
+                      border
+                      border-[var(--accent-border)]
+                      bg-[var(--accent-bg)]
+                      px-5
+                      py-2.5
+                      text-xs
+                      font-semibold
+                      text-[var(--accent)]
+                      transition-all
+                      duration-300
+                      group-hover:bg-[var(--accent)]
+                      group-hover:text-[#F4F2EC]
+                      group-hover:border-[var(--accent)]
+                    ">
+
+                      {title}
+
+                      <ArrowUpRight
+                        size={14}
+                        className="transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+
+                    </span>
+
+                  </div>
+
+                </>
+              )
+
+              const sharedClassName = `
+                group
+                relative
+                flex
+                flex-col
+                justify-center
+                overflow-hidden
+                rounded-3xl
+                border
+                border-[#1A1A1A]/10
+                bg-[#1A1A1A]/[0.025]
+                p-6
+                min-h-[280px]
+                opacity-0
+                animate-[fadeUp_0.6s_ease-out_forwards]
+                hover:bg-[#1A1A1A]/[0.045]
+                hover:border-[var(--accent-border)]
+                hover:-translate-y-1.5
+                hover:shadow-[0_20px_45px_rgba(26,26,26,0.10)]
+                transition-all
+                duration-500
+                ease-out
+              `
+
+              if (type === 'link') {
+
+                return (
+
+                  <Link
+                    key={title}
+                    to={to}
+                    className={sharedClassName}
+                    style={accentStyle}
+                  >
+
+                    {cardInner}
+
+                  </Link>
+
+                )
+
+              }
+
+
+              if (type === 'anchor') {
+
+                return (
+
+                  <a
+                    key={title}
+                    href={href}
+                    className={sharedClassName}
+                    style={accentStyle}
+                  >
+
+                    {cardInner}
+
+                  </a>
+
+                )
+
+              }
+
+
+              return (
+
+                <a
+                  key={title}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={sharedClassName}
+                  style={accentStyle}
+                >
+
+                  {cardInner}
+
+                </a>
+
+              )
+
+            }
+          )}
+
+        </div>
+
+      </section>
+
+
 
 
 
@@ -1442,7 +1524,9 @@ export default function Home() {
           CINEMATIC AUTO LOAN
       ===================================================== */}
 
-      <CinematicLoanSection />
+      <div id="finance">
+        <CinematicLoanSection />
+      </div>
 
 
 
@@ -1833,40 +1917,6 @@ export default function Home() {
   )
 }
 
-
-/* =========================================================
-   FILTER DROPDOWN
-========================================================= */
-
-function FilterDropdown({
-  children,
-}) {
-
-  return (
-
-    <div className="
-      absolute
-      left-0
-      right-0
-      top-[calc(100%+8px)]
-      z-50
-      overflow-hidden
-      rounded-2xl
-      border
-      border-[#1A1A1A]/10
-      bg-[#F4F2EC]
-      shadow-[0_20px_50px_rgba(26,26,26,0.15)]
-      max-h-[280px]
-      overflow-y-auto
-    ">
-
-      {children}
-
-    </div>
-
-  )
-
-}
 
 
 /* =========================================================

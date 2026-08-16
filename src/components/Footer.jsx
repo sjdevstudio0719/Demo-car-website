@@ -460,7 +460,7 @@ export default function Footer() {
         >
 
           <p>
-            © {year} copyright next ride. Team Work - Master Mind (www.msmind.in)
+            © {year} NEXT RIDE. All Rights Reserved. Powered By Master Mind <a href="https://msmind.in/">msmind.in</a>
             
           </p>
 
